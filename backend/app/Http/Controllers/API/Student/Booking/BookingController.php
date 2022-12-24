@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\API\User\Booking;
+namespace App\Http\Controllers\API\Student\Booking;
 
 use App\Helper\Helper;
 use App\Http\Controllers\API\ApiController;
@@ -24,7 +24,7 @@ class BookingController extends ApiController
      */
     public function index(): JsonResponse
     {
-        abort_unless(auth()->user()->tokenCan('user.booking.list'),
+        abort_unless(auth()->user()->tokenCan('student.booking.list'),
             Response::HTTP_FORBIDDEN
         );
 
@@ -39,7 +39,7 @@ class BookingController extends ApiController
      */
     public function store(StoreBookingRequest $request): JsonResponse
     {
-        abort_unless(auth()->user()->tokenCan('user.booking.create'),
+        abort_unless(auth()->user()->tokenCan('student.booking.create'),
             Response::HTTP_FORBIDDEN
         );
 
@@ -57,7 +57,7 @@ class BookingController extends ApiController
      */
     public function destroy($booking): JsonResponse
     {
-        abort_unless(auth()->user()->tokenCan('user.booking.delete'),
+        abort_unless(auth()->user()->tokenCan('student.booking.delete'),
             Response::HTTP_FORBIDDEN
         );
 

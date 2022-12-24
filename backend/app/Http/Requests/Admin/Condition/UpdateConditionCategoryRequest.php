@@ -26,6 +26,7 @@ class UpdateConditionCategoryRequest extends FormRequest
         return [
             'name' => 'string',
             'key' => 'string',
+            'value' => 'numeric',
             'language_id' => 'numeric|exists:languages,id',
         ];
     }
