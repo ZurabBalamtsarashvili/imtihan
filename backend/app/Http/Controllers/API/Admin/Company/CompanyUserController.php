@@ -14,6 +14,8 @@ use Symfony\Component\HttpFoundation\Response;
 
 class CompanyUserController extends ApiController
 {
+    private CompanyUserService $userService;
+
     public function __construct(CompanyUserService $service)
     {
         $this->userService = $service;
@@ -39,7 +41,7 @@ class CompanyUserController extends ApiController
      * @param  StoreCompanyRequest  $request
      * @return JsonResponse
      */
-    public function store(StoreCompanyUserRequest $request)
+    public function store(StoreCompanyUserRequest $request): JsonResponse
     {
         abort_unless(auth()->user()->tokenCan('admin.company.user.create'),
             Response::HTTP_FORBIDDEN
@@ -47,9 +49,9 @@ class CompanyUserController extends ApiController
 
         $request->merge(['role' => User::Manager]);
 
-        $this->userService->create($request);
+        $user = $this->userService->create($request);
 
-        return $this->successResponse([], __('response.created'), Response::HTTP_CREATED);
+        return $this->successResponse($user, __('response.created'), Response::HTTP_CREATED);
     }
 
     /**
@@ -58,7 +60,7 @@ class CompanyUserController extends ApiController
      * @param  int  $user
      * @return JsonResponse
      */
-    public function show($user): JsonResponse
+    public function show(int $user): JsonResponse
     {
         abort_unless(auth()->user()->tokenCan('admin.company.user.show'),
             Response::HTTP_FORBIDDEN
@@ -74,15 +76,15 @@ class CompanyUserController extends ApiController
      * @param  int  $user
      * @return JsonResponse
      */
-    public function update(UpdateCompanyUserRequest $request, $user)
+    public function update(UpdateCompanyUserRequest $request, int $user): JsonResponse
     {
         abort_unless(auth()->user()->tokenCan('admin.company.user.update'),
             Response::HTTP_FORBIDDEN
         );
 
-        $this->userService->update($request, $user);
+        $user = $this->userService->update($request, $user);
 
-        return $this->successResponse([], __('response.updated'));
+        return $this->successResponse($user, __('response.updated'));
     }
 
     /**
@@ -91,14 +93,14 @@ class CompanyUserController extends ApiController
      * @param  int  $user
      * @return JsonResponse
      */
-    public function destroy($user)
+    public function destroy(int $user): JsonResponse
     {
         abort_unless(auth()->user()->tokenCan('admin.company.user.delete'),
             Response::HTTP_FORBIDDEN
         );
 
-        $this->userService->destroy($user);
+        $user = $this->userService->destroy($user);
 
-        return $this->successResponse([], __('response.deleted'));
+        return $this->successResponse($user, __('response.deleted'));
     }
 }

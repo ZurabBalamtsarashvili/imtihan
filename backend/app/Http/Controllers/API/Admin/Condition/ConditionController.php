@@ -12,6 +12,8 @@ use Symfony\Component\HttpFoundation\Response;
 
 class ConditionController extends ApiController
 {
+    private ConditionService $conditionService;
+
     public function __construct(ConditionService $service)
     {
         $this->conditionService = $service;
@@ -43,9 +45,9 @@ class ConditionController extends ApiController
             Response::HTTP_FORBIDDEN
         );
 
-        $this->conditionService->create($request);
+        $condition = $this->conditionService->create($request);
 
-        return $this->successResponse([], __('response.created'), Response::HTTP_CREATED);
+        return $this->successResponse($condition, __('response.created'), Response::HTTP_CREATED);
     }
 
     /**
@@ -54,7 +56,7 @@ class ConditionController extends ApiController
      * @param  int  $condition
      * @return JsonResponse
      */
-    public function show($condition): JsonResponse
+    public function show(int $condition): JsonResponse
     {
         abort_unless(auth()->user()->tokenCan('admin.condition.show'),
             Response::HTTP_FORBIDDEN
@@ -70,15 +72,15 @@ class ConditionController extends ApiController
      * @param  int  $condition
      * @return JsonResponse
      */
-    public function update(UpdateConditionRequest $request, $condition): JsonResponse
+    public function update(UpdateConditionRequest $request, int $condition): JsonResponse
     {
         abort_unless(auth()->user()->tokenCan('admin.condition.update'),
             Response::HTTP_FORBIDDEN
         );
 
-        $this->conditionService->update($request, $condition);
+        $condition = $this->conditionService->update($request, $condition);
 
-        return $this->successResponse([], __('response.updated'));
+        return $this->successResponse($condition, __('response.updated'));
     }
 
     /**
@@ -87,14 +89,14 @@ class ConditionController extends ApiController
      * @param  int  $condition
      * @return JsonResponse
      */
-    public function destroy($condition): JsonResponse
+    public function destroy(int $condition): JsonResponse
     {
         abort_unless(auth()->user()->tokenCan('admin.condition.delete'),
             Response::HTTP_FORBIDDEN
         );
 
-        $this->conditionService->destroy($condition);
+        $condition = $this->conditionService->destroy($condition);
 
-        return $this->successResponse([], __('response.deleted'));
+        return $this->successResponse($condition, __('response.deleted'));
     }
 }

@@ -12,6 +12,8 @@ use Symfony\Component\HttpFoundation\Response;
 
 class SupportController extends ApiController
 {
+    private SupportService $supportService;
+
     public function __construct(SupportService $service)
     {
         $this->supportService = $service;
@@ -44,9 +46,10 @@ class SupportController extends ApiController
         );
 
         $request->merge(['company_id' => Helper::userInfo()->company_id, 'user_id' => auth()->id()]);
-        $this->supportService->create($request);
 
-        return $this->successResponse([], __('response.created'), Response::HTTP_CREATED);
+        $support = $this->supportService->create($request);
+
+        return $this->successResponse($support, __('response.created'), Response::HTTP_CREATED);
     }
 
     /**
@@ -55,7 +58,7 @@ class SupportController extends ApiController
      * @param  int  $support
      * @return JsonResponse
      */
-    public function destroy($support): JsonResponse
+    public function destroy(int $support): JsonResponse
     {
         abort_unless(auth()->user()->tokenCan('user.support.delete'),
             Response::HTTP_FORBIDDEN
@@ -63,8 +66,8 @@ class SupportController extends ApiController
 
         $this->authorize('delete', $this->supportService->show($support));
 
-        $this->supportService->destroy($support);
+        $support = $this->supportService->destroy($support);
 
-        return $this->successResponse([], __('response.deleted'));
+        return $this->successResponse($support, __('response.deleted'));
     }
 }

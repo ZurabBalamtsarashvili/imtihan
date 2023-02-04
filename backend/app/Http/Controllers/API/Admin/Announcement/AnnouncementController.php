@@ -12,6 +12,8 @@ use Symfony\Component\HttpFoundation\Response;
 
 class AnnouncementController extends ApiController
 {
+    private AnnouncementService $announcementService;
+
     public function __construct(AnnouncementService $service)
     {
         $this->announcementService = $service;
@@ -43,9 +45,9 @@ class AnnouncementController extends ApiController
             Response::HTTP_FORBIDDEN
         );
 
-        $this->announcementService->create($request);
+        $announcement = $this->announcementService->create($request);
 
-        return $this->successResponse([], __('response.created'), Response::HTTP_CREATED);
+        return $this->successResponse($announcement, __('response.created'), Response::HTTP_CREATED);
     }
 
     /**
@@ -66,19 +68,19 @@ class AnnouncementController extends ApiController
     /**
      * Update the specified resource in storage.
      *
-     * @param  UpdateAnnouncementRequest  $announcement
+     * @param  UpdateAnnouncementRequest  $request
      * @param  int  $announcement
      * @return JsonResponse
      */
-    public function update(UpdateAnnouncementRequest $request, $announcement): JsonResponse
+    public function update(UpdateAnnouncementRequest $request, int $announcement): JsonResponse
     {
         abort_unless(auth()->user()->tokenCan('admin.announcement.update'),
             Response::HTTP_FORBIDDEN
         );
 
-        $this->announcementService->update($request, $announcement);
+        $announcement = $this->announcementService->update($request, $announcement);
 
-        return $this->successResponse([], __('response.updated'));
+        return $this->successResponse($announcement, __('response.updated'));
     }
 
     /**
@@ -87,14 +89,14 @@ class AnnouncementController extends ApiController
      * @param  int  $announcement
      * @return JsonResponse
      */
-    public function destroy($announcement): JsonResponse
+    public function destroy(int $announcement): JsonResponse
     {
         abort_unless(auth()->user()->tokenCan('admin.announcement.delete'),
             Response::HTTP_FORBIDDEN
         );
 
-        $this->announcementService->destroy($announcement);
+        $announcement = $this->announcementService->destroy($announcement);
 
-        return $this->successResponse([], __('response.deleted'));
+        return $this->successResponse($announcement, __('response.deleted'));
     }
 }

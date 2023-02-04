@@ -12,6 +12,8 @@ use Symfony\Component\HttpFoundation\Response;
 
 class ClassRoomController extends ApiController
 {
+    private ClassRoomService $classRoomService;
+
     public function __construct(ClassRoomService $service)
     {
         $this->classRoomService = $service;
@@ -35,9 +37,9 @@ class ClassRoomController extends ApiController
      */
     public function store(StoreClassRoomRequest $request): JsonResponse
     {
-        $this->classRoomService->create($request);
+        $class_room = $this->classRoomService->create($request);
 
-        return $this->successResponse([], __('response.created'), Response::HTTP_CREATED);
+        return $this->successResponse($class_room, __('response.created'), Response::HTTP_CREATED);
     }
 
     /**
@@ -46,7 +48,7 @@ class ClassRoomController extends ApiController
      * @param  int  $class_room
      * @return JsonResponse
      */
-    public function show($class_room): JsonResponse
+    public function show(int $class_room): JsonResponse
     {
         return $this->successResponse(new ClassRoomResource($this->classRoomService->show($class_room)));
     }
@@ -58,11 +60,11 @@ class ClassRoomController extends ApiController
      * @param  int  $class_room
      * @return JsonResponse
      */
-    public function update(UpdateClassRoomRequest $request, $class_room): JsonResponse
+    public function update(UpdateClassRoomRequest $request, int $class_room): JsonResponse
     {
-        $this->classRoomService->update($request, $class_room);
+        $class_room = $this->classRoomService->update($request, $class_room);
 
-        return $this->successResponse([], __('response.updated'));
+        return $this->successResponse($class_room, __('response.updated'));
     }
 
     /**
@@ -71,10 +73,10 @@ class ClassRoomController extends ApiController
      * @param  int  $class_room
      * @return JsonResponse
      */
-    public function destroy($class_room): JsonResponse
+    public function destroy(int $class_room): JsonResponse
     {
-        $this->classRoomService->destroy($class_room);
+        $class_room = $this->classRoomService->destroy($class_room);
 
-        return $this->successResponse([], __('response.deleted'));
+        return $this->successResponse($class_room, __('response.deleted'));
     }
 }

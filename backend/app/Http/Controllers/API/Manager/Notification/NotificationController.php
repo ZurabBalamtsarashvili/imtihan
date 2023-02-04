@@ -12,6 +12,8 @@ use Symfony\Component\HttpFoundation\Response;
 
 class NotificationController extends ApiController
 {
+    private NotificationService $notificationService;
+
     public function __construct(NotificationService $service)
     {
         $this->notificationService = $service;
@@ -44,8 +46,9 @@ class NotificationController extends ApiController
         );
 
         $request->merge(['company_id' => Helper::userInfo()->company_id]);
-        $this->notificationService->create($request);
 
-        return $this->successResponse([], __('response.created'), Response::HTTP_CREATED);
+        $notification = $this->notificationService->create($request);
+
+        return $this->successResponse($notification, __('response.created'), Response::HTTP_CREATED);
     }
 }
