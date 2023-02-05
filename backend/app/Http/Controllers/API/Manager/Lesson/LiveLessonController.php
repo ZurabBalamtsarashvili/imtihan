@@ -13,6 +13,8 @@ use Symfony\Component\HttpFoundation\Response;
 
 class LiveLessonController extends ApiController
 {
+    private LiveLessonService $liveLessonService;
+
     public function __construct(LiveLessonService $service)
     {
         $this->liveLessonService = $service;
@@ -45,9 +47,10 @@ class LiveLessonController extends ApiController
         );
 
         $request->merge(['company_id' => Helper::userInfo()->company_id]);
-        $this->liveLessonService->create($request);
 
-        return $this->successResponse([], __('response.created'), Response::HTTP_CREATED);
+        $live_lesson = $this->liveLessonService->create($request);
+
+        return $this->successResponse($live_lesson, __('response.created'), Response::HTTP_CREATED);
     }
 
     /**
@@ -69,10 +72,10 @@ class LiveLessonController extends ApiController
      * Update the specified resource in storage.
      *
      * @param  UpdateLiveLessonRequest  $request
-     * @param    $live_lesson
+     * @param  int  $live_lesson
      * @return JsonResponse
      */
-    public function update(UpdateLiveLessonRequest $request, $live_lesson): JsonResponse
+    public function update(UpdateLiveLessonRequest $request, int $live_lesson): JsonResponse
     {
         abort_unless(auth()->user()->tokenCan('manager.live-lesson.update'),
             Response::HTTP_FORBIDDEN
@@ -80,9 +83,9 @@ class LiveLessonController extends ApiController
 
         $this->authorize('update', $this->liveLessonService->show($live_lesson));
 
-        $this->liveLessonService->update($request, $live_lesson);
+        $live_lesson = $this->liveLessonService->update($request, $live_lesson);
 
-        return $this->successResponse([], __('response.updated'));
+        return $this->successResponse($live_lesson, __('response.updated'));
     }
 
     /**
@@ -91,7 +94,7 @@ class LiveLessonController extends ApiController
      * @param  int  $live_lesson
      * @return JsonResponse
      */
-    public function destroy($live_lesson): JsonResponse
+    public function destroy(int $live_lesson): JsonResponse
     {
         abort_unless(auth()->user()->tokenCan('manager.live-lesson.delete'),
             Response::HTTP_FORBIDDEN
@@ -99,8 +102,8 @@ class LiveLessonController extends ApiController
 
         $this->authorize('delete', $this->liveLessonService->show($live_lesson));
 
-        $this->liveLessonService->destroy($live_lesson);
+        $live_lesson = $this->liveLessonService->destroy($live_lesson);
 
-        return $this->successResponse([], __('response.deleted'));
+        return $this->successResponse($live_lesson, __('response.deleted'));
     }
 }

@@ -13,6 +13,8 @@ use Symfony\Component\HttpFoundation\Response;
 
 class StudentController extends ApiController
 {
+    private StudentService $studentService;
+
     public function __construct(StudentService $service)
     {
         $this->studentService = $service;
@@ -46,9 +48,9 @@ class StudentController extends ApiController
 
         $request->merge(['role' => User::Student]);
 
-        $this->studentService->create($request);
+        $student = $this->studentService->create($request);
 
-        return $this->successResponse([], __('response.created'), Response::HTTP_CREATED);
+        return $this->successResponse($student, __('response.created'), Response::HTTP_CREATED);
     }
 
     /**
@@ -73,15 +75,15 @@ class StudentController extends ApiController
      * @param  int  $student
      * @return JsonResponse
      */
-    public function update(UpdateStudentRequest $request, $student): JsonResponse
+    public function update(UpdateStudentRequest $request, int $student): JsonResponse
     {
         abort_unless(auth()->user()->tokenCan('manager.user.student.update'),
             Response::HTTP_FORBIDDEN
         );
 
-        $this->studentService->update($request, $student);
+        $student = $this->studentService->update($request, $student);
 
-        return $this->successResponse([], __('response.updated'));
+        return $this->successResponse($student, __('response.updated'));
     }
 
     /**
@@ -90,14 +92,14 @@ class StudentController extends ApiController
      * @param  int  $student
      * @return JsonResponse
      */
-    public function destroy($student): JsonResponse
+    public function destroy(int $student): JsonResponse
     {
         abort_unless(auth()->user()->tokenCan('manager.user.student.delete'),
             Response::HTTP_FORBIDDEN
         );
 
-        $this->studentService->destroy($student);
+        $student = $this->studentService->destroy($student);
 
-        return $this->successResponse([], __('response.deleted'));
+        return $this->successResponse($student, __('response.deleted'));
     }
 }

@@ -14,6 +14,8 @@ use Symfony\Component\HttpFoundation\Response;
 
 class QuestionController extends ApiController
 {
+    private QuestionService $questionService;
+
     public function __construct(QuestionService $service)
     {
         $this->questionService = $service;
@@ -46,9 +48,10 @@ class QuestionController extends ApiController
         );
 
         $request->merge(['company_id' => Helper::userInfo()->company_id]);
-        $this->questionService->create($request);
 
-        return $this->successResponse([], __('response.created'), Response::HTTP_CREATED);
+        $question = $this->questionService->create($request);
+
+        return $this->successResponse($question, __('response.created'), Response::HTTP_CREATED);
     }
 
     /**
@@ -79,9 +82,11 @@ class QuestionController extends ApiController
             Response::HTTP_FORBIDDEN
         );
 
-        $this->questionService->update($request, $question);
+        $this->authorize('update', $this->questionService->show($question));
 
-        return $this->successResponse([], __('response.updated'));
+        $question = $this->questionService->update($request, $question);
+
+        return $this->successResponse($question, __('response.updated'));
     }
 
     /**
@@ -96,9 +101,11 @@ class QuestionController extends ApiController
             Response::HTTP_FORBIDDEN
         );
 
-        $this->questionService->destroy($question);
+        $this->authorize('delete', $this->questionService->show($question));
 
-        return $this->successResponse([], __('response.deleted'));
+        $question = $this->questionService->destroy($question);
+
+        return $this->successResponse($question, __('response.deleted'));
     }
 
     /**
@@ -118,6 +125,7 @@ class QuestionController extends ApiController
     /**
      * Remove the specified resource from storage.
      *
+     * @param  int  $question
      * @return JsonResponse
      */
     public function destroyBug(int $question): JsonResponse
@@ -126,8 +134,8 @@ class QuestionController extends ApiController
             Response::HTTP_FORBIDDEN
         );
 
-        $this->questionService->destroyBug($question);
+        $question = $this->questionService->destroyBug($question);
 
-        return $this->successResponse([], __('response.deleted'));
+        return $this->successResponse($question, __('response.deleted'));
     }
 }

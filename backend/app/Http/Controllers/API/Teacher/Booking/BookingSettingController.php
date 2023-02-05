@@ -13,6 +13,8 @@ use Symfony\Component\HttpFoundation\Response;
 
 class BookingSettingController extends ApiController
 {
+    private BookingSettingService $bookingSettingService;
+
     public function __construct(BookingSettingService $service)
     {
         $this->bookingSettingService = $service;
@@ -44,9 +46,9 @@ class BookingSettingController extends ApiController
             Response::HTTP_FORBIDDEN
         );
 
-        $this->bookingSettingService->create($request);
+        $booking_setting = $this->bookingSettingService->create($request);
 
-        return $this->successResponse([], __('response.created'), Response::HTTP_CREATED);
+        return $this->successResponse($booking_setting, __('response.created'), Response::HTTP_CREATED);
     }
 
     /**
@@ -68,10 +70,10 @@ class BookingSettingController extends ApiController
      * Update the specified resource in storage.
      *
      * @param  UpdateBookingSettingRequest  $request
-     * @param    $booking_setting
+     * @param  int  $booking_setting
      * @return JsonResponse
      */
-    public function update(UpdateBookingSettingRequest $request, $booking_setting): JsonResponse
+    public function update(UpdateBookingSettingRequest $request, int $booking_setting): JsonResponse
     {
         abort_unless(auth()->user()->tokenCan('teacher.booking-setting.update'),
             Response::HTTP_FORBIDDEN
@@ -79,9 +81,9 @@ class BookingSettingController extends ApiController
 
         $this->authorize('update', $this->bookingSettingService->show($booking_setting));
 
-        $this->bookingSettingService->update($request, $booking_setting);
+        $booking_setting = $this->bookingSettingService->update($request, $booking_setting);
 
-        return $this->successResponse([], __('response.updated'));
+        return $this->successResponse($booking_setting, __('response.updated'));
     }
 
     /**
@@ -90,7 +92,7 @@ class BookingSettingController extends ApiController
      * @param  int  $booking_setting
      * @return JsonResponse
      */
-    public function destroy($booking_setting): JsonResponse
+    public function destroy(int $booking_setting): JsonResponse
     {
         abort_unless(auth()->user()->tokenCan('teacher.booking-setting.delete'),
             Response::HTTP_FORBIDDEN
@@ -98,8 +100,8 @@ class BookingSettingController extends ApiController
 
         $this->authorize('delete', $this->bookingSettingService->show($booking_setting));
 
-        $this->bookingSettingService->destroy($booking_setting);
+        $booking_setting = $this->bookingSettingService->destroy($booking_setting);
 
-        return $this->successResponse([], __('response.deleted'));
+        return $this->successResponse($booking_setting, __('response.deleted'));
     }
 }

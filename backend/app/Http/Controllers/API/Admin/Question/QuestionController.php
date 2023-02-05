@@ -14,6 +14,8 @@ use Symfony\Component\HttpFoundation\Response;
 
 class QuestionController extends ApiController
 {
+    private QuestionService $questionService;
+
     public function __construct(QuestionService $service)
     {
         $this->questionService = $service;
@@ -24,7 +26,7 @@ class QuestionController extends ApiController
      *
      * @return JsonResponse
      */
-    public function index()
+    public function index(): JsonResponse
     {
         abort_unless(auth()->user()->tokenCan('admin.question.list'),
             Response::HTTP_FORBIDDEN
@@ -45,9 +47,9 @@ class QuestionController extends ApiController
             Response::HTTP_FORBIDDEN
         );
 
-        $this->questionService->create($request);
+        $question = $this->questionService->create($request);
 
-        return $this->successResponse([], __('response.created'), Response::HTTP_CREATED);
+        return $this->successResponse($question, __('response.created'), Response::HTTP_CREATED);
     }
 
     /**
@@ -56,7 +58,7 @@ class QuestionController extends ApiController
      * @param  int  $question
      * @return JsonResponse
      */
-    public function show($question): JsonResponse
+    public function show(int $question): JsonResponse
     {
         abort_unless(auth()->user()->tokenCan('admin.question.show'),
             Response::HTTP_FORBIDDEN
@@ -72,15 +74,15 @@ class QuestionController extends ApiController
      * @param  int  $question
      * @return JsonResponse
      */
-    public function update(UpdateQuestionRequest $request, $question): JsonResponse
+    public function update(UpdateQuestionRequest $request, int $question): JsonResponse
     {
         abort_unless(auth()->user()->tokenCan('admin.question.update'),
             Response::HTTP_FORBIDDEN
         );
 
-        $this->questionService->update($request, $question);
+        $question = $this->questionService->update($request, $question);
 
-        return $this->successResponse([], __('response.updated'));
+        return $this->successResponse($question, __('response.updated'));
     }
 
     /**
@@ -89,14 +91,14 @@ class QuestionController extends ApiController
      * @param  int  $question
      * @return JsonResponse
      */
-    public function destroy($question): JsonResponse
+    public function destroy(int $question): JsonResponse
     {
         abort_unless(auth()->user()->tokenCan('admin.question.delete'),
             Response::HTTP_FORBIDDEN
         );
 
-        $this->questionService->destroy($question);
+        $question = $this->questionService->destroy($question);
 
-        return $this->successResponse([], __('response.deleted'));
+        return $this->successResponse($question, __('response.deleted'));
     }
 }

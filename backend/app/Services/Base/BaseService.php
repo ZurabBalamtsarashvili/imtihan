@@ -4,10 +4,12 @@ namespace App\Services\Base;
 
 class BaseService
 {
+    protected string $model;
+
     /**
      * @var string
      */
-    public function __construct($model)
+    public function __construct(string $model)
     {
         $this->model = $model;
     }
@@ -23,9 +25,9 @@ class BaseService
     /**
      * Store a newly created resource in storage.
      */
-    public function create($request): void
+    public function create($request)
     {
-        $this->model::create($request->validated());
+        return $this->model::create($request->validated());
     }
 
     /**
@@ -44,9 +46,9 @@ class BaseService
      * @param    $request
      * @param  int  $id
      */
-    public function update($request, int $id, array $where = []): void
+    public function update($request, int $id, array $where = [])
     {
-        $this->model::where($where)->findOrFail($id)->update($request->validated());
+        return $this->model::where($where)->findOrFail($id)->update($request->validated());
     }
 
     /**
@@ -54,8 +56,8 @@ class BaseService
      *
      * @param  int  $id
      */
-    public function destroy(int $id, array $where = []): void
+    public function destroy(int $id, array $where = [])
     {
-        $this->model::where($where)->findOrFail($id)->delete();
+        return $this->model::where($where)->findOrFail($id)->delete();
     }
 }

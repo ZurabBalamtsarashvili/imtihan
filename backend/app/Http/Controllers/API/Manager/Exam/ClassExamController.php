@@ -13,6 +13,8 @@ use Symfony\Component\HttpFoundation\Response;
 
 class ClassExamController extends ApiController
 {
+    private ClassExamService $classExamService;
+
     public function __construct(ClassExamService $service)
     {
         $this->classExamService = $service;
@@ -46,9 +48,10 @@ class ClassExamController extends ApiController
         );
 
         $request->merge(['company_id' => Helper::userInfo()->company_id]);
-        $this->classExamService->create($request);
 
-        return $this->successResponse([], __('response.created'), Response::HTTP_CREATED);
+        $class_exam = $this->classExamService->create($request);
+
+        return $this->successResponse($class_exam, __('response.created'), Response::HTTP_CREATED);
     }
 
     /**
@@ -79,9 +82,9 @@ class ClassExamController extends ApiController
             Response::HTTP_FORBIDDEN
         );
 
-        $this->classExamService->update($request, $class_exam);
+        $class_exam = $this->classExamService->update($request, $class_exam);
 
-        return $this->successResponse([], __('response.updated'));
+        return $this->successResponse($class_exam, __('response.updated'));
     }
 
     /**
@@ -96,8 +99,8 @@ class ClassExamController extends ApiController
             Response::HTTP_FORBIDDEN
         );
 
-        $this->classExamService->destroy($class_exam);
+        $class_exam = $this->classExamService->destroy($class_exam);
 
-        return $this->successResponse([], __('response.deleted'));
+        return $this->successResponse($class_exam, __('response.deleted'));
     }
 }
