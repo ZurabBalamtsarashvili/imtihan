@@ -11,7 +11,7 @@
     "e-exam"
   ],
   "license": "MIT",
-  "homepage": "https://github.com/codenteq/imtihan",
+  "homepage": "https://codenteq.com",
   "authors": [
     {
       "name": "Ahmet Sefa Arşiv",
@@ -33,6 +33,10 @@
     "email": "info@codenteq.com"
   },
   "funding": [
+    {
+      "type": "github",
+      "url": "https://github.com/sponsors/codenteq"
+    },
     {
       "type": "open_collective",
       "url": "https://opencollective.com/codenteq"
