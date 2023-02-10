@@ -13,6 +13,7 @@ class ConditionCategory extends Model
     protected $fillable = [
         'name',
         'key',
+        'value',
         'language_id',
     ];
 

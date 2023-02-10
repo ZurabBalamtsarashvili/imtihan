@@ -1,17 +1,17 @@
 <?php
 
-namespace App\Http\Requests\Admin\Condition;
+namespace App\Http\Requests\User\Exam;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateConditionCategoryRequest extends FormRequest
+class StoreExamRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      *
      * @return bool
      */
-    public function authorize(): bool
+    public function authorize()
     {
         return true;
     }
@@ -21,13 +21,10 @@ class UpdateConditionCategoryRequest extends FormRequest
      *
      * @return array<string, mixed>
      */
-    public function rules(): array
+    public function rules()
     {
         return [
-            'name' => 'string',
-            'key' => 'string',
-            'value' => 'numeric',
-            'language_id' => 'numeric|exists:languages,id',
+            'type' => 'required|in:normal,custom',
         ];
     }
 }

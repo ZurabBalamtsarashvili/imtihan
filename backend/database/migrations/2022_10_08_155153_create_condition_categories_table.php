@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('key')->unique();
+            $table->string('value');
             $table->foreignId('language_id')->index();
             $table->timestamps();
             $table->softDeletes();

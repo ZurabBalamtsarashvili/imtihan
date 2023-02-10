@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\API\User\Support;
+namespace App\Http\Controllers\API\Student\Support;
 
 use App\Helper\Helper;
 use App\Http\Controllers\API\ApiController;
@@ -26,7 +26,7 @@ class SupportController extends ApiController
      */
     public function index(): JsonResponse
     {
-        abort_unless(auth()->user()->tokenCan('user.support.list'),
+        abort_unless(auth()->user()->tokenCan('student.support.list'),
             Response::HTTP_FORBIDDEN
         );
 
@@ -41,7 +41,7 @@ class SupportController extends ApiController
      */
     public function store(StoreSupportRequest $request): JsonResponse
     {
-        abort_unless(auth()->user()->tokenCan('user.support.create'),
+        abort_unless(auth()->user()->tokenCan('student.support.create'),
             Response::HTTP_FORBIDDEN
         );
 
@@ -60,7 +60,7 @@ class SupportController extends ApiController
      */
     public function destroy(int $support): JsonResponse
     {
-        abort_unless(auth()->user()->tokenCan('user.support.delete'),
+        abort_unless(auth()->user()->tokenCan('student.support.delete'),
             Response::HTTP_FORBIDDEN
         );
 

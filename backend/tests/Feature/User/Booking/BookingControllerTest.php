@@ -14,7 +14,7 @@ class BookingControllerTest extends TestCase
 {
     use RefreshDatabase;
 
-    protected string $apiUrl = '/api/user/bookings/';
+    protected string $apiUrl = '/api/student/bookings/';
 
     public function test_booking_list()
     {
@@ -23,7 +23,7 @@ class BookingControllerTest extends TestCase
         UserInfo::factory()->state(['user_id' => $user->id, 'company_id' => $company->id])->create();
         Booking::factory(20)->state(['company_id' => $company->id, 'user_id' => $user->id])->create();
 
-        Sanctum::actingAs($user, ['user.booking.list']);
+        Sanctum::actingAs($user, ['student.booking.list']);
 
         $response = $this->get($this->apiUrl);
 
@@ -38,7 +38,7 @@ class BookingControllerTest extends TestCase
         UserInfo::factory()->state(['user_id' => $user->id, 'company_id' => $company->id])->create();
         $booking = Booking::factory()->make();
 
-        Sanctum::actingAs($user, ['user.booking.create']);
+        Sanctum::actingAs($user, ['student.booking.create']);
 
         $response = $this->postJson($this->apiUrl, $booking->toArray());
         $response->assertStatus(201);
@@ -51,7 +51,7 @@ class BookingControllerTest extends TestCase
         UserInfo::factory()->state(['user_id' => $user->id, 'company_id' => $company->id])->create();
         $booking = Booking::factory()->state(['user_id' => $user->id, 'company_id' => $company->id])->create();
 
-        Sanctum::actingAs($user, ['user.booking.delete']);
+        Sanctum::actingAs($user, ['student.booking.delete']);
 
         $response = $this->delete($this->apiUrl.$booking->id);
         $response->assertStatus(200);

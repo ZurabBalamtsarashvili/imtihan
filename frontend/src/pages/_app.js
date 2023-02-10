@@ -1,15 +1,16 @@
-import 'tailwindcss/tailwind.css'
-import {useEffect} from 'react';
+import 'tailwindcss/tailwind.css';
+import { useEffect } from 'react';
 import '../styles/globals.css';
-import {useRouter} from 'next/router';
+import { useRouter } from 'next/router';
+import { Progress } from '@/components/Progress/Progress';
+import { useProgressStore } from '@/hooks/useProgressStore';
+import { Provider as ReduxProvider } from 'react-redux';
+import { store } from '@/store';
 
-import {Progress} from 'components/Progress/Progress';
-import {useProgressStore} from '../../store';
-
-function App({Component, pageProps}) {
-    const getLayout = Component.getLayout || ((page) => page)
-    const setIsAnimating = useProgressStore((state) => state.setIsAnimating);
-    const isAnimating = useProgressStore((state) => state.isAnimating);
+function App({ Component, pageProps }) {
+    const getLayout = Component.getLayout || (page => page);
+    const setIsAnimating = useProgressStore(state => state.setIsAnimating);
+    const isAnimating = useProgressStore(state => state.isAnimating);
     const router = useRouter();
     useEffect(() => {
         const handleStart = () => {
@@ -31,9 +32,11 @@ function App({Component, pageProps}) {
     }, [router]);
     return getLayout(
         <>
-            <Progress isAnimating={isAnimating}/>
-            <Component {...pageProps} />
-        </>
+            <ReduxProvider store={store}>
+                <Progress isAnimating={isAnimating} />
+                <Component {...pageProps} />
+            </ReduxProvider>
+        </>,
     );
 }
 

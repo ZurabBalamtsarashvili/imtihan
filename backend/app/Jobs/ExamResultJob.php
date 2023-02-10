@@ -9,7 +9,7 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 
-class TestResultJob implements ShouldQueue
+class ExamResultJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
@@ -33,8 +33,8 @@ class TestResultJob implements ShouldQueue
      *
      * @return void
      */
-    public function handle(TestResultService $testResultService)
+    public function handle()
     {
-        $testResultService->execute($this->userId, $this->testId);
+
     }
 }

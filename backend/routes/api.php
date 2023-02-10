@@ -19,7 +19,7 @@ use App\Http\Controllers\API\Manager\Lesson\LiveLessonController;
 use App\Http\Controllers\API\Manager\Notification\NotificationController;
 use App\Http\Controllers\API\Manager\User\StudentController;
 use App\Http\Controllers\API\Manager\User\TeacherController;
-use App\Http\Controllers\API\User\Support\SupportController;
+use App\Http\Controllers\API\Student\Support\SupportController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -98,8 +98,9 @@ Route::middleware(['auth:sanctum'])->group(function () {
         });
     });
 
-    Route::prefix('user')->group(function () {
-        Route::apiResource('bookings', \App\Http\Controllers\API\User\Booking\BookingController::class)->only(['index', 'store', 'destroy']);
+    Route::prefix('student')->group(function () {
+        Route::apiResource('exams', \App\Http\Controllers\API\Student\Exam\ExamController::class)->only(['index', 'store', 'storeAnswer']);
+        Route::apiResource('bookings', \App\Http\Controllers\API\Student\Booking\BookingController::class)->only(['index', 'store', 'destroy']);
         Route::apiResource('supports', SupportController::class)->only(['index', 'store', 'destroy']);
     });
 });

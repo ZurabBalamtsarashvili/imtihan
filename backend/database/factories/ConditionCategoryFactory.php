@@ -20,6 +20,7 @@ class ConditionCategoryFactory extends Factory
         return [
             'name' => $this->faker->name,
             'key' => $this->faker->unique()->domainName,
+            'value' => rand(1, 100),
             'language_id' => Language::factory(),
         ];
     }
