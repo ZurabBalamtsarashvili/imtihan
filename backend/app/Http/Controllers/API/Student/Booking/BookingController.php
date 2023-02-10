@@ -12,6 +12,8 @@ use Symfony\Component\HttpFoundation\Response;
 
 class BookingController extends ApiController
 {
+    private BookingService $bookingService;
+
     public function __construct(BookingService $service)
     {
         $this->bookingService = $service;
@@ -44,9 +46,10 @@ class BookingController extends ApiController
         );
 
         $request->merge(['company_id' => Helper::userInfo()->company_id, 'user_id' => auth()->id()]);
-        $this->bookingService->create($request);
 
-        return $this->successResponse([], __('response.created'), Response::HTTP_CREATED);
+        $booking = $this->bookingService->create($request);
+
+        return $this->successResponse($booking, __('response.created'), Response::HTTP_CREATED);
     }
 
     /**
@@ -55,7 +58,7 @@ class BookingController extends ApiController
      * @param  int  $booking
      * @return JsonResponse
      */
-    public function destroy($booking): JsonResponse
+    public function destroy(int $booking): JsonResponse
     {
         abort_unless(auth()->user()->tokenCan('student.booking.delete'),
             Response::HTTP_FORBIDDEN
@@ -63,8 +66,8 @@ class BookingController extends ApiController
 
         $this->authorize('delete', $this->bookingService->show($booking));
 
-        $this->bookingService->destroy($booking);
+        $booking = $this->bookingService->destroy($booking);
 
-        return $this->successResponse([], __('response.deleted'));
+        return $this->successResponse($booking, __('response.deleted'));
     }
 }

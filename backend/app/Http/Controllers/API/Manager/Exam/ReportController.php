@@ -11,6 +11,8 @@ use Symfony\Component\HttpFoundation\Response;
 
 class ReportController extends ApiController
 {
+    private ReportService $reportService;
+
     public function __construct(ReportService $service)
     {
         $this->reportService = $service;
@@ -27,9 +29,8 @@ class ReportController extends ApiController
             Response::HTTP_FORBIDDEN
         );
 
-        return $this->successResponse(
-            ReportResource::collection($this->reportService->list(['category.questionCategory', 'user'],
-                ['company_id' => Helper::userInfo()->company_id])));
+        return $this->successResponse(ReportResource::collection($this->reportService->list(['category.questionCategory', 'user'],
+            ['company_id' => Helper::userInfo()->company_id])));
     }
 
     /**

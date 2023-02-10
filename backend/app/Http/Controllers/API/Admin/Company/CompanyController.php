@@ -12,6 +12,8 @@ use Symfony\Component\HttpFoundation\Response;
 
 class CompanyController extends ApiController
 {
+    private CompanyService $companyService;
+
     public function __construct(CompanyService $service)
     {
         $this->companyService = $service;
@@ -43,15 +45,15 @@ class CompanyController extends ApiController
             Response::HTTP_FORBIDDEN
         );
 
-        $this->companyService->create($request);
+        $company = $this->companyService->create($request);
 
-        return $this->successResponse([], __('response.created'), Response::HTTP_CREATED);
+        return $this->successResponse($company, __('response.created'), Response::HTTP_CREATED);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $company
+     * @param  int  $class_room
      * @return JsonResponse
      */
     public function show(int $company): JsonResponse
@@ -66,19 +68,19 @@ class CompanyController extends ApiController
     /**
      * Update the specified resource in storage.
      *
-     * @param  UpdateCompanyRequest  $company
+     * @param  UpdateCompanyRequest  $request
      * @param  int  $company
      * @return JsonResponse
      */
-    public function update(UpdateCompanyRequest $request, $company): JsonResponse
+    public function update(UpdateCompanyRequest $request, int $company): JsonResponse
     {
         abort_unless(auth()->user()->tokenCan('admin.company.update'),
             Response::HTTP_FORBIDDEN
         );
 
-        $this->companyService->update($request, $company);
+        $company = $this->companyService->update($request, $company);
 
-        return $this->successResponse([], __('response.updated'));
+        return $this->successResponse($company, __('response.updated'));
     }
 
     /**
@@ -87,14 +89,14 @@ class CompanyController extends ApiController
      * @param  int  $company
      * @return JsonResponse
      */
-    public function destroy($company): JsonResponse
+    public function destroy(int $company): JsonResponse
     {
         abort_unless(auth()->user()->tokenCan('admin.company.delete'),
             Response::HTTP_FORBIDDEN
         );
 
-        $this->companyService->destroy($company);
+        $company = $this->companyService->destroy($company);
 
-        return $this->successResponse([], __('response.deleted'));
+        return $this->successResponse($company, __('response.deleted'));
     }
 }

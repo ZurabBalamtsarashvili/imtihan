@@ -12,6 +12,8 @@ use Symfony\Component\HttpFoundation\Response;
 
 class LessonController extends ApiController
 {
+    private LessonService $lessonService;
+
     public function __construct(LessonService $service)
     {
         $this->lessonService = $service;
@@ -37,15 +39,15 @@ class LessonController extends ApiController
      * @param  StoreLessonRequest  $request
      * @return JsonResponse
      */
-    public function store(StoreLessonRequest $request)
+    public function store(StoreLessonRequest $request): JsonResponse
     {
         abort_unless(auth()->user()->tokenCan('admin.lesson.create'),
             Response::HTTP_FORBIDDEN
         );
 
-        $this->lessonService->create($request);
+        $lesson = $this->lessonService->create($request);
 
-        return $this->successResponse([], __('response.created'), Response::HTTP_CREATED);
+        return $this->successResponse($lesson, __('response.created'), Response::HTTP_CREATED);
     }
 
     /**
@@ -54,7 +56,7 @@ class LessonController extends ApiController
      * @param  int  $lesson
      * @return JsonResponse
      */
-    public function show($lesson): JsonResponse
+    public function show(int $lesson): JsonResponse
     {
         abort_unless(auth()->user()->tokenCan('admin.lesson.show'),
             Response::HTTP_FORBIDDEN
@@ -70,15 +72,15 @@ class LessonController extends ApiController
      * @param  int  $lesson
      * @return JsonResponse
      */
-    public function update(UpdateLessonRequest $request, $lesson): JsonResponse
+    public function update(UpdateLessonRequest $request, int $lesson): JsonResponse
     {
         abort_unless(auth()->user()->tokenCan('admin.lesson.update'),
             Response::HTTP_FORBIDDEN
         );
 
-        $this->lessonService->update($request, $lesson);
+        $lesson = $this->lessonService->update($request, $lesson);
 
-        return $this->successResponse([], __('response.updated'));
+        return $this->successResponse($lesson, __('response.updated'));
     }
 
     /**
@@ -87,14 +89,14 @@ class LessonController extends ApiController
      * @param  int  $lesson
      * @return JsonResponse
      */
-    public function destroy($lesson): JsonResponse
+    public function destroy(int $lesson): JsonResponse
     {
         abort_unless(auth()->user()->tokenCan('admin.lesson.delete'),
             Response::HTTP_FORBIDDEN
         );
 
-        $this->lessonService->destroy($lesson);
+        $lesson = $this->lessonService->destroy($lesson);
 
-        return $this->successResponse([], __('response.deleted'));
+        return $this->successResponse($lesson, __('response.deleted'));
     }
 }

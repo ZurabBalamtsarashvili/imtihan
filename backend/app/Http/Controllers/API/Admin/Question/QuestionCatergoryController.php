@@ -12,6 +12,8 @@ use Symfony\Component\HttpFoundation\Response;
 
 class QuestionCatergoryController extends ApiController
 {
+    private QuestionCategoryService $questionCategoryService;
+
     public function __construct(QuestionCategoryService $service)
     {
         $this->questionCategoryService = $service;
@@ -43,9 +45,9 @@ class QuestionCatergoryController extends ApiController
             Response::HTTP_FORBIDDEN
         );
 
-        $this->questionCategoryService->create($request);
+        $category = $this->questionCategoryService->create($request);
 
-        return $this->successResponse([], __('response.created'), Response::HTTP_CREATED);
+        return $this->successResponse($category, __('response.created'), Response::HTTP_CREATED);
     }
 
     /**
@@ -54,7 +56,7 @@ class QuestionCatergoryController extends ApiController
      * @param  int  $category
      * @return JsonResponse
      */
-    public function show($category)
+    public function show(int $category): JsonResponse
     {
         abort_unless(auth()->user()->tokenCan('admin.question.category.show'),
             Response::HTTP_FORBIDDEN
@@ -70,15 +72,15 @@ class QuestionCatergoryController extends ApiController
      * @param  int  $category
      * @return JsonResponse
      */
-    public function update(UpdateQuestionCategoryRequest $request, $category)
+    public function update(UpdateQuestionCategoryRequest $request, int $category): JsonResponse
     {
         abort_unless(auth()->user()->tokenCan('admin.question.category.update'),
             Response::HTTP_FORBIDDEN
         );
 
-        $this->questionCategoryService->update($request, $category);
+        $category = $this->questionCategoryService->update($request, $category);
 
-        return $this->successResponse([], __('response.updated'));
+        return $this->successResponse($category, __('response.updated'));
     }
 
     /**
@@ -87,14 +89,14 @@ class QuestionCatergoryController extends ApiController
      * @param  int  $category
      * @return JsonResponse
      */
-    public function destroy($category): JsonResponse
+    public function destroy(int $category): JsonResponse
     {
         abort_unless(auth()->user()->tokenCan('admin.question.category.delete'),
             Response::HTTP_FORBIDDEN
         );
 
-        $this->questionCategoryService->destroy($category);
+        $category = $this->questionCategoryService->destroy($category);
 
-        return $this->successResponse([], __('response.deleted'));
+        return $this->successResponse($category, __('response.deleted'));
     }
 }

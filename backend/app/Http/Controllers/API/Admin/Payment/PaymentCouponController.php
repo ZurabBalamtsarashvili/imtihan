@@ -12,6 +12,8 @@ use Symfony\Component\HttpFoundation\Response;
 
 class PaymentCouponController extends ApiController
 {
+    private PaymentCouponService $paymentCouponService;
+
     public function __construct(PaymentCouponService $service)
     {
         $this->paymentCouponService = $service;
@@ -43,9 +45,9 @@ class PaymentCouponController extends ApiController
             Response::HTTP_FORBIDDEN
         );
 
-        $this->paymentCouponService->create($request);
+        $payment_coupon = $this->paymentCouponService->create($request);
 
-        return $this->successResponse([], __('response.created'), Response::HTTP_CREATED);
+        return $this->successResponse($payment_coupon, __('response.created'), Response::HTTP_CREATED);
     }
 
     /**
@@ -66,19 +68,19 @@ class PaymentCouponController extends ApiController
     /**
      * Update the specified resource in storage.
      *
-     * @param  UpdatePaymentCouponRequest  $payment_coupon
+     * @param  UpdatePaymentCouponRequest  $request
      * @param  int  $payment_coupon
      * @return JsonResponse
      */
-    public function update(UpdatePaymentCouponRequest $request, $payment_coupon): JsonResponse
+    public function update(UpdatePaymentCouponRequest $request, int $payment_coupon): JsonResponse
     {
         abort_unless(auth()->user()->tokenCan('admin.payment-coupon.update'),
             Response::HTTP_FORBIDDEN
         );
 
-        $this->paymentCouponService->update($request, $payment_coupon);
+        $payment_coupon = $this->paymentCouponService->update($request, $payment_coupon);
 
-        return $this->successResponse([], __('response.updated'));
+        return $this->successResponse($payment_coupon, __('response.updated'));
     }
 
     /**
@@ -87,14 +89,14 @@ class PaymentCouponController extends ApiController
      * @param  int  $payment_coupon
      * @return JsonResponse
      */
-    public function destroy($payment_coupon): JsonResponse
+    public function destroy(int $payment_coupon): JsonResponse
     {
         abort_unless(auth()->user()->tokenCan('admin.payment-coupon.delete'),
             Response::HTTP_FORBIDDEN
         );
 
-        $this->paymentCouponService->destroy($payment_coupon);
+        $payment_coupon = $this->paymentCouponService->destroy($payment_coupon);
 
-        return $this->successResponse([], __('response.deleted'));
+        return $this->successResponse($payment_coupon, __('response.deleted'));
     }
 }

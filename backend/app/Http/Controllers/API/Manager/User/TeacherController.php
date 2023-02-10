@@ -13,6 +13,8 @@ use Symfony\Component\HttpFoundation\Response;
 
 class TeacherController extends ApiController
 {
+    private TeacherService $teacherService;
+
     public function __construct(TeacherService $service)
     {
         $this->teacherService = $service;
@@ -46,9 +48,9 @@ class TeacherController extends ApiController
 
         $request->merge(['role' => User::Teacher]);
 
-        $this->teacherService->create($request);
+        $teacher = $this->teacherService->create($request);
 
-        return $this->successResponse([], __('response.created'), Response::HTTP_CREATED);
+        return $this->successResponse($teacher, __('response.created'), Response::HTTP_CREATED);
     }
 
     /**
@@ -73,15 +75,15 @@ class TeacherController extends ApiController
      * @param  int  $teacher
      * @return JsonResponse
      */
-    public function update(UpdateTeacherRequest $request, $teacher): JsonResponse
+    public function update(UpdateTeacherRequest $request, int $teacher): JsonResponse
     {
         abort_unless(auth()->user()->tokenCan('manager.user.teacher.update'),
             Response::HTTP_FORBIDDEN
         );
 
-        $this->teacherService->update($request, $teacher);
+        $teacher = $this->teacherService->update($request, $teacher);
 
-        return $this->successResponse([], __('response.updated'));
+        return $this->successResponse($teacher, __('response.updated'));
     }
 
     /**
@@ -90,14 +92,14 @@ class TeacherController extends ApiController
      * @param  int  $teacher
      * @return JsonResponse
      */
-    public function destroy($teacher): JsonResponse
+    public function destroy(int $teacher): JsonResponse
     {
         abort_unless(auth()->user()->tokenCan('manager.user.teacher.delete'),
             Response::HTTP_FORBIDDEN
         );
 
-        $this->teacherService->destroy($teacher);
+        $teacher = $this->teacherService->destroy($teacher);
 
-        return $this->successResponse([], __('response.deleted'));
+        return $this->successResponse($teacher, __('response.deleted'));
     }
 }

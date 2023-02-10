@@ -12,6 +12,8 @@ use Symfony\Component\HttpFoundation\Response;
 
 class LanguageController extends ApiController
 {
+    private LanguageService $languageService;
+
     public function __construct(LanguageService $service)
     {
         $this->languageService = $service;
@@ -35,9 +37,9 @@ class LanguageController extends ApiController
      */
     public function store(StoreLanguageRequest $request): JsonResponse
     {
-        $this->languageService->create($request);
+        $language = $this->languageService->create($request);
 
-        return $this->successResponse([], __('response.created'), Response::HTTP_CREATED);
+        return $this->successResponse($language, __('response.created'), Response::HTTP_CREATED);
     }
 
     /**
@@ -46,7 +48,7 @@ class LanguageController extends ApiController
      * @param  int  $language
      * @return JsonResponse
      */
-    public function show($language): JsonResponse
+    public function show(int $language): JsonResponse
     {
         return $this->successResponse(new LanguageResource($this->languageService->show($language)));
     }
@@ -58,11 +60,11 @@ class LanguageController extends ApiController
      * @param  int  $language
      * @return JsonResponse
      */
-    public function update(UpdateLanguageRequest $request, $language): JsonResponse
+    public function update(UpdateLanguageRequest $request, int $language): JsonResponse
     {
-        $this->languageService->update($request, $language);
+        $language = $this->languageService->update($request, $language);
 
-        return $this->successResponse([], __('response.updated'));
+        return $this->successResponse($language, __('response.updated'));
     }
 
     /**
@@ -71,10 +73,10 @@ class LanguageController extends ApiController
      * @param  int  $language
      * @return JsonResponse
      */
-    public function destroy($language): JsonResponse
+    public function destroy(int $language): JsonResponse
     {
-        $this->languageService->destroy($language);
+        $language = $this->languageService->destroy($language);
 
-        return $this->successResponse([], __('response.deleted'));
+        return $this->successResponse($language, __('response.deleted'));
     }
 }

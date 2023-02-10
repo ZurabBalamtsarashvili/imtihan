@@ -12,6 +12,8 @@ use Symfony\Component\HttpFoundation\Response;
 
 class PaymentMethodController extends ApiController
 {
+    private PaymentMethodService $paymentMethodService;
+
     public function __construct(PaymentMethodService $service)
     {
         $this->paymentMethodService = $service;
@@ -43,9 +45,9 @@ class PaymentMethodController extends ApiController
             Response::HTTP_FORBIDDEN
         );
 
-        $this->paymentMethodService->create($request);
+        $payment_method = $this->paymentMethodService->create($request);
 
-        return $this->successResponse([], __('response.created'), Response::HTTP_CREATED);
+        return $this->successResponse($payment_method, __('response.created'), Response::HTTP_CREATED);
     }
 
     /**
@@ -66,19 +68,19 @@ class PaymentMethodController extends ApiController
     /**
      * Update the specified resource in storage.
      *
-     * @param  UpdatePaymentMethodRequest  $payment_method
+     * @param  UpdatePaymentMethodRequest  $request
      * @param  int  $payment_method
      * @return JsonResponse
      */
-    public function update(UpdatePaymentMethodRequest $request, $payment_method): JsonResponse
+    public function update(UpdatePaymentMethodRequest $request, int $payment_method): JsonResponse
     {
         abort_unless(auth()->user()->tokenCan('admin.payment-method.update'),
             Response::HTTP_FORBIDDEN
         );
 
-        $this->paymentMethodService->update($request, $payment_method);
+        $payment_method = $this->paymentMethodService->update($request, $payment_method);
 
-        return $this->successResponse([], __('response.updated'));
+        return $this->successResponse($payment_method, __('response.updated'));
     }
 
     /**
@@ -87,14 +89,14 @@ class PaymentMethodController extends ApiController
      * @param  int  $payment_method
      * @return JsonResponse
      */
-    public function destroy($payment_method): JsonResponse
+    public function destroy(int $payment_method): JsonResponse
     {
         abort_unless(auth()->user()->tokenCan('admin.payment-method.delete'),
             Response::HTTP_FORBIDDEN
         );
 
-        $this->paymentMethodService->destroy($payment_method);
+        $payment_method = $this->paymentMethodService->destroy($payment_method);
 
-        return $this->successResponse([], __('response.deleted'));
+        return $this->successResponse($payment_method, __('response.deleted'));
     }
 }

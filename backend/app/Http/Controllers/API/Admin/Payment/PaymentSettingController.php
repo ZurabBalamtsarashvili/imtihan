@@ -12,6 +12,8 @@ use Symfony\Component\HttpFoundation\Response;
 
 class PaymentSettingController extends ApiController
 {
+    private PaymentSettingService $paymentSettingService;
+
     public function __construct(PaymentSettingService $service)
     {
         $this->paymentSettingService = $service;
@@ -43,9 +45,9 @@ class PaymentSettingController extends ApiController
             Response::HTTP_FORBIDDEN
         );
 
-        $this->paymentSettingService->create($request);
+        $payment_setting = $this->paymentSettingService->create($request);
 
-        return $this->successResponse([], __('response.created'), Response::HTTP_CREATED);
+        return $this->successResponse($payment_setting, __('response.created'), Response::HTTP_CREATED);
     }
 
     /**
@@ -66,19 +68,19 @@ class PaymentSettingController extends ApiController
     /**
      * Update the specified resource in storage.
      *
-     * @param  UpdatePaymentSettingRequest  $payment_setting
+     * @param  UpdatePaymentSettingRequest  $request
      * @param  int  $payment_setting
      * @return JsonResponse
      */
-    public function update(UpdatePaymentSettingRequest $request, $payment_setting): JsonResponse
+    public function update(UpdatePaymentSettingRequest $request, int $payment_setting): JsonResponse
     {
         abort_unless(auth()->user()->tokenCan('admin.payment-setting.update'),
             Response::HTTP_FORBIDDEN
         );
 
-        $this->paymentSettingService->update($request, $payment_setting);
+        $payment_setting = $this->paymentSettingService->update($request, $payment_setting);
 
-        return $this->successResponse([], __('response.updated'));
+        return $this->successResponse($payment_setting, __('response.updated'));
     }
 
     /**
@@ -87,14 +89,14 @@ class PaymentSettingController extends ApiController
      * @param  int  $payment_setting
      * @return JsonResponse
      */
-    public function destroy($payment_setting)
+    public function destroy(int $payment_setting)
     {
         abort_unless(auth()->user()->tokenCan('admin.payment-setting.delete'),
             Response::HTTP_FORBIDDEN
         );
 
-        $this->paymentSettingService->destroy($payment_setting);
+        $payment_setting = $this->paymentSettingService->destroy($payment_setting);
 
-        return $this->successResponse([], __('response.deleted'));
+        return $this->successResponse($payment_setting, __('response.deleted'));
     }
 }
