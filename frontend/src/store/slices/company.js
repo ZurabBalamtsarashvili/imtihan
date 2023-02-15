@@ -26,7 +26,7 @@ const slice = createSlice({
         },
         postCompany: (state, action) => {
             state.isLoading = false;
-            state.companies = action.payload;
+            state.companies = [action.payload, ...state.companies];
         },
         updateCompany: (state, action) => {
             state.isLoading = false;
@@ -53,7 +53,7 @@ export function getCompanies() {
         dispatch(slice.actions.startLoading);
         try {
             const response = await axios.get('/api/admin/companies');
-            dispatch(slice.actions.getCompanies(response.data.data));
+            dispatch(slice.actions.getCompanies(response.data));
         } finally {
             dispatch(slice.actions.endLoading);
         }
@@ -65,7 +65,23 @@ export function getCompany(id) {
         dispatch(slice.actions.startLoading);
         try {
             const response = await axios.get('/api/admin/companies/' + id);
-            dispatch(slice.actions.getCompany(response.data.data));
+            dispatch(slice.actions.getCompany(response.data));
+        } finally {
+            dispatch(slice.actions.endLoading);
+        }
+    };
+}
+
+export function postCompany(data) {
+    return async () => {
+        dispatch(slice.actions.startLoading);
+        try {
+            const response = await axios.post('/api/admin/companies/', data, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            });
+            dispatch(slice.actions.postCompany(response.data));
         } finally {
             dispatch(slice.actions.endLoading);
         }
@@ -80,7 +96,7 @@ export function updateCompany(id, data) {
                 '/api/admin/companies/' + id,
                 data,
             );
-            dispatch(slice.actions.deleteCompany(response.data.data));
+            dispatch(slice.actions.deleteCompany(response.data));
         } finally {
             dispatch(slice.actions.endLoading);
         }
@@ -92,7 +108,7 @@ export function deleteCompany(id) {
         dispatch(slice.actions.startLoading);
         try {
             const response = await axios.delete('/api/admin/companies/' + id);
-            dispatch(slice.actions.postCompany(response.data.data));
+            dispatch(slice.actions.postCompany(response.data));
         } finally {
             dispatch(slice.actions.endLoading);
         }
