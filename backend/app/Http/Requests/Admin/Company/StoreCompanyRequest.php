@@ -31,7 +31,7 @@ class StoreCompanyRequest extends FormRequest
             'email' => 'required|string|email|max:255',
             'web_url' => 'string|max:255',
             'phone' => 'required|string|max:255',
-            'logo' => 'required|string',
+            'logo' => 'required|file',
             'country_id' => 'required|numeric|exists:countries,id',
             'city_id' => 'required|numeric|exists:cities,id',
             'state_id' => 'required|numeric|exists:states,id',

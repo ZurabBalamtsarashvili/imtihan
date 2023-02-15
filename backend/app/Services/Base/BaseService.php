@@ -25,7 +25,7 @@ class BaseService
     /**
      * Store a newly created resource in storage.
      */
-    public function create($request)
+    public function create(object $request): object
     {
         return $this->model::create($request->validated());
     }

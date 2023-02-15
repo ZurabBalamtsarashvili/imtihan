@@ -16,11 +16,7 @@ trait ApiResponser
      */
     protected function successResponse($data, string $message = null, int $code = 200): JsonResponse
     {
-        return response()->json([
-            'success' => true,
-            'message' => $message,
-            'data' => $data,
-        ], $code);
+        return response()->json($data, $code);
     }
 
     /**
