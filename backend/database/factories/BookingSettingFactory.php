@@ -15,7 +15,7 @@ class BookingSettingFactory extends Factory
      *
      * @return array<string, mixed>
      */
-    public function definition()
+    public function definition(): array
     {
         return [
             'ignore_date' => $this->faker->date,

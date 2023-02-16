@@ -15,7 +15,7 @@ class PaymentSettingFactory extends Factory
      *
      * @return array<string, mixed>
      */
-    public function definition()
+    public function definition(): array
     {
         return [
             'price' => $this->faker->randomFloat(2, 1, 100),

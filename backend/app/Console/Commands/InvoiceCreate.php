@@ -2,7 +2,6 @@
 
 namespace App\Console\Commands;
 
-use App\Services\InvoiceCreatorService;
 use Illuminate\Console\Command;
 
 class InvoiceCreate extends Command
@@ -36,7 +35,7 @@ class InvoiceCreate extends Command
      *
      * @return int
      */
-    public function handle(InvoiceCreatorService $invoiceCreatorService)
+    public function handle(InvoiceCreatorService $invoiceCreatorService): int
     {
         $invoiceCreatorService->execute();
     }
