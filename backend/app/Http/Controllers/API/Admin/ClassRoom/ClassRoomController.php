@@ -39,7 +39,7 @@ class ClassRoomController extends ApiController
     {
         $class_room = $this->classRoomService->create($request);
 
-        return $this->successResponse($class_room, __('response.created'), Response::HTTP_CREATED);
+        return $this->successResponse($class_room, Response::HTTP_CREATED);
     }
 
     /**
@@ -64,7 +64,7 @@ class ClassRoomController extends ApiController
     {
         $class_room = $this->classRoomService->update($request, $class_room);
 
-        return $this->successResponse($class_room, __('response.updated'));
+        return $this->successResponse($class_room);
     }
 
     /**
@@ -77,6 +77,6 @@ class ClassRoomController extends ApiController
     {
         $class_room = $this->classRoomService->destroy($class_room);
 
-        return $this->successResponse($class_room, __('response.deleted'));
+        return $this->successResponse($class_room);
     }
 }

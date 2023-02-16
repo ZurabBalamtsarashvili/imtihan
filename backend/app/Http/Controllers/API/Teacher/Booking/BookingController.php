@@ -64,6 +64,6 @@ class BookingController extends ApiController
 
         $booking = $this->bookingService->destroy($booking);
 
-        return $this->successResponse($booking, __('response.deleted'));
+        return $this->successResponse($booking);
     }
 }

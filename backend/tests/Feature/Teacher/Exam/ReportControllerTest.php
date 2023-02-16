@@ -57,8 +57,7 @@ class ReportControllerTest extends TestCase
 
         $response = $this->get($this->apiUrl);
 
-        $response->assertJsonStructure(['success', 'message', 'data'])
-            ->assertJsonCount(1, 'data');
+        $response->assertJsonCount(1);
     }
 
     public function test_report_show()
@@ -98,7 +97,6 @@ class ReportControllerTest extends TestCase
 
         $response = $this->get($this->apiUrl.$exam->id);
 
-        $response->assertJsonStructure(['success', 'message', 'data'])
-            ->assertJsonCount(2, 'data.categories');
+        $response->assertJsonCount(2, 'categories');
     }
 }

@@ -7,6 +7,7 @@ use App\Models\Company;
 use App\Models\Country;
 use App\Models\State;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Http\UploadedFile;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Company>
@@ -29,7 +30,7 @@ class CompanyFactory extends Factory
             'email' => $this->faker->email,
             'web_url' => $this->faker->url,
             'phone' => $this->faker->phoneNumber,
-            'logo' => $this->faker->imageUrl,
+            'logo' => UploadedFile::fake()->image('logo.png'),
             'country_id' => Country::factory(),
             'city_id' => City::factory(),
             'state_id' => State::factory(),

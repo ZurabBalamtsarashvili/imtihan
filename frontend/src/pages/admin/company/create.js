@@ -8,21 +8,46 @@ import InputFile from '@/components/InputFile';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from '@/store';
 import { postCompany } from '@/store/slices/company';
+import { useRouter } from 'next/router';
+import toast from 'react-hot-toast';
+import { useEffect } from 'react';
 
 Create.getLayout = page => <AppLayout name="Create">{page}</AppLayout>;
 export default function Create() {
-    const { register, handleSubmit } = useForm();
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = useForm();
+
+    const router = useRouter();
 
     const dispatch = useDispatch();
     const onSubmit = data => {
-        dispatch(postCompany(data))
+        const formData = new FormData();
+
+        formData.append('logo', data.logo[0]);
+
+        for (const key in data) {
+            if (key !== 'logo') {
+                formData.append(key, data[key]);
+            }
+        }
+
+        dispatch(postCompany(formData))
             .then(res => {
-                console.log(res);
+                toast.success('Created successfully!');
+                router.push('/admin/company');
             })
             .catch(err => {
-                console.log(err);
+                toast.error(err?.response?.data?.message);
+                console.log('err');
             });
     };
+
+    useEffect(() => {
+        console.log(errors);
+    }, [errors]);
 
     return (
         <>
@@ -42,6 +67,7 @@ export default function Create() {
                                 <Input
                                     type="checkbox"
                                     {...register('is_active')}
+                                    value="1"
                                     className="rounded w-2 h-2 border-brand text-brand shadow-sm focus:ring focus:ring-brand focus:ring-opacity-20"
                                 />
 
@@ -110,7 +136,7 @@ export default function Create() {
                         </div>
                         <div>
                             <Input
-                                {...register('address')}
+                                {...register('address', { required: true })}
                                 type="text"
                                 className="block mt-1 w-full"
                                 placeholder="Address"
@@ -135,14 +161,14 @@ export default function Create() {
                             <InputSelect
                                 {...register('city_id')}
                                 defaultOption="Choose a city">
-                                <option value="41">Adana</option>
+                                <option value="1">Adana</option>
                             </InputSelect>
                         </div>
                         <div>
                             <InputSelect
                                 {...register('state_id')}
                                 defaultOption="Choose a state">
-                                <option value="21">Merkez</option>
+                                <option value="1">Merkez</option>
                             </InputSelect>
                         </div>
                     </div>

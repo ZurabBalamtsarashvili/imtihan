@@ -7,6 +7,7 @@ use App\Http\Controllers\API\ApiController;
 use App\Http\Requests\User\Support\StoreSupportRequest;
 use App\Http\Resources\User\Support\SupportResource;
 use App\Services\User\Support\SupportService;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -49,14 +50,15 @@ class SupportController extends ApiController
 
         $support = $this->supportService->create($request);
 
-        return $this->successResponse($support, __('response.created'), Response::HTTP_CREATED);
+        return $this->successResponse($support,Response::HTTP_CREATED);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $support
+     * @param int $support
      * @return JsonResponse
+     * @throws AuthorizationException
      */
     public function destroy(int $support): JsonResponse
     {
@@ -68,6 +70,6 @@ class SupportController extends ApiController
 
         $support = $this->supportService->destroy($support);
 
-        return $this->successResponse($support, __('response.deleted'));
+        return $this->successResponse($support);
     }
 }

@@ -23,8 +23,7 @@ class PaymentSettingControllerTest extends TestCase
 
         $response = $this->get($this->apiUrl);
 
-        $response->assertJsonStructure(['success', 'message', 'data'])
-            ->assertJsonCount(20, 'data');
+        $response->assertJsonCount(20);
     }
 
     public function test_payment_setting_create()
@@ -46,8 +45,7 @@ class PaymentSettingControllerTest extends TestCase
         Sanctum::actingAs($user, ['admin.payment-setting.show']);
 
         $response = $this->get($this->apiUrl.$paymentSetting->id);
-        $response->assertJsonStructure(['success', 'message', 'data'])
-            ->assertJsonFragment(['id' => $paymentSetting->id]);
+        $response->assertJsonFragment(['id' => $paymentSetting->id]);
     }
 
     public function test_payment_setting_update()

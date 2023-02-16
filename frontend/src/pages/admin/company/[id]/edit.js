@@ -5,11 +5,13 @@ import Input from '@/components/Input';
 import Button from '@/components/Button';
 import InputFile from '@/components/InputFile';
 import InputSelect from '@/components/InputSelect';
-import { get, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from '@/store';
-import { getCompany, postCompany } from '@/store/slices/company';
+import { getCompany, updateCompany } from '@/store/slices/company';
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
+import Image from 'next/image';
+import toast from 'react-hot-toast';
 
 Edit.getLayout = page => <AppLayout name="Edit">{page}</AppLayout>;
 export default function Edit() {
@@ -20,11 +22,12 @@ export default function Edit() {
 
     const { company } = useSelector(state => state.company);
     const onSubmit = data => {
-        dispatch(postCompany(data))
+        dispatch(updateCompany(id, data))
             .then(res => {
-                console.log(res);
+                toast.success('Updated successfully!');
             })
             .catch(err => {
+                toast.error(err?.response?.data?.message);
                 console.log(err);
             });
     };
@@ -41,7 +44,6 @@ export default function Edit() {
     useEffect(() => {
         if (!id) return;
         dispatch(getCompany(id));
-        console.log(company);
     }, [dispatch, id]);
 
     return (
@@ -52,7 +54,7 @@ export default function Edit() {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
-            <main>
+            <main className="px-4 pt-16">
                 <BackButton href="/admin/company" />
 
                 <form onSubmit={handleSubmit(onSubmit)}>
@@ -155,14 +157,14 @@ export default function Edit() {
                             <InputSelect
                                 {...register('city_id')}
                                 defaultOption="Choose a city">
-                                <option value="41">Adana</option>
+                                <option value="1">Adana</option>
                             </InputSelect>
                         </div>
                         <div>
                             <InputSelect
                                 {...register('state_id')}
                                 defaultOption="Choose a state">
-                                <option value="21">Merkez</option>
+                                <option value="1">Merkez</option>
                             </InputSelect>
                         </div>
                     </div>

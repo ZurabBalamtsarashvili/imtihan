@@ -47,13 +47,13 @@ class CompanyController extends ApiController
 
         $company = $this->companyService->create($request);
 
-        return $this->successResponse($company, __('response.created'), Response::HTTP_CREATED);
+        return $this->successResponse($company, Response::HTTP_CREATED);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $class_room
+     * @param int $company
      * @return JsonResponse
      */
     public function show(int $company): JsonResponse
@@ -80,7 +80,7 @@ class CompanyController extends ApiController
 
         $company = $this->companyService->update($request, $company);
 
-        return $this->successResponse($company, __('response.updated'));
+        return $this->successResponse($company);
     }
 
     /**
@@ -97,6 +97,6 @@ class CompanyController extends ApiController
 
         $company = $this->companyService->destroy($company);
 
-        return $this->successResponse($company, __('response.deleted'));
+        return $this->successResponse($company);
     }
 }

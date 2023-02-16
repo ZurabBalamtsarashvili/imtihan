@@ -26,8 +26,7 @@ class QuestionControllerTest extends TestCase
 
         $response = $this->get($this->apiUrl);
 
-        $response->assertJsonStructure(['success', 'message', 'data'])
-             ->assertJsonCount(1, 'data');
+        $response->assertJsonCount(1,);
     }
 
     public function test_question_create()
@@ -58,8 +57,7 @@ class QuestionControllerTest extends TestCase
         Sanctum::actingAs($user, ['admin.question.show']);
 
         $response = $this->get($this->apiUrl.$question->id);
-        $response->assertJsonStructure(['success', 'message', 'data'])
-            ->assertJsonFragment(['id' => $question->id]);
+        $response->assertJsonFragment(['id' => $question->id]);
     }
 
     public function test_question_update()

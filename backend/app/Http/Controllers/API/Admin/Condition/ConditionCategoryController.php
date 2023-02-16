@@ -47,7 +47,7 @@ class ConditionCategoryController extends ApiController
 
         $condition_category = $this->conditionCategoryService->create($request);
 
-        return $this->successResponse($condition_category, __('response.created'), Response::HTTP_CREATED);
+        return $this->successResponse($condition_category, Response::HTTP_CREATED);
     }
 
     /**
@@ -80,7 +80,7 @@ class ConditionCategoryController extends ApiController
 
         $condition_category = $this->conditionCategoryService->update($request, $condition_category);
 
-        return $this->successResponse($condition_category, __('response.updated'));
+        return $this->successResponse($condition_category);
     }
 
     /**
@@ -97,6 +97,6 @@ class ConditionCategoryController extends ApiController
 
         $condition_category = $this->conditionCategoryService->destroy($condition_category);
 
-        return $this->successResponse($condition_category, __('response.deleted'));
+        return $this->successResponse($condition_category);
     }
 }

@@ -49,6 +49,6 @@ class NotificationController extends ApiController
 
         $notification = $this->notificationService->create($request);
 
-        return $this->successResponse($notification, __('response.created'), Response::HTTP_CREATED);
+        return $this->successResponse($notification, Response::HTTP_CREATED);
     }
 }

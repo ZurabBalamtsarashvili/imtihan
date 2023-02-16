@@ -50,7 +50,7 @@ class LessonController extends ApiController
 
         $lesson = $this->lessonService->create($request);
 
-        return $this->successResponse($lesson, __('response.created'), Response::HTTP_CREATED);
+        return $this->successResponse($lesson,Response::HTTP_CREATED);
     }
 
     /**
@@ -83,7 +83,7 @@ class LessonController extends ApiController
 
         $lesson = $this->lessonService->update($request, $lesson);
 
-        return $this->successResponse($lesson, __('response.updated'));
+        return $this->successResponse($lesson);
     }
 
     /**
@@ -100,6 +100,6 @@ class LessonController extends ApiController
 
         $lesson = $this->lessonService->destroy($lesson);
 
-        return $this->successResponse($lesson, __('response.deleted'));
+        return $this->successResponse($lesson);
     }
 }

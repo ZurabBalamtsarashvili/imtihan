@@ -13,16 +13,19 @@ class QuestionService extends BaseService
         parent::__construct(Question::class);
     }
 
-    public function create($request): void
+    public function create(object $request): object
     {
-        DB::transaction(function () use ($request) {
+        $question = null;
+        DB::transaction(function () use ($request, &$question) {
             $question = $this->model::create($request->validated());
 
             $question->options()->createMany($request->options);
+
         });
+        return $question;
     }
 
-    public function update($request, int $id, $where = []): void
+    public function update(object $request, int $id, $where = []): object
     {
         $question = $this->model::findOrFail($id);
         DB::transaction(function () use ($request, $question) {
@@ -32,5 +35,7 @@ class QuestionService extends BaseService
 
             $question->options()->createMany($request->options);
         });
+
+        return $question;
     }
 }

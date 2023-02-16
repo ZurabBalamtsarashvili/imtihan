@@ -38,7 +38,7 @@ class QuestionController extends ApiController
     /**
      * Store a newly created resource in storage.
      *
-     * @param  StoreQuestionCategoryRequest  $request
+     * @param StoreQuestionRequest $request
      * @return JsonResponse
      */
     public function store(StoreQuestionRequest $request): JsonResponse
@@ -49,7 +49,7 @@ class QuestionController extends ApiController
 
         $question = $this->questionService->create($request);
 
-        return $this->successResponse($question, __('response.created'), Response::HTTP_CREATED);
+        return $this->successResponse($question, Response::HTTP_CREATED);
     }
 
     /**
@@ -70,8 +70,8 @@ class QuestionController extends ApiController
     /**
      * Update the specified resource in storage.
      *
-     * @param  UpdateQuestionCategoryRequest  $request
-     * @param  int  $question
+     * @param UpdateQuestionRequest $request
+     * @param int $question
      * @return JsonResponse
      */
     public function update(UpdateQuestionRequest $request, int $question): JsonResponse
@@ -82,7 +82,7 @@ class QuestionController extends ApiController
 
         $question = $this->questionService->update($request, $question);
 
-        return $this->successResponse($question, __('response.updated'));
+        return $this->successResponse($question);
     }
 
     /**
@@ -99,6 +99,6 @@ class QuestionController extends ApiController
 
         $question = $this->questionService->destroy($question);
 
-        return $this->successResponse($question, __('response.deleted'));
+        return $this->successResponse($question);
     }
 }

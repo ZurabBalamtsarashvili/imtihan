@@ -38,7 +38,7 @@ class CompanyUserController extends ApiController
     /**
      * Store a newly created resource in storage.
      *
-     * @param  StoreCompanyRequest  $request
+     * @param StoreCompanyUserRequest $request
      * @return JsonResponse
      */
     public function store(StoreCompanyUserRequest $request): JsonResponse
@@ -51,7 +51,7 @@ class CompanyUserController extends ApiController
 
         $user = $this->userService->create($request);
 
-        return $this->successResponse($user, __('response.created'), Response::HTTP_CREATED);
+        return $this->successResponse($user, Response::HTTP_CREATED);
     }
 
     /**
@@ -84,7 +84,7 @@ class CompanyUserController extends ApiController
 
         $user = $this->userService->update($request, $user);
 
-        return $this->successResponse($user, __('response.updated'));
+        return $this->successResponse($user);
     }
 
     /**
@@ -101,6 +101,6 @@ class CompanyUserController extends ApiController
 
         $user = $this->userService->destroy($user);
 
-        return $this->successResponse($user, __('response.deleted'));
+        return $this->successResponse($user);
     }
 }

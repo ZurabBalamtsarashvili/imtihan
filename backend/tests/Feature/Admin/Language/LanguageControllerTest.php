@@ -23,8 +23,7 @@ class LanguageControllerTest extends TestCase
 
         $response = $this->get($this->apiUrl);
 
-        $response->assertJsonStructure(['success', 'message', 'data'])
-            ->assertJsonCount(20, 'data');
+        $response->assertJsonCount(20);
     }
 
     public function test_language_create()
@@ -46,8 +45,7 @@ class LanguageControllerTest extends TestCase
         Sanctum::actingAs($user, ['admin.language.show']);
 
         $response = $this->get($this->apiUrl.$language->id);
-        $response->assertJsonStructure(['success', 'message', 'data'])
-            ->assertJsonFragment(['id' => $language->id]);
+        $response->assertJsonFragment(['id' => $language->id]);
     }
 
     public function test_language_update()

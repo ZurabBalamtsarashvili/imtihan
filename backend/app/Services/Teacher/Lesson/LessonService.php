@@ -20,9 +20,10 @@ class LessonService extends BaseService
         return $this->model::with($with)->where($where)->whereLessonId($id)->firstOrFail();
     }
 
-    public function create($request): void
+    public function create(object $request): object
     {
-        DB::transaction(function () use ($request) {
+        $lesson = null;
+        DB::transaction(function () use ($request, &$lesson) {
             $lesson = Lesson::create($request->validated());
 
             $this->model::create([
@@ -30,22 +31,28 @@ class LessonService extends BaseService
                 'company_id' => Helper::userInfo()->company_id,
             ]);
         });
+
+        return $lesson;
     }
 
-    public function update($request, int $id, $where = []): void
+    public function update(object $request, int $id, $where = []): object
     {
         $lesson = $this->model::whereLessonId($id)->firstOrFail();
         DB::transaction(function () use ($request, $lesson) {
             $lesson->lesson->update($request->validated());
         });
+
+        return $lesson;
     }
 
-    public function destroy($id, $where = []): void
+    public function destroy(int $id, $where = []): object
     {
         $lesson = $this->model::wherelessonId($id)->firstOrFail();
         DB::transaction(function () use ($lesson) {
             $lesson->lesson->delete();
             $lesson->delete();
         });
+
+        return $lesson;
     }
 }

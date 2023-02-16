@@ -23,8 +23,7 @@ class ClassRoomControllerTest extends TestCase
 
         $response = $this->get($this->apiUrl);
 
-        $response->assertJsonStructure(['success', 'message', 'data'])
-            ->assertJsonCount(20, 'data');
+        $response->assertJsonCount(20);
     }
 
     public function test_class_room_create()
@@ -46,8 +45,7 @@ class ClassRoomControllerTest extends TestCase
         Sanctum::actingAs($user, ['admin.class-room.show']);
 
         $response = $this->get($this->apiUrl.$classRoom->id);
-        $response->assertJsonStructure(['success', 'message', 'data'])
-            ->assertJsonFragment(['id' => $classRoom->id]);
+        $response->assertJsonFragment(['id' => $classRoom->id]);
     }
 
     public function test_class_room_update()

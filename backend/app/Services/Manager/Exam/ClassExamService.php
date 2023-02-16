@@ -13,16 +13,19 @@ class ClassExamService extends BaseService
         parent::__construct(ClassExam::class);
     }
 
-    public function create($request): void
+    public function create(object $request): object
     {
-        DB::transaction(function () use ($request) {
+       $classExam = null;
+        DB::transaction(function () use ($request, &$classExam) {
             $classExam = $this->model::create($request->validated());
 
             $classExam->classExamCategories()->createMany($request->categories);
         });
+
+        return $classExam;
     }
 
-    public function update($request, $id, $where = []): void
+    public function update(object $request, $id, $where = []): object
     {
         $classExam = $this->model::findOrFail($id);
         DB::transaction(function () use ($request, $classExam) {
@@ -32,14 +35,18 @@ class ClassExamService extends BaseService
 
             $classExam->classExamCategories()->createMany($request->categories);
         });
+
+        return $classExam;
     }
 
-    public function destroy($id, $where = []): void
+    public function destroy($id, $where = []): object
     {
         $classExam = $this->model::findOrFail($id);
         DB::transaction(function () use ($classExam) {
             $classExam->classExamCategories()->delete();
             $classExam->delete();
         });
+
+        return $classExam;
     }
 }

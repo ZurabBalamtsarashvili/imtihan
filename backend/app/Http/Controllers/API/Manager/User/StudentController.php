@@ -50,7 +50,7 @@ class StudentController extends ApiController
 
         $student = $this->studentService->create($request);
 
-        return $this->successResponse($student, __('response.created'), Response::HTTP_CREATED);
+        return $this->successResponse($student, Response::HTTP_CREATED);
     }
 
     /**
@@ -83,7 +83,7 @@ class StudentController extends ApiController
 
         $student = $this->studentService->update($request, $student);
 
-        return $this->successResponse($student, __('response.updated'));
+        return $this->successResponse($student);
     }
 
     /**
@@ -100,6 +100,6 @@ class StudentController extends ApiController
 
         $student = $this->studentService->destroy($student);
 
-        return $this->successResponse($student, __('response.deleted'));
+        return $this->successResponse($student);
     }
 }

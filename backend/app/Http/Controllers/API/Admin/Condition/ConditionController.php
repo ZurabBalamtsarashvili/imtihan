@@ -47,7 +47,7 @@ class ConditionController extends ApiController
 
         $condition = $this->conditionService->create($request);
 
-        return $this->successResponse($condition, __('response.created'), Response::HTTP_CREATED);
+        return $this->successResponse($condition, Response::HTTP_CREATED);
     }
 
     /**
@@ -80,7 +80,7 @@ class ConditionController extends ApiController
 
         $condition = $this->conditionService->update($request, $condition);
 
-        return $this->successResponse($condition, __('response.updated'));
+        return $this->successResponse($condition);
     }
 
     /**
@@ -97,6 +97,6 @@ class ConditionController extends ApiController
 
         $condition = $this->conditionService->destroy($condition);
 
-        return $this->successResponse($condition, __('response.deleted'));
+        return $this->successResponse($condition);
     }
 }

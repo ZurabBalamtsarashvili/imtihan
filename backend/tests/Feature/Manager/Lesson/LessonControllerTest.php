@@ -28,8 +28,7 @@ class LessonControllerTest extends TestCase
 
         $response = $this->get($this->apiUrl);
 
-        $response->assertJsonStructure(['success', 'message', 'data'])
-            ->assertJsonCount(20, 'data');
+        $response->assertJsonCount(20);
     }
 
     public function test_lesson_create()
@@ -57,8 +56,7 @@ class LessonControllerTest extends TestCase
 
         $response = $this->get($this->apiUrl.$lesson->lesson_id);
 
-        $response->assertJsonStructure(['success', 'message', 'data'])
-            ->assertJsonFragment(['id' => $lesson->lesson_id]);
+        $response->assertJsonFragment(['id' => $lesson->lesson_id]);
     }
 
     public function test_lesson_update()

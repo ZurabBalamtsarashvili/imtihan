@@ -23,8 +23,7 @@ class QuestionCategoryControllerTest extends TestCase
 
         $response = $this->get($this->apiUrl);
 
-        $response->assertJsonStructure(['success', 'message', 'data'])
-            ->assertJsonCount(40, 'data');
+        $response->assertJsonCount(40);
     }
 
     public function test_question_category_create()
@@ -46,8 +45,7 @@ class QuestionCategoryControllerTest extends TestCase
         Sanctum::actingAs($user, ['admin.question.category.show']);
 
         $response = $this->get($this->apiUrl.$questionCategory->id);
-        $response->assertJsonStructure(['success', 'message', 'data'])
-            ->assertJsonFragment(['id' => $questionCategory->id]);
+        $response->assertJsonFragment(['id' => $questionCategory->id]);
     }
 
     public function test_question_category_update()
