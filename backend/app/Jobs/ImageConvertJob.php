@@ -36,7 +36,7 @@ class ImageConvertJob implements ShouldQueue
      *
      * @return void
      */
-    public function handle(ImageConvertService $convertService)
+    public function handle(ImageConvertService $convertService): void
     {
         $convertService->execute($this->id, $this->model, $this->path);
     }

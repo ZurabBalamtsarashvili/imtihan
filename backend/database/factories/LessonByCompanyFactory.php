@@ -16,7 +16,7 @@ class LessonByCompanyFactory extends Factory
      *
      * @return array<string, mixed>
      */
-    public function definition()
+    public function definition(): array
     {
         return [
             'lesson_id' => Lesson::factory(),

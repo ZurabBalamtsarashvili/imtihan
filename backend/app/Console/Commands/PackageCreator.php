@@ -25,7 +25,7 @@ class PackageCreator extends Command
      *
      * @return int
      */
-    public function handle()
+    public function handle(): bool|int
     {
         if (! $this->option('name')) {
             $this->error('Please enter the name');

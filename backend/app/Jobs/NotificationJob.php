@@ -35,7 +35,7 @@ class NotificationJob implements ShouldQueue
      *
      * @return void
      */
-    public function handle(FirebaseNotificationService $notificationService)
+    public function handle(FirebaseNotificationService $notificationService): void
     {
         $notificationService->execute($this->notificationId, $this->companyId);
     }

@@ -16,7 +16,7 @@ class ClassExamCategoryFactory extends Factory
      *
      * @return array<string, mixed>
      */
-    public function definition()
+    public function definition(): array
     {
         return [
             'class_exam_id' => ClassExam::factory(),
