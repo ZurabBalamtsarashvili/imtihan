@@ -33,8 +33,7 @@ class ClassExamControllerTest extends TestCase
 
         $response = $this->get($this->apiUrl);
 
-        $response->assertJsonStructure(['success', 'message', 'data'])
-            ->assertJsonCount(20, 'data');
+        $response->assertJsonCount(20);
     }
 
     public function test_class_exam_create()
@@ -70,7 +69,7 @@ class ClassExamControllerTest extends TestCase
 
         $response = $this->get($this->apiUrl.$classExam->id);
 
-        $response->assertJsonStructure(['success', 'message', 'data'])
+        $response
             ->assertJsonFragment(['id' => $classExam->id]);
     }
 

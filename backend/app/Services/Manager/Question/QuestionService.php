@@ -21,9 +21,10 @@ class QuestionService extends BaseService
         return $this->model::with($with)->where($where)->whereQuestionId($id)->firstOrFail();
     }
 
-    public function create($request): void
+    public function create(object $request): object
     {
-        DB::transaction(function () use ($request) {
+        $question = null;
+        DB::transaction(function () use ($request, &$question) {
             $question = Question::create($request->validated());
             $question->options()->createMany($request->options);
 
@@ -32,9 +33,11 @@ class QuestionService extends BaseService
                 'company_id' => Helper::userInfo()->company_id,
             ]);
         });
+
+        return $question;
     }
 
-    public function update($request, int $id, $where = []): void
+    public function update(object $request, int $id, $where = []): object
     {
         $question = $this->model::whereQuestionId($id)->firstOrFail();
         DB::transaction(function () use ($request, $question) {
@@ -42,9 +45,11 @@ class QuestionService extends BaseService
             $question->question->options()->delete();
             $question->question->options()->createMany($request->options);
         });
+
+        return $question;
     }
 
-    public function destroy($id, $where = []): void
+    public function destroy(int $id, $where = []): object
     {
         $question = $this->model::whereQuestionId($id)->firstOrFail();
         DB::transaction(function () use ($question) {
@@ -52,6 +57,8 @@ class QuestionService extends BaseService
             $question->question->delete();
             $question->delete();
         });
+
+        return $question;
     }
 
     public function getBugList()
@@ -63,6 +70,6 @@ class QuestionService extends BaseService
 
     public function destroyBug($id)
     {
-        QuestionBug::findOrFail($id)->delete();
+        return QuestionBug::findOrFail($id)->delete();
     }
 }

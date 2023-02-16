@@ -47,7 +47,7 @@ class QuestionCatergoryController extends ApiController
 
         $category = $this->questionCategoryService->create($request);
 
-        return $this->successResponse($category, __('response.created'), Response::HTTP_CREATED);
+        return $this->successResponse($category, Response::HTTP_CREATED);
     }
 
     /**
@@ -80,7 +80,7 @@ class QuestionCatergoryController extends ApiController
 
         $category = $this->questionCategoryService->update($request, $category);
 
-        return $this->successResponse($category, __('response.updated'));
+        return $this->successResponse($category);
     }
 
     /**
@@ -97,6 +97,6 @@ class QuestionCatergoryController extends ApiController
 
         $category = $this->questionCategoryService->destroy($category);
 
-        return $this->successResponse($category, __('response.deleted'));
+        return $this->successResponse($category);
     }
 }

@@ -50,7 +50,7 @@ class LiveLessonController extends ApiController
 
         $live_lesson = $this->liveLessonService->create($request);
 
-        return $this->successResponse($live_lesson, __('response.created'), Response::HTTP_CREATED);
+        return $this->successResponse($live_lesson, Response::HTTP_CREATED);
     }
 
     /**
@@ -85,7 +85,7 @@ class LiveLessonController extends ApiController
 
         $live_lesson = $this->liveLessonService->update($request, $live_lesson);
 
-        return $this->successResponse($live_lesson, __('response.updated'));
+        return $this->successResponse($live_lesson);
     }
 
     /**
@@ -104,6 +104,6 @@ class LiveLessonController extends ApiController
 
         $live_lesson = $this->liveLessonService->destroy($live_lesson);
 
-        return $this->successResponse($live_lesson, __('response.deleted'));
+        return $this->successResponse($live_lesson);
     }
 }

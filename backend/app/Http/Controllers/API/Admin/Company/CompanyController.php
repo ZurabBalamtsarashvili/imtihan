@@ -47,7 +47,7 @@ class CompanyController extends ApiController
 
         $company = $this->companyService->create($request);
 
-        return $this->successResponse($company, __('response.created'), Response::HTTP_CREATED);
+        return $this->successResponse($company, Response::HTTP_CREATED);
     }
 
     /**

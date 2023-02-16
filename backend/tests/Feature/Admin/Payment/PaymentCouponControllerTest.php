@@ -23,8 +23,7 @@ class PaymentCouponControllerTest extends TestCase
 
         $response = $this->get($this->apiUrl);
 
-        $response->assertJsonStructure(['success', 'message', 'data'])
-            ->assertJsonCount(20, 'data');
+        $response->assertJsonCount(20);
     }
 
     public function test_payment_coupon_create()
@@ -46,8 +45,7 @@ class PaymentCouponControllerTest extends TestCase
         Sanctum::actingAs($user, ['admin.payment-coupon.show']);
 
         $response = $this->get($this->apiUrl.$paymentCoupon->id);
-        $response->assertJsonStructure(['success', 'message', 'data'])
-            ->assertJsonFragment(['id' => $paymentCoupon->id]);
+        $response->assertJsonFragment(['id' => $paymentCoupon->id]);
     }
 
     public function test_payment_coupon_update()

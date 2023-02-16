@@ -18,9 +18,10 @@ class ExamService extends BaseService
         parent::__construct(Exam::class);
     }
 
-    public function create($request): void
+    public function create(object $request): object
     {
-        DB::transaction(function () use ($request) {
+        $exam = null;
+        DB::transaction(function () use ($request, &$exam) {
             $exam = $this->model::create([
                 'name' => 'Exam ' . now()->format('Y-m-d H:i:s'),
                 'user_id' => $request->user_id,
@@ -49,12 +50,15 @@ class ExamService extends BaseService
                 });
             }
         });
+
+        return $exam;
     }
 
-    public function storeUserAnswer($request): void
+    public function storeUserAnswer(object $request): array
     {
-        $request->answers->each(function ($answer) use ($request) {
-            ExamUserAnswer::create([
+        $answers[] = null;
+        $request->answers->each(function ($answer) use ($request, &$answers) {
+            $answers[] = ExamUserAnswer::create([
                 'exam_id' => $request->exam_id,
                 'question_id' => $answer->question_id,
                 'answer_id' => $answer->answer_id,
@@ -63,5 +67,7 @@ class ExamService extends BaseService
         });
 
         ExamResultJob::dispatch($request->exam_id)->onQueue('exam_result');
+
+        return $answers;
     }
 }

@@ -27,8 +27,7 @@ class AnnouncementControllerTest extends TestCase
 
         $response = $this->get($this->apiUrl);
 
-        $response->assertJsonStructure(['success', 'message', 'data'])
-            ->assertJsonCount(20, 'data');
+        $response->assertJsonCount(20);
     }
 
     public function test_announcement_create()
@@ -54,8 +53,7 @@ class AnnouncementControllerTest extends TestCase
         Sanctum::actingAs($user, ['manager.announcement.show']);
 
         $response = $this->get($this->apiUrl.$announcement->id);
-        $response->assertJsonStructure(['success', 'message', 'data'])
-            ->assertJsonFragment(['id' => $announcement->id]);
+        $response->assertJsonFragment(['id' => $announcement->id]);
     }
 
     public function test_announcement_update()

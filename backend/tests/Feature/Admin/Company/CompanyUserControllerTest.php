@@ -22,8 +22,7 @@ class CompanyUserControllerTest extends TestCase
 
         $response = $this->get($this->apiUrl);
 
-        $response->assertJsonStructure(['success', 'message', 'data'])
-            ->assertJsonCount(20, 'data');
+        $response->assertJsonCount(20);
     }
 
     public function test_company_user_create()
@@ -49,8 +48,7 @@ class CompanyUserControllerTest extends TestCase
         Sanctum::actingAs($user, ['admin.company.user.show']);
 
         $response = $this->get($this->apiUrl.$companyUser->id);
-        $response->assertJsonStructure(['success', 'message', 'data'])
-            ->assertJsonFragment(['id' => $companyUser->id]);
+        $response->assertJsonFragment(['id' => $companyUser->id]);
     }
 
     public function test_company_user_update()

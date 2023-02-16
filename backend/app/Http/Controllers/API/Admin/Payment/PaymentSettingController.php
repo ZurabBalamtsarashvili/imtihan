@@ -47,7 +47,7 @@ class PaymentSettingController extends ApiController
 
         $payment_setting = $this->paymentSettingService->create($request);
 
-        return $this->successResponse($payment_setting, __('response.created'), Response::HTTP_CREATED);
+        return $this->successResponse($payment_setting, Response::HTTP_CREATED);
     }
 
     /**
@@ -80,7 +80,7 @@ class PaymentSettingController extends ApiController
 
         $payment_setting = $this->paymentSettingService->update($request, $payment_setting);
 
-        return $this->successResponse($payment_setting, __('response.updated'));
+        return $this->successResponse($payment_setting);
     }
 
     /**
@@ -97,6 +97,6 @@ class PaymentSettingController extends ApiController
 
         $payment_setting = $this->paymentSettingService->destroy($payment_setting);
 
-        return $this->successResponse($payment_setting, __('response.deleted'));
+        return $this->successResponse($payment_setting);
     }
 }

@@ -23,8 +23,7 @@ class ConditionControllerTest extends TestCase
 
         $response = $this->get($this->apiUrl);
 
-        $response->assertJsonStructure(['success', 'message', 'data'])
-            ->assertJsonCount(20, 'data');
+        $response->assertJsonCount(20);
     }
 
     public function test_condition_create()
@@ -46,8 +45,7 @@ class ConditionControllerTest extends TestCase
         Sanctum::actingAs($user, ['admin.condition.show']);
 
         $response = $this->get($this->apiUrl.$condition->id);
-        $response->assertJsonStructure(['success', 'message', 'data'])
-            ->assertJsonFragment(['id' => $condition->id]);
+        $response->assertJsonFragment(['id' => $condition->id]);
     }
 
     public function test_condition_update()

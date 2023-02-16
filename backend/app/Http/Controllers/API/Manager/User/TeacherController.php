@@ -50,7 +50,7 @@ class TeacherController extends ApiController
 
         $teacher = $this->teacherService->create($request);
 
-        return $this->successResponse($teacher, __('response.created'), Response::HTTP_CREATED);
+        return $this->successResponse($teacher, Response::HTTP_CREATED);
     }
 
     /**
@@ -83,7 +83,7 @@ class TeacherController extends ApiController
 
         $teacher = $this->teacherService->update($request, $teacher);
 
-        return $this->successResponse($teacher, __('response.updated'));
+        return $this->successResponse($teacher);
     }
 
     /**
@@ -100,6 +100,6 @@ class TeacherController extends ApiController
 
         $teacher = $this->teacherService->destroy($teacher);
 
-        return $this->successResponse($teacher, __('response.deleted'));
+        return $this->successResponse($teacher);
     }
 }

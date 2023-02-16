@@ -24,8 +24,7 @@ class ConditionCategoryControllerTest extends TestCase
 
         $response = $this->get($this->apiUrl);
 
-        $response->assertJsonStructure(['success', 'message', 'data'])
-            ->assertJsonCount(20, 'data');
+        $response->assertJsonCount(20);
     }
 
     public function test_condition_category_create()
@@ -47,8 +46,7 @@ class ConditionCategoryControllerTest extends TestCase
         Sanctum::actingAs($user, ['admin.condition-category.show']);
 
         $response = $this->get($this->apiUrl.$conditionCategory->id);
-        $response->assertJsonStructure(['success', 'message', 'data'])
-            ->assertJsonFragment(['id' => $conditionCategory->id]);
+        $response->assertJsonFragment(['id' => $conditionCategory->id]);
     }
 
     public function test_condition_category_update()

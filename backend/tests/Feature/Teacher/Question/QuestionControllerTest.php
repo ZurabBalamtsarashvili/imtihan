@@ -33,8 +33,7 @@ class QuestionControllerTest extends TestCase
 
         $response = $this->get($this->apiUrl);
 
-        $response->assertJsonStructure(['success', 'message', 'data'])
-            ->assertJsonCount(20, 'data');
+        $response->assertJsonCount(20);
     }
 
     public function test_question_create()
@@ -70,8 +69,7 @@ class QuestionControllerTest extends TestCase
 
         $response = $this->get($this->apiUrl.$question->question_id);
 
-        $response->assertJsonStructure(['success', 'message', 'data'])
-            ->assertJsonCount(4, 'data.options');
+        $response->assertJsonCount(4, 'options');
     }
 
     public function test_question_update()
@@ -128,8 +126,7 @@ class QuestionControllerTest extends TestCase
 
         $response = $this->get('/api/teacher/question/bugs');
 
-        $response->assertJsonStructure(['success', 'message', 'data'])
-            ->assertJsonCount(20, 'data');
+        $response->assertJsonCount(20);
     }
 
     public function test_question_bug_delete()

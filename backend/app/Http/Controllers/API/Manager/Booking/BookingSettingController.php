@@ -48,7 +48,7 @@ class BookingSettingController extends ApiController
 
         $booking_setting = $this->bookingSettingService->create($request);
 
-        return $this->successResponse($booking_setting, __('response.created'), Response::HTTP_CREATED);
+        return $this->successResponse($booking_setting, Response::HTTP_CREATED);
     }
 
     /**
@@ -83,7 +83,7 @@ class BookingSettingController extends ApiController
 
         $booking_setting = $this->bookingSettingService->update($request, $booking_setting);
 
-        return $this->successResponse($booking_setting, __('response.updated'));
+        return $this->successResponse($booking_setting);
     }
 
     /**
@@ -102,6 +102,6 @@ class BookingSettingController extends ApiController
 
         $booking_setting = $this->bookingSettingService->destroy($booking_setting);
 
-        return $this->successResponse($booking_setting, __('response.deleted'));
+        return $this->successResponse($booking_setting);
     }
 }

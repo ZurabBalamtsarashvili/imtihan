@@ -51,7 +51,7 @@ class QuestionController extends ApiController
 
         $question = $this->questionService->create($request);
 
-        return $this->successResponse($question, __('response.created'), Response::HTTP_CREATED);
+        return $this->successResponse($question, Response::HTTP_CREATED);
     }
 
     /**
@@ -86,7 +86,7 @@ class QuestionController extends ApiController
 
         $question = $this->questionService->update($request, $question);
 
-        return $this->successResponse($question, __('response.updated'));
+        return $this->successResponse($question);
     }
 
     /**
@@ -105,7 +105,7 @@ class QuestionController extends ApiController
 
         $question = $this->questionService->destroy($question);
 
-        return $this->successResponse($question, __('response.deleted'));
+        return $this->successResponse($question);
     }
 
     /**
@@ -136,6 +136,6 @@ class QuestionController extends ApiController
 
         $question = $this->questionService->destroyBug($question);
 
-        return $this->successResponse($question, __('response.deleted'));
+        return $this->successResponse($question);
     }
 }

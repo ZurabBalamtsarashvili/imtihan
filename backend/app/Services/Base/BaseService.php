@@ -43,20 +43,26 @@ class BaseService
     /**
      * Update the specified resource in storage.
      *
-     * @param    $request
-     * @param  int  $id
+     * @param object $request
+     * @param int $id
+     * @param array $where
+     * @return object
      */
-    public function update($request, int $id, array $where = [])
+    public function update(object $request, int $id, array $where = []): object
     {
-        return $this->model::where($where)->findOrFail($id)->update($request->validated());
+        $this->model::where($where)->findOrFail($id)->update($request->validated());
+
+        return $this->model::findOrFail($id);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
+     * @param array $where
+     * @return mixed
      */
-    public function destroy(int $id, array $where = [])
+    public function destroy(int $id, array $where = []): mixed
     {
         return $this->model::where($where)->findOrFail($id)->delete();
     }

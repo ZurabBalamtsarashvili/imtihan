@@ -29,8 +29,7 @@ class BookingControllerTest extends TestCase
 
         $response = $this->get($this->apiUrl);
 
-        $response->assertJsonStructure(['success', 'message', 'data'])
-            ->assertJsonCount(20, 'data');
+        $response->assertJsonCount(20);
     }
 
     public function test_booking_show()
@@ -45,8 +44,7 @@ class BookingControllerTest extends TestCase
         Sanctum::actingAs($teacher, ['teacher.booking.show']);
 
         $response = $this->get($this->apiUrl.$booking->id);
-        $response->assertJsonStructure(['success', 'message', 'data'])
-            ->assertJsonFragment(['id' => $booking->id]);
+        $response->assertJsonFragment(['id' => $booking->id]);
     }
 
     public function test_booking_delete()

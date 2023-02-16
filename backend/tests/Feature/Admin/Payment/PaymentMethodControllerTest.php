@@ -23,8 +23,7 @@ class PaymentMethodControllerTest extends TestCase
 
         $response = $this->get($this->apiUrl);
 
-        $response->assertJsonStructure(['success', 'message', 'data'])
-            ->assertJsonCount(20, 'data');
+        $response->assertJsonCount(20);
     }
 
     public function test_payment_method_create()
@@ -46,8 +45,7 @@ class PaymentMethodControllerTest extends TestCase
         Sanctum::actingAs($user, ['admin.payment-method.show']);
 
         $response = $this->get($this->apiUrl.$paymentMethod->id);
-        $response->assertJsonStructure(['success', 'message', 'data'])
-            ->assertJsonFragment(['id' => $paymentMethod->id]);
+        $response->assertJsonFragment(['id' => $paymentMethod->id]);
     }
 
     public function test_payment_method_update()

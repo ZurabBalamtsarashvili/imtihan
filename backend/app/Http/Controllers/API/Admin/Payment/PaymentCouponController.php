@@ -47,7 +47,7 @@ class PaymentCouponController extends ApiController
 
         $payment_coupon = $this->paymentCouponService->create($request);
 
-        return $this->successResponse($payment_coupon, __('response.created'), Response::HTTP_CREATED);
+        return $this->successResponse($payment_coupon, Response::HTTP_CREATED);
     }
 
     /**
@@ -80,7 +80,7 @@ class PaymentCouponController extends ApiController
 
         $payment_coupon = $this->paymentCouponService->update($request, $payment_coupon);
 
-        return $this->successResponse($payment_coupon, __('response.updated'));
+        return $this->successResponse($payment_coupon);
     }
 
     /**
@@ -97,6 +97,6 @@ class PaymentCouponController extends ApiController
 
         $payment_coupon = $this->paymentCouponService->destroy($payment_coupon);
 
-        return $this->successResponse($payment_coupon, __('response.deleted'));
+        return $this->successResponse($payment_coupon);
     }
 }

@@ -47,7 +47,7 @@ class AnnouncementController extends ApiController
 
         $announcement = $this->announcementService->create($request);
 
-        return $this->successResponse($announcement, __('response.created'), Response::HTTP_CREATED);
+        return $this->successResponse($announcement, Response::HTTP_CREATED);
     }
 
     /**
@@ -80,7 +80,7 @@ class AnnouncementController extends ApiController
 
         $announcement = $this->announcementService->update($request, $announcement);
 
-        return $this->successResponse($announcement, __('response.updated'));
+        return $this->successResponse($announcement);
     }
 
     /**
@@ -97,6 +97,6 @@ class AnnouncementController extends ApiController
 
         $announcement = $this->announcementService->destroy($announcement);
 
-        return $this->successResponse($announcement, __('response.deleted'));
+        return $this->successResponse($announcement);
     }
 }

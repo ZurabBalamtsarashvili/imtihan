@@ -24,8 +24,7 @@ class LessonControllerTest extends TestCase
 
         $response = $this->get($this->apiUrl);
 
-        $response->assertJsonStructure(['success', 'message', 'data'])
-            ->assertJsonCount(20, 'data');
+        $response->assertJsonCount(20);
     }
 
     public function test_lesson_create()
@@ -48,8 +47,7 @@ class LessonControllerTest extends TestCase
         Sanctum::actingAs($user, ['admin.lesson.show']);
 
         $response = $this->get($this->apiUrl.$lesson->id);
-        $response->assertJsonStructure(['success', 'message', 'data'])
-            ->assertJsonFragment(['id' => $lesson->id]);
+        $response->assertJsonFragment(['id' => $lesson->id]);
     }
 
     public function test_lesson_update()

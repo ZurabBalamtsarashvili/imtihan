@@ -47,7 +47,7 @@ class PaymentMethodController extends ApiController
 
         $payment_method = $this->paymentMethodService->create($request);
 
-        return $this->successResponse($payment_method, __('response.created'), Response::HTTP_CREATED);
+        return $this->successResponse($payment_method, Response::HTTP_CREATED);
     }
 
     /**
@@ -80,7 +80,7 @@ class PaymentMethodController extends ApiController
 
         $payment_method = $this->paymentMethodService->update($request, $payment_method);
 
-        return $this->successResponse($payment_method, __('response.updated'));
+        return $this->successResponse($payment_method);
     }
 
     /**
@@ -97,6 +97,6 @@ class PaymentMethodController extends ApiController
 
         $payment_method = $this->paymentMethodService->destroy($payment_method);
 
-        return $this->successResponse($payment_method, __('response.deleted'));
+        return $this->successResponse($payment_method);
     }
 }

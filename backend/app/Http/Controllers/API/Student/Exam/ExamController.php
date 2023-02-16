@@ -47,9 +47,9 @@ class ExamController extends ApiController
         );
 
         $request->merge(['user_id' => auth()->id()]);
-        $this->examService->create($request);
+        $exam = $this->examService->create($request);
 
-        return $this->successResponse([], __('response.created'), Response::HTTP_CREATED);
+        return $this->successResponse($exam,Response::HTTP_CREATED);
     }
 
     /*
@@ -61,8 +61,8 @@ class ExamController extends ApiController
             Response::HTTP_FORBIDDEN
         );
 
-        $this->examService->storeUserAnswer($request);
+        $answer = $this->examService->storeUserAnswer($request);
 
-        return $this->successResponse([], __('response.created'), Response::HTTP_CREATED);
+        return $this->successResponse($answer, Response::HTTP_CREATED);
     }
 }
