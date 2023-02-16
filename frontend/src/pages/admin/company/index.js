@@ -27,14 +27,6 @@ export default function Index() {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <main className="px-4 pt-16">
-                <div className="flex justify-end px-4">
-                    <NavLink
-                        name="Create"
-                        href="/admin/company/create"
-                        className="p-2 px-5"
-                    />
-                </div>
-
                 <Table
                     searchable={true}
                     head={[
@@ -43,27 +35,7 @@ export default function Index() {
                         { name: 'phone', sortable: true },
                         { name: 'İşlemler', width: 200 },
                     ]}
-                    body={
-                        companies &&
-                        companies?.map(company => [
-                            company.name,
-                            company.email,
-                            company.phone,
-                            [
-                                <div
-                                    key={company.id}
-                                    className="w-full flex gap-3">
-                                    <Link
-                                        href={`/admin/company/${company.id}/edit`}>
-                                        <PencilIcon className="w-5 h-5 text-gray-500 cursor-pointer" />
-                                    </Link>
-                                    <Link href={``}>
-                                        <TrashIcon className="w-5 h-5 text-gray-500 cursor-pointer" />
-                                    </Link>
-                                </div>,
-                            ],
-                        ])
-                    }
+                    data={companies}
                 />
             </main>
         </>
