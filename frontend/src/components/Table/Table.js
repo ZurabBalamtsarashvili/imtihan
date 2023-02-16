@@ -1,104 +1,142 @@
-import {useState} from "react";
-import {useMediaQuery} from '@react-hook/media-query';
-import TableMobile from "./TableMobile";
-import {ArrowSmallDownIcon, ArrowSmallUpIcon, ArrowsUpDownIcon} from "@heroicons/react/24/outline";
+import { useState } from 'react';
+import { useMediaQuery } from '@react-hook/media-query';
+import TableMobile from './TableMobile';
+import {
+    ArrowSmallDownIcon,
+    ArrowSmallUpIcon,
+    ArrowsUpDownIcon,
+} from '@heroicons/react/24/outline';
+import NavLink from '@/components/NavLink';
+import Input from '@/components/Input';
 
-export default function Table({head, body, searchable}) {
+export default function Table({ head, data, searchable }) {
+    const isMobile = useMediaQuery('(max-width: 600px)');
 
-    const isMobile = useMediaQuery('(max-width: 600px)')
+    const [sorting, setSorting] = useState(false);
+    const [search, setSearch] = useState('');
 
-    const [sorting, setSorting] = useState(false)
-    const [search, setSearch] = useState('')
-    const filteredData = body && body.filter(
-        items => items.some(
-            item => (item?.key || item?.props?.searchableText || item).toString().toLocaleLowerCase('TR').includes(search.toLocaleLowerCase('TR'))
-        )
-    ).sort((a, b) => {
-        if (sorting?.orderBy === 'asc') {
-            return (a[sorting.key]?.key || a[sorting.key]?.props?.searchableText || a[sorting.key]).toString().localeCompare(b[sorting.key]?.key || b[sorting.key]?.props?.searchableText || b[sorting.key])
-        }
-        if (sorting?.orderBy === 'desc') {
-            return b[sorting.key].toString().localeCompare(a[sorting.key])
-        }
-    })
-
-    if (!body || body?.length === 0) {
+    if (!data || data?.length === 0) {
         return (
-            <div className="p-4 rounded bg-gray-100 text-brand dark:bg-gray-900 text-sm">Gösterilecek veri bulunmuyor.</div>
-        )
+            <div className="p-4 rounded bg-gray-100 text-brand dark:bg-gray-900 text-sm">
+                Gösterilecek veri bulunmuyor.
+            </div>
+        );
     }
 
     return (
         <>
-            {searchable && (
-                <div className="p-4 mb-4 flex gap-x-2">
-                    <input
-                        value={search}
-                        onChange={e => setSearch(e.target.value)}
-                        type="text"
-                        placeholder="Tabloda ara"
-                        className="border border-blue-700 focus:border-blue-100 dark:bg-gray-900 text-sm rounded-lg w-full p-2.5"
-                    />
-                </div>
-            )}
-            {isMobile && <TableMobile head={head} body={filteredData}/>}
-            {!isMobile && (
-                <div className="w-full rounded p4">
-                    <table className="w-full">
-                        <thead>
-                        <tr>
-                            {head.map((h, key) => (
-                                <th
-                                    width={h?.width}
-                                    className="text-left bg-gray-50 dark:bg-gray-900 text-sm font-semibold text-gray-500 dark:text-white p-3"
-                                    key={key}>
-                                    <div className="inline-flex items-center gap-x-2">
-                                        {h.name}
-                                        {h.sortable && (
-                                            <button onClick={() => {
-                                                if (sorting?.key === key) {
-                                                    setSorting({
-                                                        key,
-                                                        orderBy: sorting.orderBy === 'asc' ? 'desc' : 'asc'
-                                                    })
-                                                } else {
-                                                    setSorting({
-                                                        key,
-                                                        orderBy: 'asc'
-                                                    })
+            <section className="bg-gray-50 dark:bg-gray-900 p-3 sm:p-5">
+                <div className="mx-auto max-w-screen-xl px-4 lg:px-12">
+                    <div className="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden">
+                        <div className="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
+                            <div className="w-full md:w-1/2">
+                                <form className="flex items-center">
+                                    <div className="relative w-full">
+                                        {searchable && (
+                                            <Input
+                                                value={search}
+                                                onChange={e =>
+                                                    setSearch(e.target.value)
                                                 }
-                                            }}>
-                                                {sorting?.key === key && (
-                                                    sorting.orderBy === 'asc' ? <ArrowSmallDownIcon className="w-3 h-3"/> : <ArrowSmallUpIcon className="w-3 h-3"/>
-                                                )}
-                                                {sorting?.key !== key && <ArrowsUpDownIcon className="w-3 h-3"/>}
-                                            </button>
+                                                type="text"
+                                                placeholder="Search"
+                                                className="w-full"
+                                            />
                                         )}
                                     </div>
-                                </th>
-                            ))}
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {filteredData.map((items, key) => (
-                            <tr className="group" key={key}>
-                                {items.map((item, key) => (
-                                    <td
-                                        className="p-3 text-sm group-hover:bg-blue-50 dark:group-hover:bg-gray-900 group-hover:text-blue-600"
-                                        key={key}>
-                                        {Array.isArray(item) ? (
-                                            <div className="flex gap-x-2.5">
-                                                {item}
-                                            </div>
-                                        ) : item}
-                                    </td>
-                                ))}
-                            </tr>
-                        ))}
-                        </tbody>
-                    </table>
+                                </form>
+                            </div>
+                            <div className="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0">
+                                <NavLink
+                                    name="Create"
+                                    href="/admin/company/create"
+                                    className="p-2 px-5"
+                                />
+                            </div>
+                        </div>
+
+                        <div className="overflow-x-auto">
+                            <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                                <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                                    <tr>
+                                        {head.map((h, key) => (
+                                            <th
+                                                scope="col"
+                                                className="px-4 py-3"
+                                                key={key}>
+                                                {h.name}
+                                            </th>
+                                        ))}
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    {data.map((item, key) => (
+                                        <tr
+                                            className="border-b dark:border-gray-700"
+                                            key={key}>
+                                            <td className="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                                {item.name}
+                                            </td>
+                                            <td className="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                                {item.email}
+                                            </td>
+                                            <td className="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                                {item.phone}
+                                            </td>
+                                            <td className="px-4 py-3 flex items-center justify-end">
+                                                <button
+                                                    id="xbox-series-s-dropdown-button"
+                                                    data-dropdown-toggle="xbox-series-s-dropdown"
+                                                    className="inline-flex items-center p-0.5 text-sm font-medium text-center text-gray-500 hover:text-gray-800 rounded-lg focus:outline-none dark:text-gray-400 dark:hover:text-gray-100"
+                                                    type="button">
+                                                    <svg
+                                                        className="w-5 h-5"
+                                                        aria-hidden="true"
+                                                        fill="currentColor"
+                                                        viewBox="0 0 20 20"
+                                                        xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z" />
+                                                    </svg>
+                                                </button>
+                                                <div
+                                                    id="xbox-series-s-dropdown"
+                                                    className="hidden z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
+                                                    <ul
+                                                        className="py-1 text-sm text-gray-700 dark:text-gray-200"
+                                                        aria-labelledby="xbox-series-s-dropdown-button">
+                                                        <li>
+                                                            <a
+                                                                href="#"
+                                                                className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                                                                Show
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a
+                                                                href="#"
+                                                                className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                                                                Edit
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                    <div className="py-1">
+                                                        <a
+                                                            href="#"
+                                                            className="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
+                                                            Delete
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
-            )}
+            </section>
         </>
-    )
+    );
 }
