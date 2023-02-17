@@ -19,7 +19,7 @@ class BaseService
      */
     public function list(array $with = [], array $where = [])
     {
-        return $this->model::with($with)->where($where)->latest()->get();
+        return $this->model::with($with)->where($where)->latest()->paginate(10);
     }
 
     /**

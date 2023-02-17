@@ -30,7 +30,7 @@ class CompanyController extends ApiController
             Response::HTTP_FORBIDDEN
         );
 
-        return $this->successResponse(CompanyResource::collection($this->companyService->list()));
+        return $this->successResponse($this->companyService->list());
     }
 
     /**

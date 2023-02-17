@@ -26,8 +26,8 @@ class StoreCompanyRequest extends FormRequest
         return [
             'name' => 'required|string|max:255',
             'subdomain' => 'required|string|max:255',
-            'is_active' => 'required|boolean',
-            'tax_id' => 'required|integer|max:11',
+            'is_active' => 'boolean',
+            'tax_id' => 'required|numeric|max:11',
             'email' => 'required|string|email|max:255',
             'web_url' => 'string|max:255',
             'phone' => 'required|string|max:255',
