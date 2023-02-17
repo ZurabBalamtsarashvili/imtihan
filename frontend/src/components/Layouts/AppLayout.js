@@ -12,9 +12,11 @@ export default function AppLayout({ name, children }) {
             {/* Page Heading */}
             <Header name={name} />
 
-            {/* Page Content */}
             <main className="flex">
+                {/* Page Sidebar */}
                 <Sidebar user={user} />
+
+                {/* Page Content */}
                 <div className="container mx-auto">{children}</div>
             </main>
 
