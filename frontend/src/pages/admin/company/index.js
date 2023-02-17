@@ -1,23 +1,36 @@
 import AppLayout from '@/components/Layouts/AppLayout';
 import Head from 'next/head';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Table from '@/components/Table/Table';
-import NavLink from '@/components/NavLink';
-import Link from 'next/link';
 import { useDispatch, useSelector } from '@/store';
 import { getCompanies } from '@/store/slices/company';
-import { PencilIcon } from '@heroicons/react/20/solid';
-import { TrashIcon } from '@heroicons/react/24/solid';
 
 Index.getLayout = page => <AppLayout name="Companies">{page}</AppLayout>;
+
+const columns = [
+    {
+        Header: 'Şirkey Adı',
+        accessor: 'name',
+    },
+    {
+        Header: 'E-mail',
+        accessor: 'email',
+    },
+    {
+        Header: 'Phone',
+        accessor: 'phone',
+    },
+];
+
 export default function Index() {
     const dispatch = useDispatch();
+    const [pagePaginate, setPagePaginate] = useState(1);
 
-    const { companies } = useSelector(state => state.company);
+    const { companies, meta } = useSelector(state => state.company);
 
     useEffect(() => {
-        dispatch(getCompanies());
-    }, [dispatch]);
+        dispatch(getCompanies(pagePaginate));
+    }, [dispatch, pagePaginate]);
 
     return (
         <>
@@ -28,14 +41,11 @@ export default function Index() {
             </Head>
             <main className="px-4 pt-16">
                 <Table
-                    searchable={true}
-                    head={[
-                        { name: 'Şirket Adı', sortable: true },
-                        { name: 'E-mail' },
-                        { name: 'phone', sortable: true },
-                        { name: 'İşlemler', width: 200 },
-                    ]}
+                    columns={columns}
                     data={companies}
+                    pagePaginate={pagePaginate}
+                    setPagePaginate={setPagePaginate}
+                    meta={meta}
                 />
             </main>
         </>

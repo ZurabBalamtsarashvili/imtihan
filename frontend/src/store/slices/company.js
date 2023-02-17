@@ -8,6 +8,7 @@ const slice = createSlice({
         isLoading: false,
         companies: [],
         company: null,
+        meta: null,
     },
     reducers: {
         startLoading: state => {
@@ -18,7 +19,13 @@ const slice = createSlice({
         },
         getCompanies: (state, action) => {
             state.isLoading = false;
-            state.companies = action.payload;
+            state.companies = action.payload.data;
+            state.meta = {
+                current_page: action.payload.current_page,
+                last_page: action.payload.last_page,
+                total: action.payload.total,
+                links: action.payload.links,
+            };
         },
         getCompany: (state, action) => {
             state.isLoading = false;
@@ -48,11 +55,13 @@ const slice = createSlice({
 
 export default slice.reducer;
 
-export function getCompanies() {
+export function getCompanies(page = 1) {
     return async () => {
         dispatch(slice.actions.startLoading);
         try {
-            const response = await axios.get('/api/admin/companies');
+            const response = await axios.get(
+                '/api/admin/companies?page=' + page,
+            );
             dispatch(slice.actions.getCompanies(response.data));
         } finally {
             dispatch(slice.actions.endLoading);
