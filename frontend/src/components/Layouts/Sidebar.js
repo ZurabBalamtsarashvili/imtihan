@@ -3,15 +3,16 @@ import {ArrowLeftOnRectangleIcon} from '@heroicons/react/24/outline'
 import Link from 'next/link'
 import { useAuth } from '@/hooks/auth'
 import config from "@/config/menu";
+import Footer from "@/components/Layouts/Footer";
 
 export default function Sidebar(className) {
     const { logout } = useAuth()
 
     return (
-        <nav
-            className={`${className} top-0 pt-14 bg-gray-50 dark:bg-gray-900 rounded-lg drop-shadow-md sm:hidden md:hidden lg:block xl:block 2xl:block hidden overflow-auto w-72 h-screen`}>
+        <aside
+            className={`${className} bg-white border-r border-zinc-400 drop-shadow-sm sm:hidden md:hidden lg:block xl:block 2xl:block hidden overflow-auto w-72 dark:border-zinc-800 dark:bg-black`}>
             <Avatar />
-            <ul className="text-lg">
+            <ul className="text-lg h-screen">
                 {
                     config.admin.map((item, index) => {
                         return (
@@ -31,6 +32,8 @@ export default function Sidebar(className) {
                     <label className="mx-2">Log out</label>
                 </li>
             </ul>
-        </nav>
+
+            <Footer />
+        </aside>
     )
 }
