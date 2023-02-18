@@ -65,7 +65,7 @@ export default function Edit() {
             })
             .catch(err => {
                 toast.error(err?.response?.data?.message);
-                console.log('test', err);
+                console.log(err);
             });
     };
 
