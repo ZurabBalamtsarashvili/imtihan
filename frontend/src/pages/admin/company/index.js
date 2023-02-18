@@ -1,36 +1,61 @@
 import AppLayout from '@/components/Layouts/AppLayout';
 import Head from 'next/head';
 import { useEffect, useState } from 'react';
-import Table from '@/components/Table/Table';
+import Datatable from '@/components/Table/Datatable';
 import { useDispatch, useSelector } from '@/store';
-import { getCompanies } from '@/store/slices/company';
+import { deleteCompany, getCompanies } from '@/store/slices/company';
+import { PencilSquareIcon, TrashIcon } from '@heroicons/react/24/outline';
+import Link from 'next/link';
 
 Index.getLayout = page => <AppLayout name="Companies">{page}</AppLayout>;
-
-const columns = [
-    {
-        Header: 'Şirkey Adı',
-        accessor: 'name',
-    },
-    {
-        Header: 'E-mail',
-        accessor: 'email',
-    },
-    {
-        Header: 'Phone',
-        accessor: 'phone',
-    },
-];
 
 export default function Index() {
     const dispatch = useDispatch();
     const [pagePaginate, setPagePaginate] = useState(1);
+    const [search, setSearch] = useState('');
 
-    const { companies, meta } = useSelector(state => state.company);
+    const { companies, meta, isLoading } = useSelector(state => state.company);
 
     useEffect(() => {
-        dispatch(getCompanies(pagePaginate));
-    }, [dispatch, pagePaginate]);
+        dispatch(getCompanies(pagePaginate, search));
+    }, [dispatch, pagePaginate, search]);
+
+    const handleDelete = id => {
+        confirm('Are you sure?') && dispatch(deleteCompany(id));
+    };
+
+    const columns = [
+        {
+            Header: 'Şirket Adı',
+            accessor: 'name',
+        },
+        {
+            Header: 'E-mail',
+            accessor: 'email',
+        },
+        {
+            Header: 'Telefon',
+            accessor: 'phone',
+        },
+        {
+            Header: 'İşlemler',
+            Cell: ({ row }) => (
+                <div className="flex items-center space-x-2">
+                    <Link
+                        href={'/admin/company/' + row?.original?.id + '/edit'}>
+                        <a className="text-sm text-gray-500 cursor-pointer hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300">
+                            <PencilSquareIcon className="h-5 w-5" />
+                        </a>
+                    </Link>
+                    <button
+                        onClick={() => handleDelete(row?.original?.id)}
+                        className="text-sm text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300">
+                        <TrashIcon className="h-5 w-5" />
+                    </button>
+                </div>
+            ),
+        },
+    ];
 
     return (
         <>
@@ -40,12 +65,18 @@ export default function Index() {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <main className="px-4 pt-16">
-                <Table
+                <Datatable
                     columns={columns}
                     data={companies}
                     pagePaginate={pagePaginate}
                     setPagePaginate={setPagePaginate}
                     meta={meta}
+                    isLoading={isLoading}
+                    link={{
+                        name: 'Create',
+                        href: '/admin/company/create',
+                    }}
+                    setSearch={setSearch}
                 />
             </main>
         </>
