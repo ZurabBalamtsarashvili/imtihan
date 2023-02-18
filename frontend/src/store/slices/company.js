@@ -8,6 +8,7 @@ const slice = createSlice({
         isLoading: false,
         companies: [],
         company: null,
+        meta: null,
     },
     reducers: {
         startLoading: state => {
@@ -18,7 +19,15 @@ const slice = createSlice({
         },
         getCompanies: (state, action) => {
             state.isLoading = false;
-            state.companies = action.payload;
+            state.companies = action.payload.data;
+            state.meta = {
+                current_page: action.payload.current_page,
+                last_page: action.payload.last_page,
+                total: action.payload.total,
+                links: action.payload.links,
+                from: action.payload.from,
+                to: action.payload.to,
+            };
         },
         getCompany: (state, action) => {
             state.isLoading = false;
@@ -40,41 +49,44 @@ const slice = createSlice({
         deleteCompany: (state, action) => {
             state.isLoading = false;
             state.companies = state.companies.filter(
-                company => company.id !== action.payload,
+                company => company.id !== action.payload.id,
             );
+            state.meta.total = state.meta.total - 1;
         },
     },
 });
 
 export default slice.reducer;
 
-export function getCompanies() {
+export function getCompanies(page = 1, query = '') {
     return async () => {
-        dispatch(slice.actions.startLoading);
+        await dispatch(slice.actions.startLoading());
         try {
-            const response = await axios.get('/api/admin/companies');
+            const response = await axios.get(
+                '/api/admin/companies?page=' + page + '&query=' + query,
+            );
             dispatch(slice.actions.getCompanies(response.data));
         } finally {
-            dispatch(slice.actions.endLoading);
+            dispatch(slice.actions.endLoading());
         }
     };
 }
 
 export function getCompany(id) {
     return async () => {
-        dispatch(slice.actions.startLoading);
+        dispatch(slice.actions.startLoading());
         try {
             const response = await axios.get('/api/admin/companies/' + id);
             dispatch(slice.actions.getCompany(response.data));
         } finally {
-            dispatch(slice.actions.endLoading);
+            dispatch(slice.actions.endLoading());
         }
     };
 }
 
 export function postCompany(data) {
     return async () => {
-        dispatch(slice.actions.startLoading);
+        dispatch(slice.actions.startLoading());
         try {
             const response = await axios.post('/api/admin/companies/', data, {
                 headers: {
@@ -83,22 +95,27 @@ export function postCompany(data) {
             });
             dispatch(slice.actions.postCompany(response.data));
         } finally {
-            dispatch(slice.actions.endLoading);
+            dispatch(slice.actions.endLoading());
         }
     };
 }
 
 export function updateCompany(id, data) {
     return async () => {
-        dispatch(slice.actions.startLoading);
+        dispatch(slice.actions.startLoading());
         try {
             const response = await axios.put(
                 '/api/admin/companies/' + id,
                 data,
+                {
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
+                    },
+                },
             );
-            dispatch(slice.actions.deleteCompany(response.data));
+            dispatch(slice.actions.updateCompany(response.data));
         } finally {
-            dispatch(slice.actions.endLoading);
+            dispatch(slice.actions.endLoading());
         }
     };
 }
@@ -108,9 +125,9 @@ export function deleteCompany(id) {
         dispatch(slice.actions.startLoading);
         try {
             const response = await axios.delete('/api/admin/companies/' + id);
-            dispatch(slice.actions.postCompany(response.data));
+            dispatch(slice.actions.deleteCompany(response.data));
         } finally {
-            dispatch(slice.actions.endLoading);
+            dispatch(slice.actions.endLoading());
         }
     };
 }

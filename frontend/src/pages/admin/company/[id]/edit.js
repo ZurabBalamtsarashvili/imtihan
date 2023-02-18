@@ -12,6 +12,8 @@ import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 import toast from 'react-hot-toast';
+import createImageUrl from '@/lib/image';
+import { object } from 'yup';
 
 Edit.getLayout = page => <AppLayout name="Edit">{page}</AppLayout>;
 export default function Edit() {
@@ -22,8 +24,20 @@ export default function Edit() {
 
     const { company } = useSelector(state => state.company);
     const onSubmit = data => {
-        dispatch(updateCompany(id, data))
-            .then(res => {
+        const formData = new FormData();
+
+        if (typeof data.logo[0] === 'object') {
+            formData.append('logo', data.logo[0]);
+        }
+
+        for (const key in data) {
+            if (key !== 'logo') {
+                formData.append(key, data[key]);
+            }
+        }
+
+        dispatch(updateCompany(id, formData))
+            .then(() => {
                 toast.success('Updated successfully!');
             })
             .catch(err => {
@@ -32,7 +46,7 @@ export default function Edit() {
             });
     };
 
-    const { register, handleSubmit } = useForm({
+    const { register, reset, handleSubmit } = useForm({
         defaultValues: {
             ...company,
         },
@@ -81,6 +95,12 @@ export default function Edit() {
                             className="hidden"
                         />
                     </InputFile>
+                    <Image
+                        src={createImageUrl(company?.logo)}
+                        height={150}
+                        width={150}
+                        className="object-fill rounded-lg"
+                    />
                     <div className="grid gap-4 mb-6 lg:grid-cols-2">
                         <div>
                             <Input

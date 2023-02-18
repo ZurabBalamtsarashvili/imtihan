@@ -7,7 +7,7 @@ class BaseService
     protected string $model;
 
     /**
-     * @var string
+     * @var string $model
      */
     public function __construct(string $model)
     {
@@ -16,14 +16,41 @@ class BaseService
 
     /**
      * Display a listing of the resource.
+     * @param array $with
+     * @param array $where
+     * @return mixed
      */
-    public function list(array $with = [], array $where = [])
+    public function list(array $with = [], array $where = []): mixed
     {
         return $this->model::with($with)->where($where)->latest()->get();
     }
 
     /**
+     * Display a listing paginated of the resource.
+     * @param array $with
+     * @param array $where
+     * @param int $perPage
+     */
+    public function paginate(array $with = [], array $where = [], int $perPage = 10)
+    {
+        return $this->model::with($with)->where($where)->latest()->paginate($perPage);
+    }
+
+    /**
+     * Display a listing paginated of the resource.
+     * @param string $query
+     * @param int $perPage
+     * @return mixed
+     */
+    public function search(string $query, int $perPage = 10): mixed
+    {
+        return $this->model::search($query)->paginate($perPage);
+    }
+
+    /**
      * Store a newly created resource in storage.
+     * @param object $request
+     * @return object
      */
     public function create(object $request): object
     {
@@ -33,9 +60,12 @@ class BaseService
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     * @param array $with
+     * @param array $where
+     * @return mixed
      */
-    public function show(int $id, array $with = [], array $where = [])
+    public function show(int $id, array $with = [], array $where = []): mixed
     {
         return $this->model::with($with)->where($where)->findOrFail($id);
     }

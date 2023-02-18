@@ -31,7 +31,7 @@ class UpdateCompanyRequest extends FormRequest
             'email' => 'string|email|max:255',
             'web_url' => 'string|max:255',
             'phone' => 'string|max:255',
-            'logo' => 'string',
+            'logo' => 'file',
             'country_id' => 'numeric|exists:countries,id',
             'city_id' => 'numeric|exists:cities,id',
             'state_id' => 'numeric|exists:states,id',

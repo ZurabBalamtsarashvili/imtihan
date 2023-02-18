@@ -10,6 +10,7 @@
     "dependencies": {
         "@headlessui/react": "^1.4.2",
         "@heroicons/react": "^2.0.13",
+        "@hookform/resolvers": "^2.9.11",
         "@react-hook/media-query": "^1.1.1",
         "@reduxjs/toolkit": "^1.9.1",
         "@tanem/react-nprogress": "^5.0.20",
@@ -20,7 +21,9 @@
         "react-hook-form": "^7.41.5",
         "react-hot-toast": "^2.4.0",
         "react-redux": "^8.0.5",
+        "react-table": "^7.8.0",
         "swr": "^1.2.2",
+        "yup": "^1.0.0",
         "zustand": "^4.1.5"
     },
     "devDependencies": {

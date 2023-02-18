@@ -15,7 +15,7 @@ class LessonService extends BaseService
         parent::__construct(LessonByCompany::class);
     }
 
-    public function show($id, $with = [], $where = [])
+    public function show($id, $with = [], $where = []): mixed
     {
         return $this->model::with($with)->where($where)->whereLessonId($id)->firstOrFail();
     }

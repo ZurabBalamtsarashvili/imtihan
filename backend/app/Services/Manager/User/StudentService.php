@@ -13,7 +13,7 @@ class StudentService extends BaseService
         parent::__construct(User::class);
     }
 
-    public function list(array $with = [], array $where = [])
+    public function list(array $with = [], array $where = []): mixed
     {
         return $this->model::with($with)->where($where)->whereRelation('info', 'company_id', Helper::userInfo()->company_id)->latest()->get();
     }
