@@ -6,6 +6,7 @@ import { Progress } from '@/components/Progress/Progress';
 import { useProgressStore } from '@/hooks/useProgressStore';
 import { Provider as ReduxProvider } from 'react-redux';
 import { store } from '@/store';
+import { ThemeProvider } from 'next-themes';
 
 function App({ Component, pageProps }) {
     const getLayout = Component.getLayout || (page => page);
@@ -32,10 +33,12 @@ function App({ Component, pageProps }) {
     }, [router]);
     return getLayout(
         <>
-            <ReduxProvider store={store}>
-                <Progress isAnimating={isAnimating} />
-                <Component {...pageProps} />
-            </ReduxProvider>
+            <ThemeProvider enableSystem={true} attribute="class">
+                <ReduxProvider store={store}>
+                    <Progress isAnimating={isAnimating} />
+                    <Component {...pageProps} />
+                </ReduxProvider>
+            </ThemeProvider>
         </>,
     );
 }

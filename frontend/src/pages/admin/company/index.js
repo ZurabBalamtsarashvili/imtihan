@@ -43,13 +43,13 @@ export default function Index() {
                 <div className="flex items-center space-x-2">
                     <Link
                         href={'/admin/company/' + row?.original?.id + '/edit'}>
-                        <a className="text-sm text-gray-500 cursor-pointer hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300">
+                        <a className="text-sm text-zinc-500 cursor-pointer hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-300">
                             <PencilSquareIcon className="h-5 w-5" />
                         </a>
                     </Link>
                     <button
                         onClick={() => handleDelete(row?.original?.id)}
-                        className="text-sm text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300">
+                        className="text-sm text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-300">
                         <TrashIcon className="h-5 w-5" />
                     </button>
                 </div>

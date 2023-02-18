@@ -13,6 +13,7 @@ import * as Yup from 'yup';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useEffect } from 'react';
+import Label from '@/components/Label';
 
 Create.getLayout = page => <AppLayout name="Create">{page}</AppLayout>;
 
@@ -96,7 +97,7 @@ export default function Create() {
                                     className="rounded w-2 h-2 border-brand text-brand shadow-sm focus:ring focus:ring-brand focus:ring-opacity-20"
                                 />
 
-                                <span className="ml-2 text-sm text-gray-600">
+                                <span className="ml-2 text-sm text-zinc-600">
                                     Checked for active
                                 </span>
                             </label>
@@ -122,11 +123,12 @@ export default function Create() {
 
                     <div className="grid gap-4 mb-6 lg:grid-cols-2">
                         <div>
+                            <Label>Name</Label>
+
                             <Input
                                 {...register('name')}
                                 type="text"
                                 className="block mt-1 w-full"
-                                placeholder="Name"
                             />
                             {errors.name?.message && (
                                 <p className="mt-2 text-sm text-red-600 dark:text-red-500">
@@ -135,11 +137,12 @@ export default function Create() {
                             )}
                         </div>
                         <div>
+                            <Label>Email</Label>
+
                             <Input
                                 {...register('email')}
                                 type="email"
                                 className="block mt-1 w-full"
-                                placeholder="Email"
                             />
                             {errors.email?.message && (
                                 <p className="mt-2 text-sm text-red-600 dark:text-red-500">
@@ -148,11 +151,12 @@ export default function Create() {
                             )}
                         </div>
                         <div>
+                            <Label>Phone</Label>
+
                             <Input
                                 {...register('phone')}
-                                type="phone"
+                                type="tel"
                                 className="block mt-1 w-full"
-                                placeholder="Phone"
                             />
                             {errors.phone?.message && (
                                 <p className="mt-2 text-sm text-red-600 dark:text-red-500">
@@ -161,11 +165,12 @@ export default function Create() {
                             )}
                         </div>
                         <div>
+                            <Label>Tax id</Label>
+
                             <Input
                                 {...register('tax_id')}
                                 type="text"
                                 className="block mt-1 w-full"
-                                placeholder="Tax id"
                             />
                             {errors.tax_id?.message && (
                                 <p className="mt-2 text-sm text-red-600 dark:text-red-500">
@@ -174,11 +179,12 @@ export default function Create() {
                             )}
                         </div>
                         <div>
+                            <Label>Subdomain</Label>
+
                             <Input
                                 {...register('subdomain')}
                                 type="text"
                                 className="block mt-1 w-full"
-                                placeholder="Subdomain"
                             />
                             {errors.subdomain?.message && (
                                 <p className="mt-2 text-sm text-red-600 dark:text-red-500">
@@ -187,11 +193,12 @@ export default function Create() {
                             )}
                         </div>
                         <div>
+                            <Label>Web url</Label>
+
                             <Input
                                 {...register('web_url')}
                                 type="text"
                                 className="block mt-1 w-full"
-                                placeholder="Web url"
                             />
                             {errors.web_url?.message && (
                                 <p className="mt-2 text-sm text-red-600 dark:text-red-500">
@@ -200,11 +207,12 @@ export default function Create() {
                             )}
                         </div>
                         <div>
+                            <Label>Address</Label>
+
                             <Input
                                 {...register('address')}
                                 type="text"
                                 className="block mt-1 w-full"
-                                placeholder="Address"
                             />
                             {errors.address?.message && (
                                 <p className="mt-2 text-sm text-red-600 dark:text-red-500">
@@ -213,11 +221,12 @@ export default function Create() {
                             )}
                         </div>
                         <div>
+                            <Label>Zip code</Label>
+
                             <Input
                                 {...register('zip_code')}
                                 type="text"
                                 className="block mt-1 w-full"
-                                placeholder="Zip code"
                             />
                             {errors.zip_code?.message && (
                                 <p className="mt-2 text-sm text-red-600 dark:text-red-500">
@@ -226,6 +235,8 @@ export default function Create() {
                             )}
                         </div>
                         <div>
+                            <Label>Choose a country</Label>
+
                             <InputSelect
                                 {...register('country_id')}
                                 defaultOption="Choose a country">
@@ -238,6 +249,8 @@ export default function Create() {
                             )}
                         </div>
                         <div>
+                            <Label>Choose a city</Label>
+
                             <InputSelect
                                 {...register('city_id')}
                                 defaultOption="Choose a city">
@@ -250,6 +263,8 @@ export default function Create() {
                             )}
                         </div>
                         <div>
+                            <Label>Choose a state</Label>
+
                             <InputSelect
                                 {...register('state_id')}
                                 defaultOption="Choose a state">

@@ -1,27 +1,27 @@
-import ApplicationLogo from '@/components/ApplicationLogo'
-import AuthCard from '@/components/AuthCard'
-import AuthSessionStatus from '@/components/AuthSessionStatus'
-import Button from '@/components/Button'
-import GuestLayout from '@/components/Layouts/GuestLayout'
-import Input from '@/components/Input'
-import InputError from '@/components/InputError'
-import Label from '@/components/Label'
-import Link from 'next/link'
-import { useAuth } from '@/hooks/auth'
-import { useState } from 'react'
+import ApplicationLogo from '@/components/ApplicationLogo';
+import AuthCard from '@/components/AuthCard';
+import AuthSessionStatus from '@/components/AuthSessionStatus';
+import Button from '@/components/Button';
+import GuestLayout from '@/components/Layouts/GuestLayout';
+import Input from '@/components/Input';
+import InputError from '@/components/InputError';
+import Label from '@/components/Label';
+import Link from 'next/link';
+import { useAuth } from '@/hooks/auth';
+import { useState } from 'react';
 
 const ForgotPassword = () => {
-    const { forgotPassword } = useAuth({ middleware: 'guest' })
+    const { forgotPassword } = useAuth({ middleware: 'guest' });
 
-    const [email, setEmail] = useState('')
-    const [errors, setErrors] = useState([])
-    const [status, setStatus] = useState(null)
+    const [email, setEmail] = useState('');
+    const [errors, setErrors] = useState([]);
+    const [status, setStatus] = useState(null);
 
     const submitForm = event => {
-        event.preventDefault()
+        event.preventDefault();
 
-        forgotPassword({ email, setErrors, setStatus })
-    }
+        forgotPassword({ email, setErrors, setStatus });
+    };
 
     return (
         <GuestLayout>
@@ -33,8 +33,7 @@ const ForgotPassword = () => {
                         </a>
                     </Link>
                 }>
-
-                <div className="mb-4 text-sm text-gray-600 dark:text-gray-300">
+                <div className="mb-4 text-sm text-zinc-600 dark:text-zinc-300">
                     Forgot your password? No problem. Just let us know your
                     email address and we will email you a password reset link
                     that will allow you to choose a new one.
@@ -67,7 +66,7 @@ const ForgotPassword = () => {
                 </form>
             </AuthCard>
         </GuestLayout>
-    )
-}
+    );
+};
 
-export default ForgotPassword
+export default ForgotPassword;
