@@ -1,15 +1,15 @@
-import Head from 'next/head'
+import Head from 'next/head';
 
 export default function GuestLayout({ children }) {
     return (
         <div>
             <Head>
-                <title>Laravel</title>
+                <title>İmtihan</title>
             </Head>
 
-            <main className="py-16 grid justify-items-center">
+            <main className="py-16 grid justify-items-center dark:bg-black">
                 {children}
             </main>
         </div>
-    )
+    );
 }

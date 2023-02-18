@@ -1,9 +1,9 @@
 export default function Button({ type = 'submit', className, ...props }) {
-    return(
+    return (
         <button
             type={type}
-            className={`${className} text-white bg-brand hover:bg-black dark:hover:bg-blue-900 font-medium rounded-lg text-sm text-center px-5 py-2.5`}
+            className={`${className} dark:text-white border border-brand hover:bg-brand hover:text-white transition-all rounded-lg px-4 py-2`}
             {...props}
         />
-    )
+    );
 }

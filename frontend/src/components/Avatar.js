@@ -11,8 +11,8 @@ export default function Avatar({ className }) {
     return (
         <div
             className={`${className} sm:grid md:grid lg:grid xl:grid 2xl:grid grid justify-items-center my-4`}>
-            <div className="inline-flex overflow-hidden relative justify-center items-center w-12 h-12 bg-gray-200 rounded-full dark:bg-gray-600">
-                <span className="font-medium text-gray-600 dark:text-gray-300">
+            <div className="inline-flex overflow-hidden relative justify-center items-center w-12 h-12 bg-zinc-200 rounded-full dark:bg-zinc-600">
+                <span className="font-medium text-zinc-600 dark:text-zinc-300">
                     {userSplit}
                 </span>
             </div>

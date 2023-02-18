@@ -13,9 +13,32 @@ import { useRouter } from 'next/router';
 import Image from 'next/image';
 import toast from 'react-hot-toast';
 import createImageUrl from '@/lib/image';
-import { object } from 'yup';
+import * as Yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
+import Label from '@/components/Label';
 
 Edit.getLayout = page => <AppLayout name="Edit">{page}</AppLayout>;
+
+const CompanyUpdateSchema = Yup.object().shape({
+    is_active: Yup.boolean(),
+    name: Yup.string().required('Required'),
+    email: Yup.string().email('Invalid email').required('Required'),
+    logo: Yup.mixed().test('logo', 'You need to provide a file', value => {
+        if (value.length > 0) {
+            return true;
+        }
+        return false;
+    }),
+    phone: Yup.string().required('Required'),
+    tax_id: Yup.number().required('Required'),
+    subdomain: Yup.string().required('Required'),
+    web_url: Yup.string().url('Invalid url').required('Required'),
+    address: Yup.string().required('Required'),
+    zip_code: Yup.string().required('Required'),
+    country_id: Yup.number().required('Required'),
+    city_id: Yup.number().required('Required'),
+    state_id: Yup.number().required('Required'),
+});
 export default function Edit() {
     const router = useRouter();
     const { id } = router.query;
@@ -42,11 +65,13 @@ export default function Edit() {
             })
             .catch(err => {
                 toast.error(err?.response?.data?.message);
-                console.log(err);
+                console.log('test', err);
             });
     };
 
     const { register, reset, handleSubmit } = useForm({
+        resolver: yupResolver(CompanyUpdateSchema),
+
         defaultValues: {
             ...company,
         },
@@ -75,34 +100,39 @@ export default function Edit() {
                     <div className="flex items-center justify-between my-4">
                         <div className="mt-3">
                             <label className="inline-flex items-center">
-                                <Input
+                                {/*<Input
                                     type="checkbox"
                                     {...register('is_active')}
+                                    defaultValue={1}
                                     className="rounded w-2 h-2 border-brand text-brand shadow-sm focus:ring focus:ring-brand focus:ring-opacity-20"
-                                />
-
-                                <span className="ml-2 text-sm text-gray-600">
+                                />*/}
+                                {/*TODO: Fix this*/}
+                                <span className="ml-2 text-sm text-zinc-600">
                                     Checked for active
                                 </span>
                             </label>
                         </div>
                         <Button type="submit">Save</Button>
                     </div>
-                    <InputFile className="my-4">
-                        <Input
-                            {...register('logo')}
-                            type="file"
-                            className="hidden"
-                        />
-                    </InputFile>
+                    <Label className="mr-4">Uploaded file</Label>
+
                     <Image
                         src={createImageUrl(company?.logo)}
                         height={150}
                         width={150}
                         className="object-fill rounded-lg"
                     />
+                    <InputFile className="my-4 mr-4">
+                        <Input
+                            {...register('logo')}
+                            type="file"
+                            className="hidden"
+                        />
+                    </InputFile>
                     <div className="grid gap-4 mb-6 lg:grid-cols-2">
                         <div>
+                            <Label>Name</Label>
+
                             <Input
                                 {...register('name')}
                                 type="text"
@@ -111,6 +141,8 @@ export default function Edit() {
                             />
                         </div>
                         <div>
+                            <Label>Email</Label>
+
                             <Input
                                 {...register('email')}
                                 type="email"
@@ -119,14 +151,18 @@ export default function Edit() {
                             />
                         </div>
                         <div>
+                            <Label>Phone</Label>
+
                             <Input
                                 {...register('phone')}
-                                type="phone"
+                                type="tel"
                                 className="block mt-1 w-full"
                                 placeholder="Phone"
                             />
                         </div>
                         <div>
+                            <Label>Tax id</Label>
+
                             <Input
                                 {...register('tax_id')}
                                 type="text"
@@ -135,6 +171,8 @@ export default function Edit() {
                             />
                         </div>
                         <div>
+                            <Label>Subdomain</Label>
+
                             <Input
                                 {...register('subdomain')}
                                 type="text"
@@ -143,6 +181,8 @@ export default function Edit() {
                             />
                         </div>
                         <div>
+                            <Label>Web url</Label>
+
                             <Input
                                 {...register('web_url')}
                                 type="text"
@@ -151,6 +191,8 @@ export default function Edit() {
                             />
                         </div>
                         <div>
+                            <Label>Address</Label>
+
                             <Input
                                 {...register('address')}
                                 type="text"
@@ -159,6 +201,8 @@ export default function Edit() {
                             />
                         </div>
                         <div>
+                            <Label>Zip code</Label>
+
                             <Input
                                 {...register('zip_code')}
                                 type="text"
@@ -167,6 +211,8 @@ export default function Edit() {
                             />
                         </div>
                         <div>
+                            <Label>Choose a country</Label>
+
                             <InputSelect
                                 {...register('country_id')}
                                 defaultOption="Choose a country">
@@ -174,6 +220,8 @@ export default function Edit() {
                             </InputSelect>
                         </div>
                         <div>
+                            <Label>Choose a city</Label>
+
                             <InputSelect
                                 {...register('city_id')}
                                 defaultOption="Choose a city">
@@ -181,6 +229,8 @@ export default function Edit() {
                             </InputSelect>
                         </div>
                         <div>
+                            <Label>Choose a state</Label>
+
                             <InputSelect
                                 {...register('state_id')}
                                 defaultOption="Choose a state">

@@ -53,15 +53,15 @@ export default function Pagination({
     return (
         <>
             <nav
-                className="flex flex-col md:flex-row justify-between items-start md:items-center space-y-3 md:space-y-0 p-4"
+                className="flex justify-between items-center p-3"
                 aria-label="Datatable navigation">
-                <span className="text-sm font-normal text-gray-500 dark:text-gray-400">
+                <span className="text-sm font-normal text-zinc-500 dark:text-zinc-400">
                     Showing{' '}
-                    <span className="font-semibold text-gray-900 dark:text-white">
+                    <span className="font-semibold text-zinc-900 dark:text-zinc-200">
                         {meta?.from} {' - '} {meta?.to}
                     </span>
                     {' of '}
-                    <span className="font-semibold text-gray-900 dark:text-white">
+                    <span className="font-semibold text-zinc-900 dark:text-zinc-200">
                         {meta?.total}
                     </span>
                 </span>
@@ -69,7 +69,7 @@ export default function Pagination({
                     <li>
                         <button
                             onClick={customPrevPage}
-                            className="flex items-center justify-center h-full py-1.5 px-3 ml-0 text-gray-500 bg-white rounded-l-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                            className="flex items-center justify-center h-full py-1.5 px-3 ml-0 text-zinc-500 bg-white rounded-l-lg border border-zinc-300 hover:bg-zinc-100 hover:text-zinc-700 dark:bg-zinc-800 dark:border-zinc-700 dark:text-zinc-400 dark:hover:bg-zinc-700 dark:hover:text-white">
                             <span className="sr-only">Previous</span>
                             <svg
                                 className="w-5 h-5"
@@ -88,7 +88,7 @@ export default function Pagination({
                     <li>
                         <button
                             onClick={customNextPage}
-                            className="flex items-center justify-center h-full py-1.5 px-3 leading-tight text-gray-500 bg-white rounded-r-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                            className="flex items-center justify-center h-full py-1.5 px-3 leading-tight text-zinc-500 bg-white rounded-r-lg border border-zinc-300 hover:bg-zinc-100 hover:text-zinc-700 dark:bg-zinc-800 dark:border-zinc-700 dark:text-zinc-400 dark:hover:bg-zinc-700 dark:hover:text-white">
                             <span className="sr-only">Next</span>
                             <svg
                                 className="w-5 h-5"

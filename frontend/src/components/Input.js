@@ -6,7 +6,7 @@ const Input = React.forwardRef(
             ref={ref}
             {...props}
             disabled={disabled}
-            className={`${className} border border-zinc-800 focus:ring-brand dark:bg-zinc-900 text-sm rounded-lg p-2.5`}
+            className={`${className} border border-zinc-300 focus:ring-brand dark:bg-zinc-900 text-sm rounded-lg p-2.5`}
         />
     ),
 );
