@@ -16,7 +16,7 @@ class QuestionService extends BaseService
         parent::__construct(QuestionByCompany::class);
     }
 
-    public function show(int $id, array $with = [], array $where = [])
+    public function show(int $id, array $with = [], array $where = []): mixed
     {
         return $this->model::with($with)->where($where)->whereQuestionId($id)->firstOrFail();
     }

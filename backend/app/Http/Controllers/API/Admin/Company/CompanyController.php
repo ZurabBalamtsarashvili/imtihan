@@ -8,6 +8,7 @@ use App\Http\Requests\Admin\Company\UpdateCompanyRequest;
 use App\Http\Resources\Admin\Company\CompanyResource;
 use App\Services\Admin\Company\CompanyService;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Log;
 use Symfony\Component\HttpFoundation\Response;
 
 class CompanyController extends ApiController
@@ -30,7 +31,13 @@ class CompanyController extends ApiController
             Response::HTTP_FORBIDDEN
         );
 
-        return $this->successResponse($this->companyService->list());
+        $query = request()->query('query');
+
+        if ($query) {
+            return $this->successResponse($this->companyService->search($query));
+        }
+
+        return $this->successResponse($this->companyService->paginate());
     }
 
     /**

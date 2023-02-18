@@ -21,8 +21,59 @@ class CompanyService extends BaseService
     public function create(object $request): object
     {
         $path = $request->file('logo')->store('companies');
-        $data = $request->safe()->merge(['logo' => Storage::disk('minio')->url($path)]);
+        $data = $request->safe()->merge(['logo' => $path]);
 
         return $this->model::create($data->all());
+    }
+
+    /*
+     * Update the specified resource in storage.
+     *
+     * @param object $request
+     * @param int $id
+     * @param array $where
+     * @return object
+     */
+    public function update(object $request, int $id, array $where = []): object
+    {
+        $company = $this->model::findOrFail($id);
+
+        $storage = Storage::disk('minio');
+
+        if ($request->hasFile('logo')) {
+            if ($storage->exists($company->logo)) {
+                $storage->delete($company->logo);
+            }
+            $path = $request->file('logo')->store('companies');
+            $data = $request->safe()->merge(['logo' => $path]);
+        } else {
+            $data = $request->safe();
+        }
+
+        $company->update($data->all());
+
+        return $company;
+    }
+
+    /*
+     * Remove the specified resource from storage.
+     *
+     * @param int $id
+     * @param array $where
+     * @return bool
+     */
+    public function destroy(int $id, array $where = []): object
+    {
+        $company = $this->model::findOrFail($id);
+
+        $storage = Storage::disk('minio');
+
+        if ($storage->exists($company->logo)) {
+            $storage->delete($company->logo);
+        }
+
+        $company->delete();
+
+        return $company;
     }
 }

@@ -20,13 +20,13 @@ export default function Table({
         gotoPage,
     } = useTable({ columns, data }, usePagination);
 
-    const pageCount = meta?.last_page; // sayfa sayısı
-    const pageSize = 4; // sayfa boyutu
+    const pageCount = meta?.last_page;
+    const pageSize = 5; // sayfa boyutu
     const pageNumbers = Array.from({ length: pageCount }, (_, i) => i + 1); // sayfa sayıları
     const numGroups = Math.ceil(pageCount / pageSize); // sayfa grupları sayısı
-    const activeGroup = Math.floor(meta?.current_page - 1 / pageSize); // mevcut sayfa grubu
-    console.log(activeGroup);
-    const groupStart = activeGroup * pageSize; // mevcut sayfa grubunun başlangıç sayfası
+    const activeGroup = Math.floor(meta.current_page / pageSize); // mevcut sayfa grubu
+    const startPage = activeGroup * pageSize - Math.floor(pageSize / 2); // mevcut sayfa grubunun başlangıç sayfası
+    const groupStart = Math.max(Math.min(startPage, pageCount - pageSize), 0); // mevcut sayfa grubunun başlangıç sayfası
     const groupEnd = Math.min(groupStart + pageSize, pageCount); // mevcut sayfa grubunun son sayfası
 
     const customPrevPage = () => {

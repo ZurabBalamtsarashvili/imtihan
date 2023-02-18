@@ -5,10 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Laravel\Scout\Searchable;
 
 class Company extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory, SoftDeletes, Searchable;
 
     const STATUS_ACTIVE = 1;
 
@@ -29,6 +30,16 @@ class Company extends Model
         'address',
         'zip_code',
     ];
+
+    /**
+     * Get the name of the index associated with the model.
+     *
+     * @return string
+     */
+    public function searchableAs(): string
+    {
+        return 'company_index';
+    }
 
     //TODO: Invoice waiting...
 }

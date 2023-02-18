@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\Admin;
+namespace Tests\Feature\Admin\Company;
 
 use App\Models\Company;
 use App\Models\User;
@@ -23,7 +23,7 @@ class CompanyControllerTest extends TestCase
 
         $response = $this->get($this->apiUrl);
 
-        $response->assertJsonCount(20);
+        $response->assertJsonCount(10, 'data');
     }
 
     public function test_company_create()
