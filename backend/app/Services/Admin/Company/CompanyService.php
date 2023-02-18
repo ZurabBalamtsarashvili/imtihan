@@ -38,11 +38,9 @@ class CompanyService extends BaseService
     {
         $company = $this->model::findOrFail($id);
 
-        $storage = Storage::disk('minio');
-
         if ($request->hasFile('logo')) {
-            if ($storage->exists($company->logo)) {
-                $storage->delete($company->logo);
+            if (Storage::exists($company->logo)) {
+                Storage::delete($company->logo);
             }
             $path = $request->file('logo')->store('companies');
             $data = $request->safe()->merge(['logo' => $path]);
@@ -66,10 +64,8 @@ class CompanyService extends BaseService
     {
         $company = $this->model::findOrFail($id);
 
-        $storage = Storage::disk('minio');
-
-        if ($storage->exists($company->logo)) {
-            $storage->delete($company->logo);
+        if (Storage::exists($company->logo)) {
+            Storage::delete($company->logo);
         }
 
         $company->delete();
