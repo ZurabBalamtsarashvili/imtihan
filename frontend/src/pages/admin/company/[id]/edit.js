@@ -59,6 +59,8 @@ export default function Edit() {
             }
         }
 
+        formData.append('is_active', 1);
+
         dispatch(updateCompany(id, formData))
             .then(() => {
                 toast.success('Updated successfully!');
@@ -69,7 +71,12 @@ export default function Edit() {
             });
     };
 
-    const { register, reset, handleSubmit } = useForm({
+    const {
+        register,
+        reset,
+        handleSubmit,
+        formState: { errors },
+    } = useForm({
         resolver: yupResolver(CompanyUpdateSchema),
 
         defaultValues: {
@@ -100,12 +107,12 @@ export default function Edit() {
                     <div className="flex items-center justify-between my-4">
                         <div className="mt-3">
                             <label className="inline-flex items-center">
-                                {/*<Input
+                                <Input
                                     type="checkbox"
                                     {...register('is_active')}
                                     defaultValue={1}
                                     className="rounded w-2 h-2 border-brand text-brand shadow-sm focus:ring focus:ring-brand focus:ring-opacity-20"
-                                />*/}
+                                />
                                 {/*TODO: Fix this*/}
                                 <span className="ml-2 text-sm text-zinc-600">
                                     Checked for active
@@ -122,13 +129,20 @@ export default function Edit() {
                         width={150}
                         className="object-fill rounded-lg"
                     />
-                    <InputFile className="my-4 mr-4">
-                        <Input
-                            {...register('logo')}
-                            type="file"
-                            className="hidden"
-                        />
-                    </InputFile>
+                    <div>
+                        <InputFile className="my-4 mr-4">
+                            <Input
+                                {...register('logo')}
+                                type="file"
+                                className="hidden"
+                            />
+                        </InputFile>
+                        {errors.logo?.message && (
+                            <p className="mt-2 text-sm text-red-600 dark:text-red-500">
+                                {errors.logo.message}
+                            </p>
+                        )}
+                    </div>
                     <div className="grid gap-4 mb-6 lg:grid-cols-2">
                         <div>
                             <Label>Name</Label>
@@ -139,6 +153,11 @@ export default function Edit() {
                                 className="block mt-1 w-full"
                                 placeholder="Name"
                             />
+                            {errors.name?.message && (
+                                <p className="mt-2 text-sm text-red-600 dark:text-red-500">
+                                    {errors.name.message}
+                                </p>
+                            )}
                         </div>
                         <div>
                             <Label>Email</Label>
@@ -149,6 +168,11 @@ export default function Edit() {
                                 className="block mt-1 w-full"
                                 placeholder="Email"
                             />
+                            {errors.email?.message && (
+                                <p className="mt-2 text-sm text-red-600 dark:text-red-500">
+                                    {errors.email.message}
+                                </p>
+                            )}
                         </div>
                         <div>
                             <Label>Phone</Label>
@@ -159,6 +183,11 @@ export default function Edit() {
                                 className="block mt-1 w-full"
                                 placeholder="Phone"
                             />
+                            {errors.phone?.message && (
+                                <p className="mt-2 text-sm text-red-600 dark:text-red-500">
+                                    {errors.phone.message}
+                                </p>
+                            )}
                         </div>
                         <div>
                             <Label>Tax id</Label>
@@ -169,6 +198,11 @@ export default function Edit() {
                                 className="block mt-1 w-full"
                                 placeholder="Tax id"
                             />
+                            {errors.tax_id?.message && (
+                                <p className="mt-2 text-sm text-red-600 dark:text-red-500">
+                                    {errors.tax_id.message}
+                                </p>
+                            )}
                         </div>
                         <div>
                             <Label>Subdomain</Label>
@@ -179,6 +213,11 @@ export default function Edit() {
                                 className="block mt-1 w-full"
                                 placeholder="Subdomain"
                             />
+                            {errors.subdomain?.message && (
+                                <p className="mt-2 text-sm text-red-600 dark:text-red-500">
+                                    {errors.subdomain.message}
+                                </p>
+                            )}
                         </div>
                         <div>
                             <Label>Web url</Label>
@@ -189,6 +228,11 @@ export default function Edit() {
                                 className="block mt-1 w-full"
                                 placeholder="Web url"
                             />
+                            {errors.web_url?.message && (
+                                <p className="mt-2 text-sm text-red-600 dark:text-red-500">
+                                    {errors.web_url.message}
+                                </p>
+                            )}
                         </div>
                         <div>
                             <Label>Address</Label>
@@ -199,6 +243,11 @@ export default function Edit() {
                                 className="block mt-1 w-full"
                                 placeholder="Address"
                             />
+                            {errors.address?.message && (
+                                <p className="mt-2 text-sm text-red-600 dark:text-red-500">
+                                    {errors.address.message}
+                                </p>
+                            )}
                         </div>
                         <div>
                             <Label>Zip code</Label>
@@ -209,6 +258,11 @@ export default function Edit() {
                                 className="block mt-1 w-full"
                                 placeholder="Zip code"
                             />
+                            {errors.zip_code?.message && (
+                                <p className="mt-2 text-sm text-red-600 dark:text-red-500">
+                                    {errors.zip_code.message}
+                                </p>
+                            )}
                         </div>
                         <div>
                             <Label>Choose a country</Label>
@@ -218,6 +272,11 @@ export default function Edit() {
                                 defaultOption="Choose a country">
                                 <option value="1">Türkiye</option>
                             </InputSelect>
+                            {errors.country_id?.message && (
+                                <p className="mt-2 text-sm text-red-600 dark:text-red-500">
+                                    {errors.country_id.message}
+                                </p>
+                            )}
                         </div>
                         <div>
                             <Label>Choose a city</Label>
@@ -227,6 +286,11 @@ export default function Edit() {
                                 defaultOption="Choose a city">
                                 <option value="1">Adana</option>
                             </InputSelect>
+                            {errors.city_id?.message && (
+                                <p className="mt-2 text-sm text-red-600 dark:text-red-500">
+                                    {errors.city_id.message}
+                                </p>
+                            )}
                         </div>
                         <div>
                             <Label>Choose a state</Label>
@@ -236,6 +300,11 @@ export default function Edit() {
                                 defaultOption="Choose a state">
                                 <option value="1">Merkez</option>
                             </InputSelect>
+                            {errors.state_id?.message && (
+                                <p className="mt-2 text-sm text-red-600 dark:text-red-500">
+                                    {errors.state_id.message}
+                                </p>
+                            )}
                         </div>
                     </div>
                 </form>
