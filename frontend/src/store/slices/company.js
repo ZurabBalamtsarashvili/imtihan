@@ -40,7 +40,7 @@ const slice = createSlice({
         updateCompany: (state, action) => {
             state.isLoading = false;
             state.companies = [
-                ...action.payload,
+                action.payload,
                 ...state.companies.filter(
                     company => company.id !== action.payload.id,
                 ),
