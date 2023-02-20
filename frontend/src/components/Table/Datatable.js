@@ -2,7 +2,6 @@ import NavLink from '@/components/NavLink';
 import Input from '@/components/Input';
 import { useTable, usePagination } from 'react-table';
 import Pagination from '@/components/Table/Pagination';
-import { useEffect } from 'react';
 
 export default function Datatable({
     columns,
@@ -81,7 +80,7 @@ export default function Datatable({
                             ))}
                         </thead>
 
-                        <tbody {...getTableBodyProps()}>
+                        <tbody className="text-zinc-900 dark:text-zinc-300" {...getTableBodyProps()}>
                             {isLoading ? (
                                 <tr>
                                     {Array(columns.length)

@@ -16,6 +16,7 @@ import createImageUrl from '@/lib/image';
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import Label from '@/components/Label';
+import Toggle from "@/components/Toggle";
 
 Edit.getLayout = page => <AppLayout name="Edit">{page}</AppLayout>;
 
@@ -107,11 +108,10 @@ export default function Edit() {
                     <div className="flex items-center justify-between my-4">
                         <div className="mt-3">
                             <label className="inline-flex items-center">
-                                <Input
+                                <Toggle
                                     type="checkbox"
                                     {...register('is_active')}
                                     defaultValue={1}
-                                    className="rounded w-2 h-2 border-brand text-brand shadow-sm focus:ring focus:ring-brand focus:ring-opacity-20"
                                 />
                                 {/*TODO: Fix this*/}
                                 <span className="ml-2 text-sm text-zinc-600">
