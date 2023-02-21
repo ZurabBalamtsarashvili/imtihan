@@ -21,9 +21,9 @@ export default function MobileBar({ className }) {
     return (
         <nav className={`${className} bg-white dark:bg-black sm:block md:blcok lg:hidden xl:hidden 2xl:hidden block h-14`}>
             <ul className="flex justify-between fixed bottom-0 border-t bg-white dark:bg-black border-zinc-100 shadow w-full dark:border-zinc-800">
-                <Link href="/dashboard">
+                <Link href="/admin/dashboard">
                     <li className="w-full zinctext-center p-3">
-                        {router.asPath == '/dashboard' ? (
+                        {router.asPath == '/admin/dashboard' ? (
                             <SolidHomeIcon className="inline-block w-7 h-7 dark:text-white text-zinc-900" />
                         ) : (
                             <HomeIcon className="inline-block w-7 h-7 dark:text-white text-zinc-900" />

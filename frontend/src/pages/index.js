@@ -16,7 +16,7 @@ export default function Home() {
             <div className="relative flex items-top justify-center min-h-screen bg-zinc-100 dark:bg-zinc-900 sm:items-center sm:pt-0">
                 <div className="hidden fixed top-0 right-0 px-6 py-4 sm:block">
                     {user ? (
-                        <Link href="/dashboard">
+                        <Link href="/admin/dashboard">
                             <a className="ml-4 text-sm text-zinc-700 underline">
                                 Dashboard
                             </a>
