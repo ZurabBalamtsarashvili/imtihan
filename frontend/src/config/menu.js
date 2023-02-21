@@ -5,7 +5,7 @@ const config = {
         {
             name: 'Home',
             icon: <HomeIcon className="inline-block w-6 h-6"/>,
-            path: "/dashboard"
+            path: "/admin/dashboard"
         },
         {
             name: 'Companies',

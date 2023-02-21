@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import Datatable from '@/components/Table/Datatable';
 import { useDispatch, useSelector } from '@/store';
 import { deleteCompany, getCompanies } from '@/store/slices/company';
-import { PencilSquareIcon, TrashIcon } from '@heroicons/react/24/outline';
+import { PencilSquareIcon, TrashIcon, EyeIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 
 Index.getLayout = page => <AppLayout name="Companies">{page}</AppLayout>;
@@ -45,6 +45,12 @@ export default function Index() {
                         href={'/admin/company/' + row?.original?.id + '/edit'}>
                         <a className="text-sm text-zinc-500 cursor-pointer hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-300">
                             <PencilSquareIcon className="h-5 w-5" />
+                        </a>
+                    </Link>
+                    <Link
+                        href={'/admin/company/' + row?.original?.id + '/view'}>
+                        <a className="text-sm text-zinc-500 cursor-pointer hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-300">
+                            <EyeIcon className="h-5 w-5" />
                         </a>
                     </Link>
                     <button

@@ -12,7 +12,7 @@ export default function AppLayout({ name, children }) {
             {/* Page Heading */}
             <Header name={name} />
 
-            <main className="flex dark:bg-black">
+            <main className="flex bg-white dark:bg-black">
                 {/* Page Sidebar */}
                 <Sidebar user={user} />
 

@@ -108,7 +108,7 @@ export default function Dashboard() {
                             </div>
 
                             <div className="flex flex-col mt-8">
-                                <Link href="">
+                                <Link href="src/pages">
                                     <div className="flex items-center border-b dark:border-zinc-700 hover:bg-zinc-100 dark:hover:bg-zinc-800 overflow-hidden rounded-lg w-full h-full p-2">
                                         <div className="inline-flex flex-col w-full">
                                             <span className="text-blue">
@@ -124,7 +124,7 @@ export default function Dashboard() {
                                         <ChevronRightIcon className="text-blue w-8 h-8" />
                                     </div>
                                 </Link>
-                                <Link href="">
+                                <Link href="src/pages">
                                     <div className="flex items-center border-b dark:border-zinc-700 hover:bg-zinc-100 dark:hover:bg-zinc-800 overflow-hidden rounded-lg w-full h-full p-2">
                                         <div className="inline-flex flex-col w-full">
                                             <span className="text-blue">

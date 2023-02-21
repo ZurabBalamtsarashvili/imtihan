@@ -74,7 +74,7 @@ export function getCompanies(page = 1, query = '') {
 
 export function getCompany(id) {
     return async () => {
-        dispatch(slice.actions.startLoading());
+        await dispatch(slice.actions.startLoading());
         try {
             const response = await axios.get('/api/admin/companies/' + id);
             dispatch(slice.actions.getCompany(response.data));

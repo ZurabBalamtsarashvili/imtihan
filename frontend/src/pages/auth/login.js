@@ -16,7 +16,7 @@ const Login = () => {
 
     const { login } = useAuth({
         middleware: 'guest',
-        redirectIfAuthenticated: '/dashboard',
+        redirectIfAuthenticated: '/admin/dashboard',
     });
 
     const [email, setEmail] = useState('');
@@ -200,12 +200,12 @@ const Login = () => {
                 <hr className="my-8 w-full h-px bg-zinc-200 border-0 dark:bg-zinc-700" />
 
                 <div className="flex flex-col">
-                    <p className="my-4 text-center text-sm">
+                    <p className="my-4 text-center text-sm text-zinc-900 dark:text-zinc-300">
                         Don't have an account?
                     </p>
 
                     <Link href="/auth/register">
-                        <a className="dark:text-white border hover:border-brand font-medium rounded-full text-lg text-center py-2.5">
+                        <a className="dark:text-white text-zinc-900 border hover:border-brand font-medium rounded-full text-lg text-center py-2.5">
                             Register for the Imtihan
                         </a>
                     </Link>

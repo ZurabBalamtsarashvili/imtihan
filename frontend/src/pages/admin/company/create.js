@@ -14,6 +14,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useEffect } from 'react';
 import Label from '@/components/Label';
+import Toggle from "@/components/Toggle";
 
 Create.getLayout = page => <AppLayout name="Create">{page}</AppLayout>;
 
@@ -90,12 +91,10 @@ export default function Create() {
                     <div className="flex items-center justify-between my-4">
                         <div className="mt-3">
                             <label className="inline-flex items-center">
-                                <Input
+                                <Toggle
                                     type="checkbox"
                                     name="is_active"
-                                    value="1"
-                                    className="rounded w-2 h-2 border-brand text-brand shadow-sm focus:ring focus:ring-brand focus:ring-opacity-20"
-                                />
+                                    value="1"/>
 
                                 <span className="ml-2 text-sm text-zinc-600">
                                     Checked for active
