@@ -28,6 +28,6 @@ class Language extends Model
      */
     public function searchableAs(): string
     {
-        return 'company_index';
+        return 'language_index';
     }
 }
