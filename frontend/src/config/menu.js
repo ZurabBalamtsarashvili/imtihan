@@ -1,4 +1,4 @@
-import {BriefcaseIcon, HomeIcon} from "@heroicons/react/24/outline";
+import {BriefcaseIcon, HomeIcon, LanguageIcon} from "@heroicons/react/24/outline";
 
 const config = {
     admin: [
@@ -11,6 +11,11 @@ const config = {
             name: 'Companies',
             icon: <BriefcaseIcon className="inline-block w-6 h-6"/>,
             path: "/admin/company"
+        },
+        {
+            name: 'Languages',
+            icon: <LanguageIcon className="inline-block w-6 h-6"/>,
+            path: "/admin/language"
         },
     ],
     manager: [],

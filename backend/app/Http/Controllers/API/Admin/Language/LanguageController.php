@@ -26,7 +26,17 @@ class LanguageController extends ApiController
      */
     public function index(): JsonResponse
     {
-        return $this->successResponse(LanguageResource::collection($this->languageService->list()));
+        abort_unless(auth()->user()->tokenCan('admin.language.list'),
+            Response::HTTP_FORBIDDEN
+        );
+
+        $query = request()->query('query');
+
+        if ($query) {
+            return $this->successResponse($this->languageService->search($query));
+        }
+
+        return $this->successResponse($this->languageService->paginate());
     }
 
     /**
@@ -37,6 +47,10 @@ class LanguageController extends ApiController
      */
     public function store(StoreLanguageRequest $request): JsonResponse
     {
+        abort_unless(auth()->user()->tokenCan('admin.language.create'),
+            Response::HTTP_FORBIDDEN
+        );
+
         $language = $this->languageService->create($request);
 
         return $this->successResponse($language, Response::HTTP_CREATED);
@@ -50,6 +64,10 @@ class LanguageController extends ApiController
      */
     public function show(int $language): JsonResponse
     {
+        abort_unless(auth()->user()->tokenCan('admin.language.show'),
+            Response::HTTP_FORBIDDEN
+        );
+
         return $this->successResponse(new LanguageResource($this->languageService->show($language)));
     }
 
@@ -62,6 +80,10 @@ class LanguageController extends ApiController
      */
     public function update(UpdateLanguageRequest $request, int $language): JsonResponse
     {
+        abort_unless(auth()->user()->tokenCan('admin.language.update'),
+            Response::HTTP_FORBIDDEN
+        );
+
         $language = $this->languageService->update($request, $language);
 
         return $this->successResponse($language);
@@ -75,6 +97,10 @@ class LanguageController extends ApiController
      */
     public function destroy(int $language): JsonResponse
     {
+        abort_unless(auth()->user()->tokenCan('admin.language.delete'),
+            Response::HTTP_FORBIDDEN
+        );
+
         $language = $this->languageService->destroy($language);
 
         return $this->successResponse($language);

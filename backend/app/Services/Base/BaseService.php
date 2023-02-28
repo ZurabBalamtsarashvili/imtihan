@@ -94,6 +94,10 @@ class BaseService
      */
     public function destroy(int $id, array $where = []): mixed
     {
-        return $this->model::where($where)->findOrFail($id)->delete();
+        $model = $this->model::where($where)->findOrFail($id);
+
+        $model->delete();
+
+        return $model;
     }
 }
