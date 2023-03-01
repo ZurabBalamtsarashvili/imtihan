@@ -26,7 +26,7 @@ class UpdateLanguageRequest extends FormRequest
         return [
             'name' => 'string|max:255',
             'code' => 'string|max:3',
-            'status' => 'boolean',
+            'is_active' => 'boolean',
         ];
     }
 }

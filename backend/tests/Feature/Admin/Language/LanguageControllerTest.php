@@ -23,7 +23,7 @@ class LanguageControllerTest extends TestCase
 
         $response = $this->get($this->apiUrl);
 
-        $response->assertJsonCount(20);
+        $response->assertJsonCount(10, 'data');
     }
 
     public function test_language_create()

@@ -51,7 +51,7 @@ export default function Home() {
 
                                     <div className="ml-4 text-lg leading-7 font-semibold">
                                         <a
-                                            href="https://github.com/codenteq/imtihan/wiki"
+                                            href="https://codenteq.github.io/imtihan-docs/"
                                             className="underline text-zinc-900 dark:text-white">
                                             Dev Documentation
                                         </a>
