@@ -26,7 +26,7 @@ class UpdateAnnouncementRequest extends FormRequest
         return [
             'name' => 'string|max:255',
             'content' => 'string',
-            'src' => 'nullable|string',
+            'src' => 'nullable|file',
             'company_id' => 'nullable',
         ];
     }

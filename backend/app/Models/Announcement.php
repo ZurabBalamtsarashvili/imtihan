@@ -28,6 +28,6 @@ class Announcement extends Model
      */
     public function searchableAs(): string
     {
-        return 'company_index';
+        return 'announcement_index';
     }
 }
