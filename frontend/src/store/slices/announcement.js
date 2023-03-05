@@ -10,7 +10,6 @@ const slice = createSlice({
         announcement: null,
         meta: null,
     },
-
     reducers: {
         startLoading: state => {
             state.isLoading = true;
@@ -89,15 +88,11 @@ export function postAnnouncement(data) {
     return async () => {
         dispatch(slice.actions.startLoading());
         try {
-            const response = await axios.post(
-                '/api/admin/announcements/',
-                data,
-                {
-                    headers: {
-                        'Content-Type': 'multipart/form-data',
-                    },
+            const response = await axios.post('/api/admin/announcements/', data, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
                 },
-            );
+            });
             dispatch(slice.actions.postAnnouncement(response.data));
         } finally {
             dispatch(slice.actions.endLoading());
@@ -129,9 +124,7 @@ export function deleteAnnouncement(id) {
     return async () => {
         dispatch(slice.actions.startLoading);
         try {
-            const response = await axios.delete(
-                '/api/admin/announcements/' + id,
-            );
+            const response = await axios.delete('/api/admin/announcements/' + id);
             dispatch(slice.actions.deleteAnnouncement(response.data));
         } finally {
             dispatch(slice.actions.endLoading());

@@ -7,7 +7,7 @@ use App\Http\Controllers\API\ApiController;
 use App\Http\Requests\Manager\Announcement\StoreAnnouncementRequest;
 use App\Http\Requests\Manager\Announcement\UpdateAnnouncementRequest;
 use App\Http\Resources\Manager\Announcement\AnnouncementResource;
-use App\Services\Manager\Post\AnnouncementService;
+use App\Services\Manager\Announcement\AnnouncementService;
 use Illuminate\Http\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 
