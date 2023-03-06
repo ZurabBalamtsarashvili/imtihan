@@ -26,8 +26,7 @@ class StoreAnnouncementRequest extends FormRequest
         return [
             'name' => 'required|string|max:255',
             'content' => 'required|string',
-            'src' => 'string',
-            'company_id' => 'nullable|numeric|exists:companies,id',
+            'src' => 'file',
         ];
     }
 }

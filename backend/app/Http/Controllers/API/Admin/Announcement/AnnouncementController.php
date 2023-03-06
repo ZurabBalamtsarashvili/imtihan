@@ -30,7 +30,13 @@ class AnnouncementController extends ApiController
             Response::HTTP_FORBIDDEN
         );
 
-        return $this->successResponse(AnnouncementResource::collection($this->announcementService->list([], ['company_id' => null])));
+        $query = request()->query('query');
+
+        if ($query) {
+            return $this->successResponse($this->announcementService->search($query));
+        }
+
+        return $this->successResponse($this->announcementService->paginate());
     }
 
     /**

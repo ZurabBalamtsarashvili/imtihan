@@ -22,6 +22,7 @@ class AnnouncementResource extends JsonResource
             'name' => $this->name,
             'content' => $this->content,
             'src' => $this->src,
+            'company_id' => $this->company_id,
         ];
     }
 }

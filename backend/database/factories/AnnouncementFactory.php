@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Company;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Http\UploadedFile;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Announcement>
@@ -20,7 +21,7 @@ class AnnouncementFactory extends Factory
         return [
             'name' => $this->faker->title,
             'content' => $this->faker->paragraph,
-            'src' => $this->faker->imageUrl,
+            'src' => UploadedFile::fake()->image('announcement.png'),
             'company_id' => Company::factory(),
         ];
     }
