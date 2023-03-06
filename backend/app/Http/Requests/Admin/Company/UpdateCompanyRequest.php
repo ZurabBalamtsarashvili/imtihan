@@ -27,7 +27,7 @@ class UpdateCompanyRequest extends FormRequest
             'name' => 'string|max:255',
             'subdomain' => 'string|max:255',
             'is_active' => 'boolean',
-            'tax_id' => 'digits:11',
+            'tax_id' => 'integer',
             'email' => 'string|email|max:255',
             'web_url' => 'string|max:255',
             'phone' => 'string|max:255',
