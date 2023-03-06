@@ -16,7 +16,6 @@ export default function Dashboard() {
             </Head>
 
             <main className="px-4 pt-16">
-                <ThemeToggle />
                 <div className="mt-4 w-full grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3">
                     <div className="bg-zinc-50 dark:bg-zinc-900 rounded-lg p-5">
                         <div className="flex items-center">
