@@ -1,10 +1,14 @@
-import AppLayout from '@/components/Layouts/AppLayout';
+import AppLayout from '@/layouts/AppLayout';
 import Head from 'next/head';
 import { useEffect, useState } from 'react';
-import Datatable from '@/components/Table/Datatable';
+import Datatable from '@/components/table/Datatable';
 import { useDispatch, useSelector } from '@/store';
 import { deleteCompany, getCompanies } from '@/store/slices/company';
-import { PencilSquareIcon, TrashIcon, EyeIcon } from '@heroicons/react/24/outline';
+import {
+    PencilSquareIcon,
+    TrashIcon,
+    EyeIcon,
+} from '@heroicons/react/24/outline';
 import Link from 'next/link';
 
 Index.getLayout = page => <AppLayout name="Companies">{page}</AppLayout>;

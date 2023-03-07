@@ -1,9 +1,12 @@
-import AppLayout from '@/components/Layouts/AppLayout';
+import AppLayout from '@/layouts/AppLayout';
 import Head from 'next/head';
 import { useEffect, useState } from 'react';
-import Datatable from '@/components/Table/Datatable';
+import Datatable from '@/components/table/Datatable';
 import { useDispatch, useSelector } from '@/store';
-import { deleteAnnouncement, getAnnouncements } from '@/store/slices/announcement';
+import {
+    deleteAnnouncement,
+    getAnnouncements,
+} from '@/store/slices/announcement';
 import {
     PencilSquareIcon,
     TrashIcon,
@@ -18,7 +21,9 @@ export default function Index() {
     const [pagePaginate, setPagePaginate] = useState(1);
     const [search, setSearch] = useState('');
 
-    const { announcements, meta, isLoading } = useSelector(state => state.announcement);
+    const { announcements, meta, isLoading } = useSelector(
+        state => state.announcement,
+    );
 
     useEffect(() => {
         dispatch(getAnnouncements(pagePaginate, search));

@@ -2,7 +2,7 @@ import 'tailwindcss/tailwind.css';
 import { useEffect } from 'react';
 import '../styles/globals.css';
 import { useRouter } from 'next/router';
-import { Progress } from '@/components/Progress/Progress';
+import { Progress } from '@/components/progress/Progress';
 import { useProgressStore } from '@/hooks/useProgressStore';
 import { Provider as ReduxProvider } from 'react-redux';
 import { store } from '@/store';

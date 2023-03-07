@@ -1,11 +1,16 @@
-import AppLayout from '@/components/Layouts/AppLayout';
+import AppLayout from '@/layouts/AppLayout';
 import Head from 'next/head';
 import { useEffect, useState } from 'react';
-import Datatable from '@/components/Table/Datatable';
+import Datatable from '@/components/table/Datatable';
 import { useDispatch, useSelector } from '@/store';
 import { deleteLanguage, getLanguages } from '@/store/slices/language';
-import { PencilSquareIcon, TrashIcon, EyeIcon } from '@heroicons/react/24/outline';
+import {
+    PencilSquareIcon,
+    TrashIcon,
+    EyeIcon,
+} from '@heroicons/react/24/outline';
 import Link from 'next/link';
+import CreateModal from '@/sections/admin/languages/CreateModal';
 
 Index.getLayout = page => <AppLayout name="Languages">{page}</AppLayout>;
 
@@ -13,6 +18,7 @@ export default function Index() {
     const dispatch = useDispatch();
     const [pagePaginate, setPagePaginate] = useState(1);
     const [search, setSearch] = useState('');
+    const [openCreateModal, setOpenCreateModal] = useState(false);
 
     const { languages, meta, isLoading } = useSelector(state => state.language);
 
@@ -74,11 +80,15 @@ export default function Index() {
                     setPagePaginate={setPagePaginate}
                     meta={meta}
                     isLoading={isLoading}
-                    link={{
+                    button={{
                         name: 'Create',
-                        href: '/admin/language/create',
+                        onClick: () => setOpenCreateModal(true),
                     }}
                     setSearch={setSearch}
+                />
+                <CreateModal
+                    open={openCreateModal}
+                    setIsOpen={setOpenCreateModal}
                 />
             </main>
         </>
