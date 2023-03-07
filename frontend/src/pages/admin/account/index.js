@@ -27,15 +27,15 @@ export default function Index() {
 
             <main className="pt-16">
                 <div className="grid grid-cols-1 gap-1 md:grid-cols-1 md:gap-1 shadow-md">
-                    <div className="border-b dark:border-gray-700 p-5">
-                        <div className="bg-white dark:bg-gray-900 shadow-md rounded-lg float-right w-10 h-10 p-2">
+                    <div className="border-b border-zinc-100 dark:border-zinc-900 p-5">
+                        <div className="bg-white dark:bg-zinc-900 shadow-md rounded-lg float-right w-10 h-10 p-2">
                             <PencilSquareIcon className="text-brand w-6 h-6"/>
                         </div>
                         <UserIcon className="text-brand w-12 h-12 mr-2 float-left"/>
                         <span className="text-xl font-medium text-zinc-900 dark:text-zinc-300">{user?.full_name}</span>
                     </div>
 
-                    <div className="border-b dark:border-gray-700 p-5">
+                    <div className="border-b border-zinc-100 dark:border-zinc-900 p-5">
                         <EnvelopeOpenIcon className="text-brand w-6 h-6 mr-2 float-left"/>
                         <span className="text-zinc-900 dark:text-zinc-300">{user?.email}</span>
 
@@ -61,18 +61,18 @@ export default function Index() {
 
                     <div
                         onClick={logout}
-                        className="border-b dark:border-gray-700 hover:bg-gray-100 focus:bg-gray-100 dark:hover:bg-gray-900 dark:focus:bg-gray-900 w-full h-full p-5">
+                        className="border-b border-zinc-100 dark:border-zinc-900 hover:bg-zinc-100 focus:bg-zinc-100 dark:hover:bg-zinc-900 dark:focus:bg-zinc-900 w-full h-full p-5">
                         <ArrowLeftOnRectangleIcon className="text-brand w-6 h-6 mr-2 float-left"/>
-                        <span className="text-gray-500 dark:text-gray-300">Çıkış Yap</span>
+                        <span className="text-zinc-500 dark:text-zinc-300">Çıkış Yap</span>
                         <ChevronRightIcon className="text-brand w-6 h-6 float-right"/>
                     </div>
                 </div>
 
 
                 <div className="grid grid-cols-1 gap-1 md:grid-cols-1 md:gap-1 shadow-md mt-10">
-                    <div className="border-b dark:border-gray-700 w-full h-full p-5">
-                        <span className="text-gray-500 dark:text-gray-300">Versiyon</span>
-                        <span className="float-right text-gray-500 dark:text-gray-500">0.5.0</span>
+                    <div className="border-b border-zinc-100 dark:border-zinc-900 w-full h-full p-5">
+                        <span className="text-zinc-500 dark:text-zinc-300">Versiyon</span>
+                        <span className="float-right text-zinc-500 dark:text-zinc-500">0.5.0</span>
                     </div>
                 </div>
 

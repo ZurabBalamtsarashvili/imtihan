@@ -34,7 +34,7 @@ export default function Datatable({
 
     return (
         <>
-            <div className="bg-white dark:bg-zinc-800 shadow-md sm:rounded-lg overflow-hidden">
+            <div className="bg-white dark:bg-zinc-900 shadow-md sm:rounded-lg overflow-hidden">
                 <div className="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
                     <div className="w-full md:w-1/2">
                         <div className="flex items-center">
@@ -61,7 +61,7 @@ export default function Datatable({
 
                 <div className="overflow-x-auto">
                     <table
-                        className="w-full text-sm text-left table-auto"
+                        className="w-full text-left table-auto"
                         {...getTableProps}>
                         <thead className="text-xs text-zinc-700 uppercase bg-zinc-50 dark:bg-zinc-900 dark:text-zinc-500">
                             {headerGroups.map((headerGroup, key) => (
@@ -106,12 +106,12 @@ export default function Datatable({
                                     return (
                                         <tr
                                             key={key}
-                                            className="border-b dark:border-zinc-700 hover:bg-zinc-50 dark:hover:bg-zinc-700"
+                                            className="border-b border-zinc-50 dark:border-zinc-800 hover:bg-zinc-50 dark:hover:bg-zinc-800 h-16"
                                             {...row.getRowProps()}>
                                             {row.cells.map((cell, key) => (
                                                 <td
                                                     key={key}
-                                                    className="px-4 py-3 font-medium whitespace-nowrap dark:text-zinc-300"
+                                                    className="p-4 text-base font-medium font-medium whitespace-nowrap dark:text-zinc-400"
                                                     {...cell.getCellProps()}>
                                                     {' '}
                                                     {cell.render('Cell')}{' '}

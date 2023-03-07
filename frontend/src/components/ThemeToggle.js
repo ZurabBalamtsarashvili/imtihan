@@ -19,17 +19,17 @@ export default function ThemeToggle() {
             {currentTheme === 'dark' ? (
                 <div
                     onClick={() => setTheme('light')}
-                    className="border-b dark:border-gray-700 hover:bg-gray-100 focus:bg-gray-100 dark:hover:bg-gray-900 dark:focus:bg-gray-900 w-full h-full p-5">
+                    className="border-b border-zinc-100 dark:border-zinc-900 hover:bg-zinc-100 focus:bg-zinc-100 dark:hover:bg-zinc-900 dark:focus:bg-zinc-900 w-full h-full p-5">
                     <SunIcon className="text-amber-500 w-6 h-6 mr-2 float-left"/>
-                    <span className="text-gray-500 dark:text-gray-300">Light Theme</span>
+                    <span className="text-zinc-500 dark:text-zinc-300">Light Theme</span>
                     <ChevronRightIcon className="text-brand w-6 h-6 float-right"/>
                 </div>
             ) : (
                 <div
                     onClick={() => setTheme('dark')}
-                    className="border-b dark:border-gray-700 hover:bg-gray-100 focus:bg-gray-100 dark:hover:bg-gray-900 dark:focus:bg-gray-900 w-full h-full p-5">
-                    <MoonIcon className="text-gray-500 w-6 h-6 mr-2 float-left"/>
-                    <span className="text-gray-500 dark:text-gray-300">Dark Theme</span>
+                    className="border-b border-zinc-100 dark:border-zinc-900 hover:bg-zinc-100 focus:bg-zinc-100 dark:hover:bg-zinc-900 dark:focus:bg-zinc-900 w-full h-full p-5">
+                    <MoonIcon className="text-zinc-500 w-6 h-6 mr-2 float-left"/>
+                    <span className="text-zinc-500 dark:text-zinc-300">Dark Theme</span>
                     <ChevronRightIcon className="text-brand w-6 h-6 float-right"/>
                 </div>
             )}
