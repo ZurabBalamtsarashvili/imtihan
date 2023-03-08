@@ -1,4 +1,4 @@
-import Sidebar from '@/components/Layouts/Sidebar';
+import Sidebar from '@/layouts/Sidebar';
 import { useAuth } from '@/hooks/auth';
 import Header from '@/components/Header';
 import MobileBar from '@/components/MobileBar';

@@ -1,4 +1,4 @@
-import AppLayout from '@/components/Layouts/AppLayout';
+import AppLayout from '@/layouts/AppLayout';
 import Head from 'next/head';
 import BackButton from '@/components/BackButton';
 import Input from '@/components/Input';
@@ -14,7 +14,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useEffect } from 'react';
 import Label from '@/components/Label';
-import Toggle from "@/components/Toggle";
+import Toggle from '@/components/Toggle';
 
 Create.getLayout = page => <AppLayout name="Create">{page}</AppLayout>;
 
@@ -94,7 +94,8 @@ export default function Create() {
                                 <Toggle
                                     type="checkbox"
                                     name="is_active"
-                                    value="1"/>
+                                    value="1"
+                                />
 
                                 <span className="ml-2 text-sm text-zinc-600">
                                     Checked for active

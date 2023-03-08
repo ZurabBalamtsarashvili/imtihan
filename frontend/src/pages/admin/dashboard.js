@@ -1,9 +1,8 @@
-import AppLayout from '@/components/Layouts/AppLayout';
+import AppLayout from '@/layouts/AppLayout';
 import Head from 'next/head';
 import Link from 'next/link';
 import NavLink from '@/components/NavLink';
 import { ChevronRightIcon } from '@heroicons/react/24/outline';
-import ThemeToggle from '@/components/ThemeToggle';
 
 Dashboard.getLayout = page => <AppLayout name="Dashboard">{page}</AppLayout>;
 export default function Dashboard() {

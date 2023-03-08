@@ -1,4 +1,4 @@
-import AppLayout from '@/components/Layouts/AppLayout';
+import AppLayout from '@/layouts/AppLayout';
 import Head from 'next/head';
 import BackButton from '@/components/BackButton';
 import Input from '@/components/Input';

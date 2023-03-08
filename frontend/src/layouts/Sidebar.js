@@ -3,7 +3,7 @@ import { ArrowLeftOnRectangleIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 import { useAuth } from '@/hooks/auth';
 import config from '@/config/menu';
-import Footer from '@/components/Layouts/Footer';
+import Footer from '@/layouts/Footer';
 import { useRouter } from 'next/router';
 
 export default function Sidebar(className) {

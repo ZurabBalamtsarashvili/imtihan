@@ -1,4 +1,4 @@
-import AppLayout from '@/components/Layouts/AppLayout';
+import AppLayout from '@/layouts/AppLayout';
 import Head from 'next/head';
 import BackButton from '@/components/BackButton';
 import Input from '@/components/Input';
@@ -16,7 +16,7 @@ import createImageUrl from '@/lib/image';
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import Label from '@/components/Label';
-import Toggle from "@/components/Toggle";
+import Toggle from '@/components/Toggle';
 
 Edit.getLayout = page => <AppLayout name="Edit">{page}</AppLayout>;
 
