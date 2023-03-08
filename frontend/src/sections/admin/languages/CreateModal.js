@@ -88,7 +88,7 @@ export default function CreateModal({ open, setIsOpen }) {
                                 )}
                             </div>
                         </div>
-                        <div className="w-full">
+                        <div className="flex justify-end w-full">
                             <Button type="submit">Save</Button>
                         </div>
                     </form>
