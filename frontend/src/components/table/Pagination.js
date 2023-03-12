@@ -3,36 +3,8 @@ export default function Pagination({
     nextPage,
     setPagePaginate,
     pagePaginate,
-    gotoPage,
     meta,
 }) {
-    /*    const pageCount = meta?.last_page;
-    const pageSize = 5; // sayfa boyutu
-    const pageNumbers = Array.from({ length: pageCount }, (_, i) => i + 1);
-    let numGroups = Math.ceil(pageCount / pageSize);
-    let activeGroup = Math.floor(meta.current_page / pageSize);
-    const startPage = activeGroup * pageSize - Math.floor(pageSize / 2);
-    let groupStart = Math.max(Math.min(startPage, pageCount - pageSize), 0);
-    let groupEnd = Math.min(groupStart + pageSize, pageCount);
-
-    if (pageCount < pageSize) {
-        // Sayfa sayısı, sayfa boyutundan küçük olduğunda tüm sayfaları göster
-        groupStart = 0;
-        groupEnd = pageCount;
-        numGroups = 1;
-        activeGroup = 0;
-    } else if (meta.current_page < Math.ceil(pageSize / 2)) {
-        numGroups = Math.ceil(pageCount / pageSize) - 1;
-        activeGroup = 0;
-        groupStart = 0;
-        groupEnd = pageSize;
-    } else if (meta.current_page >= pageCount - Math.floor(pageSize / 2)) {
-        numGroups = Math.ceil(pageCount / pageSize) - 1;
-        activeGroup = numGroups;
-        groupStart = pageCount - pageSize;
-        groupEnd = pageCount;
-    }*/
-
     const customPrevPage = () => {
         if (pagePaginate === 1) return;
         setPagePaginate(pagePaginate - 1);
@@ -43,11 +15,6 @@ export default function Pagination({
         if (pagePaginate === meta?.last_page) return;
         setPagePaginate(pagePaginate + 1);
         nextPage();
-    };
-
-    const customPage = page => {
-        gotoPage(page - 1);
-        setPagePaginate(page);
     };
 
     return (

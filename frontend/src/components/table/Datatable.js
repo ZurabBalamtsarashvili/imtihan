@@ -23,7 +23,6 @@ export default function Datatable({
         nextPage,
         previousPage,
         prepareRow,
-        gotoPage,
     } = useTable({ columns, data }, usePagination);
 
     const handleSearch = e => {
@@ -139,7 +138,6 @@ export default function Datatable({
                     nextPage={nextPage}
                     pagePaginate={pagePaginate}
                     setPagePaginate={setPagePaginate}
-                    gotoPage={gotoPage}
                 />
             </div>
         </>
