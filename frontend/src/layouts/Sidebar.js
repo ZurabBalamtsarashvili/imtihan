@@ -16,8 +16,7 @@ export default function Sidebar(className) {
             className={`${className} bg-white text-zinc-900 dark:text-zinc-300 border-r border-zinc-100 drop-shadow-sm sm:hidden md:hidden lg:block xl:block 2xl:block hidden overflow-auto w-72 dark:border-zinc-900 dark:bg-black z-auto`}>
             <Avatar />
             <ul className="text-lg h-screen">
-                {config.desktop.admin.map((item, index) => {
-                    return (
+                {config.desktop.admin.map((item, index) => (
                         <Link href={item.path} key={index}>
                             <li
                                 className={`${
@@ -29,8 +28,7 @@ export default function Sidebar(className) {
                                 <label className="mx-2">{item.name}</label>
                             </li>
                         </Link>
-                    );
-                })}
+                    ))}
                 <li
                     onClick={logout}
                     className="flex items-center p-5 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-lg">
