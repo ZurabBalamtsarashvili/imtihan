@@ -29,7 +29,7 @@
   "support": {
     "source": "https://github.com/codenteq/imtihan",
     "issues": "https://github.com/codenteq/imtihan/issues",
-    "wiki": "https://codenteq.github.io/imtihan-docs",
+    "wiki": "https://imtihan-docs.vercel.app",
     "email": "info@codenteq.com"
   },
   "funding": [
