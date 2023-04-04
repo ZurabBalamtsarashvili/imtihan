@@ -22,7 +22,7 @@ export default function Modal({ children, title, isOpen, setIsOpen }) {
                                     <button
                                         onClick={onClose}
                                         type="button"
-                                        className="bg-transparent p-1.5 hover:dark:bg-zinc-800 rounded-full duration-200">
+                                        className="bg-transparent p-1.5 hover:bg-zinc-200 hover:dark:bg-zinc-800 rounded-full duration-200">
                                         <XMarkIcon className="w-5 h-5 text-zinc-700 dark:text-zinc-400" />
                                     </button>
                                 </div>
