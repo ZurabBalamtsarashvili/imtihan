@@ -98,7 +98,7 @@ export default function Home() {
                     </div>
 
                     <div className="ml-4 text-center text-sm text-gray-500 dark:text-gray-400 sm:text-right sm:ml-0">
-                        Imtihan v0.5.0
+                        Imtihan v0.5.1
                     </div>
                 </div>
             </div>
