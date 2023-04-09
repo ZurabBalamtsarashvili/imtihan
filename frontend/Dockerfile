@@ -1,15 +1,11 @@
-# Node.js 16.0.0 üzerinde çalışacak Alpine Linux tabanlı bir imajı alıyoruz
-FROM node:16.0.0-alpine
+FROM node:16.17.0-bullseye-slim
 
 WORKDIR /app
 
-RUN apk add --no-cache bash
-
-COPY package*.json ./
-RUN npm install
-
 COPY . .
 
-RUN npm run build
+RUN yarn
 
-CMD ["npm", "start"]
+RUN yarn build
+
+CMD [ "yarn", "start" ]
