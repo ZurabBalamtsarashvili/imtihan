@@ -83,7 +83,7 @@ export default function Index() {
                             Versiyon
                         </span>
                         <span className="float-right text-zinc-500 dark:text-zinc-500">
-                            0.5.0
+                            0.5.1
                         </span>
                     </div>
                 </div>
