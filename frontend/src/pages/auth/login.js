@@ -60,7 +60,7 @@ const Login = () => {
 
                 <div className="flex flex-col">
                     <p className="my-4 text-center text-sm">
-                        Log in to Imtihan to continue.
+                        Sign in to imtihan to continue.
                     </p>
 
                     <Link href="">
@@ -193,7 +193,7 @@ const Login = () => {
                             </a>
                         </Link>
 
-                        <Button>Log in</Button>
+                        <Button>Sign in</Button>
                     </div>
                 </form>
 
@@ -207,7 +207,7 @@ const Login = () => {
 
                         <Link href="/auth/register">
                             <a className="dark:text-white text-zinc-900 border hover:border-brand font-medium rounded-full text-lg text-center py-2.5">
-                                Register for the Imtihan
+                                Register for the imtihan
                             </a>
                         </Link>
                     </div>

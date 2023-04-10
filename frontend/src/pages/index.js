@@ -27,13 +27,13 @@ export default function Home() {
                         <>
                             <Link href="/auth/login">
                                 <a className="text-sm text-gray-500 dark:text-gray-300 underline">
-                                    Log in
+                                    Sign in
                                 </a>
                             </Link>
 
                             <Link href="/auth/register">
                                 <a className="ml-4 text-sm text-gray-500 dark:text-gray-300 underline">
-                                    Sign in
+                                    Sign up
                                 </a>
                             </Link>
                         </>
@@ -61,13 +61,13 @@ export default function Home() {
                             <>
                                 <Link href="/auth/login">
                                     <a className="text-xl underline">
-                                        Log in
+                                        Sign in
                                     </a>
                                 </Link>
 
                                 <Link href="/auth/register">
                                     <a className="text-xl underline">
-                                        Sign in
+                                        Sign up
                                     </a>
                                 </Link>
                             </>
