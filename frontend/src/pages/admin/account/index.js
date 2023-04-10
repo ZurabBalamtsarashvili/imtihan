@@ -71,7 +71,7 @@ export default function Index() {
                         className="border-b border-zinc-100 dark:border-zinc-900 hover:bg-zinc-100 focus:bg-zinc-100 dark:hover:bg-zinc-900 dark:focus:bg-zinc-900 w-full h-full p-5">
                         <ArrowLeftOnRectangleIcon className="text-brand w-6 h-6 mr-2 float-left" />
                         <span className="text-zinc-500 dark:text-zinc-300">
-                            Çıkış Yap
+                            Log out
                         </span>
                         <ChevronRightIcon className="text-brand w-6 h-6 float-right" />
                     </div>
@@ -80,7 +80,7 @@ export default function Index() {
                 <div className="grid grid-cols-1 gap-1 md:grid-cols-1 md:gap-1 shadow-md mt-10">
                     <div className="border-b border-zinc-100 dark:border-zinc-900 w-full h-full p-5">
                         <span className="text-zinc-500 dark:text-zinc-300">
-                            Versiyon
+                            Version
                         </span>
                         <span className="float-right text-zinc-500 dark:text-zinc-500">
                             0.5.1
@@ -88,7 +88,7 @@ export default function Index() {
                     </div>
                 </div>
 
-                <Footer />
+                <Footer className="sm:block md:blcok lg:hidden xl:hidden 2xl:hidden block" />
             </main>
         </>
     );

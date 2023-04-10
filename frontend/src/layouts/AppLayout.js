@@ -17,7 +17,7 @@ export default function AppLayout({ name, children }) {
                 <Sidebar user={user} />
 
                 {/* Page Content */}
-                <div className="container mx-auto">{children}</div>
+                <div className="container mx-auto h-screen">{children}</div>
             </main>
 
             {/* Mobile Menu */}
