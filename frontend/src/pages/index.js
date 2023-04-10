@@ -3,6 +3,8 @@ import Link from 'next/link'
 import { useAuth } from '@/hooks/auth'
 import {ArrowRightIcon, BookOpenIcon, GlobeAltIcon, HeartIcon} from "@heroicons/react/24/outline";
 import ApplicationLogo from "@/components/ApplicationLogo";
+import NavLink from "@/components/NavLink";
+import Avatar from "@/components/Avatar";
 
 export default function Home() {
     const { user } = useAuth({ middleware: 'guest' })
@@ -25,13 +27,13 @@ export default function Home() {
                         <>
                             <Link href="/auth/login">
                                 <a className="text-sm text-gray-500 dark:text-gray-300 underline">
-                                    Sign in
+                                    Log in
                                 </a>
                             </Link>
 
                             <Link href="/auth/register">
                                 <a className="ml-4 text-sm text-gray-500 dark:text-gray-300 underline">
-                                    Register
+                                    Sign in
                                 </a>
                             </Link>
                         </>
@@ -44,6 +46,33 @@ export default function Home() {
                 </div>
 
                 <div className="mt-16">
+                    <div className="flex justify-around py-5 sm:block md:hidden lg:hidden xl:hidden 2xl:hidden block">
+                        {user ? (
+                            <div className="flex-none text-center">
+                                <Avatar />
+
+                                <Link href="/admin/dashboard">
+                                    <a className="text-xl text-gray-500 dark:text-gray-300 underline">
+                                        Dashboard
+                                    </a>
+                                </Link>
+                            </div>
+                        ) : (
+                            <>
+                                <Link href="/auth/login">
+                                    <a className="text-xl underline">
+                                        Log in
+                                    </a>
+                                </Link>
+
+                                <Link href="/auth/register">
+                                    <a className="text-xl underline">
+                                        Sign in
+                                    </a>
+                                </Link>
+                            </>
+                        )}
+                    </div>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
                         <a href="https://imtihan-docs.vercel.app/"
                            className="scale-100 p-6 bg-white dark:bg-gray-800/50 dark:bg-gradient-to-bl from-gray-700/50 via-transparent dark:ring-1 dark:ring-inset dark:ring-white/5 rounded-lg shadow-2xl shadow-gray-500/20 dark:shadow-none flex motion-safe:hover:scale-[1.01] transition-all duration-250 focus:outline focus:outline-2 focus:outline-blue-500">

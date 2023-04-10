@@ -193,22 +193,24 @@ const Login = () => {
                             </a>
                         </Link>
 
-                        <Button>Sign in</Button>
+                        <Button>Log in</Button>
                     </div>
                 </form>
 
                 <hr className="my-8 w-full h-px bg-zinc-200 border-0 dark:bg-zinc-700" />
 
-                <div className="flex flex-col">
-                    <p className="my-4 text-center text-sm text-zinc-900 dark:text-zinc-300">
-                        Don't have an account?
-                    </p>
+                <div className="dark:bg-black w-full">
+                    <div className="flex flex-col">
+                        <p className="my-4 text-center text-sm text-zinc-900 dark:text-zinc-300">
+                            Don't have an account?
+                        </p>
 
-                    <Link href="/auth/register">
-                        <a className="dark:text-white text-zinc-900 border hover:border-brand font-medium rounded-full text-lg text-center py-2.5">
-                            Register for the Imtihan
-                        </a>
-                    </Link>
+                        <Link href="/auth/register">
+                            <a className="dark:text-white text-zinc-900 border hover:border-brand font-medium rounded-full text-lg text-center py-2.5">
+                                Register for the Imtihan
+                            </a>
+                        </Link>
+                    </div>
                 </div>
             </AuthCard>
         </GuestLayout>
