@@ -8,4 +8,4 @@ RUN yarn install
 
 RUN yarn build
 
-CND ["yarn", "start"]
+CMD ["yarn", "start"]
