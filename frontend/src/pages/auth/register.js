@@ -8,12 +8,15 @@ import Label from '@/components/Label';
 import Link from 'next/link';
 import { useAuth } from '@/hooks/auth';
 import { useState } from 'react';
+import {EyeIcon, EyeSlashIcon} from "@heroicons/react/24/outline";
 
 const Register = () => {
     const { register } = useAuth({
         middleware: 'guest',
         redirectIfAuthenticated: '/admin/dashboard',
     });
+
+    const [isRevealPassword, setIsRevealPassword] = useState(false);
 
     const [fullName, setFullName] = useState('');
     const [email, setEmail] = useState('');
@@ -150,14 +153,20 @@ const Register = () => {
                     <div className="mt-4">
                         <Input
                             id="password"
-                            type="password"
+                            type={isRevealPassword ? "text" : "password"}
                             value={password}
-                            className="block mt-1 w-full"
+                            className="block mt-1 w-full pr-10"
                             placeholder="Password"
                             onChange={event => setPassword(event.target.value)}
                             required
                             autoComplete="new-password"
                         />
+
+                        <div className="relative">
+                            <span className="absolute -top-9 right-0 flex pr-2 text-zinc-900 dark:text-zinc-300" onClick={() => setIsRevealPassword(prevState => !prevState)}>
+                                {isRevealPassword ? <EyeSlashIcon className="w-6 h-6"/> : <EyeIcon className="w-6 h-6"/>}
+                            </span>
+                        </div>
 
                         <InputError
                             messages={errors.password}
@@ -169,7 +178,7 @@ const Register = () => {
                     <div className="mt-4">
                         <Input
                             id="passwordConfirmation"
-                            type="password"
+                            type={isRevealPassword ? "text" : "password"}
                             value={passwordConfirmation}
                             className="block mt-1 w-full"
                             placeholder="Confirm Password"

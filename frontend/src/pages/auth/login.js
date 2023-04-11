@@ -5,11 +5,11 @@ import Button from '@/components/Button';
 import GuestLayout from '@/layouts/GuestLayout';
 import Input from '@/components/Input';
 import InputError from '@/components/InputError';
-import Label from '@/components/Label';
 import Link from 'next/link';
 import { useAuth } from '@/hooks/auth';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
+import {EyeIcon, EyeSlashIcon} from "@heroicons/react/24/outline";
 
 const Login = () => {
     const router = useRouter();
@@ -18,6 +18,8 @@ const Login = () => {
         middleware: 'guest',
         redirectIfAuthenticated: '/admin/dashboard',
     });
+
+    const [isRevealPassword, setIsRevealPassword] = useState(false);
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -149,14 +151,20 @@ const Login = () => {
                     <div className="mt-4">
                         <Input
                             id="password"
-                            type="password"
+                            type={isRevealPassword ? "text" : "password"}
                             value={password}
-                            className="block mt-1 w-full"
+                            className="block mt-1 w-full pr-10"
                             placeholder="Password"
                             onChange={event => setPassword(event.target.value)}
                             required
                             autoComplete="current-password"
                         />
+
+                        <div className="relative">
+                            <span className="absolute -top-9 right-0 flex pr-2 text-zinc-900 dark:text-zinc-300" onClick={() => setIsRevealPassword(prevState => !prevState)}>
+                                {isRevealPassword ? <EyeSlashIcon className="w-6 h-6"/> : <EyeIcon className="w-6 h-6"/>}
+                            </span>
+                        </div>
 
                         <InputError
                             messages={errors.password}
