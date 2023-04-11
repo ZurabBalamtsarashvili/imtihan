@@ -6,14 +6,6 @@ COPY . .
 
 RUN yarn install
 
-RUN yarn export
+RUN yarn build
 
-FROM nginx:stable-alpine
-
-COPY ./docker/nginx.conf /etc/nginx/conf.d/default.conf
-
-COPY --from=0 /app/out /usr/share/nginx/html
-
-EXPOSE 80
-
-CMD ["nginx", "-g", "daemon off;"]
+CND ["yarn", "start"]
