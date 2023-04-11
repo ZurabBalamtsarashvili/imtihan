@@ -5,6 +5,8 @@ import Footer from "@/layouts/Footer";
 import {CalendarIcon, CheckIcon, CreditCardIcon, MicrophoneIcon, VideoCameraIcon} from "@heroicons/react/24/outline";
 import Button from "@/components/Button";
 import Input from "@/components/Input";
+import Image from "next/image";
+import HomeImage from '../../public/home.webp';
 
 export default function Home() {
     return (
@@ -45,7 +47,7 @@ export default function Home() {
                         </div>
 
                         <div className="pt-16">
-                            <img src="https://chenini.superpeer.com/assets/images/Tf8HwM1dk--2176.avif"  alt="İmtihan" />
+                            <Image src={HomeImage} placeholder="blur" />
                         </div>
                     </div>
 
@@ -68,7 +70,7 @@ export default function Home() {
 
                             <div className="flex flex-col items-center relative py-7 px-6 xl:py-10 xl:pr-10 xl:pl-[210px] rounded-lg overflow-hidden min-h-[284px]">
                                 <picture>
-                                    <img src="https://chenini.superpeer.com/assets/images/W3cFKPO7Y3-622.avif"
+                                    <img src="/class-exam.webp"
                                          className="mb-4 md:mb-8 md:h-[200px] md:object-contain xl:h-auto xl:mb-0 xl:absolute xl:top-1/2 xl:-translate-y-1/2 xl:right-full xl:mr-[-178px] xl:max-w-none"
                                          alt="İmtihan"
                                     />
@@ -88,7 +90,7 @@ export default function Home() {
                             </div>
 
                             <div className="flex flex-col items-center relative py-7 px-6 xl:py-10 xl:pr-10 xl:pl-[210px] rounded-lg overflow-hidden min-h-[284px]">
-                                <img src="https://chenini.superpeer.com/assets/images/N0Ha_bQJr--549.avif"
+                                <img src="/online-course.webp"
                                      className="mb-4 md:mb-8 md:h-[200px] md:object-contain xl:h-auto xl:mb-0 xl:absolute xl:top-1/2 xl:-translate-y-1/2 xl:right-full xl:mr-[-178px] xl:max-w-none" alt="İmtihan" />
                                 <div className="flex flex-col gap-2 text-sm md:text-base">
                                     <h5 className="mb-2 text-2xl font-bold tracking-tight">
@@ -104,7 +106,7 @@ export default function Home() {
                             </div>
 
                             <div className="flex flex-col items-center relative py-7 px-6 xl:py-10 xl:pr-10 xl:pl-[210px] rounded-lg overflow-hidden min-h-[284px]">
-                                <img src="https://chenini.superpeer.com/assets/images/UoST6ZrvRp-549.avif"
+                                <img src="/analytics.webp"
                                      className="mb-4 md:mb-8 md:h-[200px] md:object-contain xl:h-auto xl:mb-0 xl:absolute xl:top-1/2 xl:-translate-y-1/2 xl:right-full xl:mr-[-178px] xl:max-w-none" alt="İmtihan" />
                                 <div className="flex flex-col gap-2 text-sm md:text-base">
                                     <h5 className="mb-2 text-2xl font-bold tracking-tight">
@@ -120,7 +122,7 @@ export default function Home() {
                             </div>
 
                             <div className="flex flex-col items-center relative py-7 px-6 xl:py-10 xl:pr-10 xl:pl-[210px] rounded-lg overflow-hidden min-h-[284px]">
-                                <img src="https://chenini.superpeer.com/assets/images/xy_VmnZm60-683.avif"
+                                <img src="/events.webp"
                                      className="mb-4 md:mb-8 md:h-[200px] md:object-contain xl:h-auto xl:mb-0 xl:absolute xl:top-1/2 xl:-translate-y-1/2 xl:right-full xl:mr-[-178px] xl:max-w-none" alt="İmtihan" />
                                 <div className="flex flex-col gap-2 text-sm md:text-base">
                                     <h5 className="mb-2 text-2xl font-bold tracking-tight">
