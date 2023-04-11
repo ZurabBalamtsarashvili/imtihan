@@ -164,7 +164,7 @@ const Register = () => {
 
                         <div className="relative">
                             <span className="absolute -top-9 right-0 flex pr-2 text-zinc-900 dark:text-zinc-300" onClick={() => setIsRevealPassword(prevState => !prevState)}>
-                                {isRevealPassword ? <EyeSlashIcon className="w-6 h-6"/> : <EyeIcon className="w-6 h-6"/>}
+                                {isRevealPassword ? <EyeIcon className="w-6 h-6"/> : <EyeSlashIcon className="w-6 h-6"/>}
                             </span>
                         </div>
 
