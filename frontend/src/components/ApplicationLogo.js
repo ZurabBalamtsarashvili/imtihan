@@ -1,6 +1,6 @@
-import Logo from '../../public/imtihan-default.webp';
+import Logo from '../../public/imtihan.svg';
 import Image from 'next/image';
 
 export default function ApplicationLogo({ ...props }) {
-    return <Image src={Logo} placeholder="blur" {...props} alt="" />;
+    return <Image src={Logo} placeholder="empty" {...props} alt="" />;
 }
